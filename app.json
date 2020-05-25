@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/editSelf/editSelf",
+    "pages/friends/friends",
+    "pages/groupPhoto/groupPhoto",
+    "pages/album/album",
+    "pages/selfInfo/selfInfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#67C23A",
+    "borderStyle": "black",
+    "list": [{
+      "selectedIconPath": "images/self-select.png",
+      "iconPath": "images/self.png",
+      "pagePath": "pages/index/index",
+      "text": "形象"
+    }, {
+      "selectedIconPath": "images/photo-select.png",
+      "iconPath": "images/photo.png",
+      "pagePath": "pages/groupPhoto/groupPhoto",
+      "text": "拍照"
+    }, {
+      "selectedIconPath": "images/album-select.png",
+      "iconPath": "images/album.png",
+      "pagePath": "pages/album/album",
+      "text": "相册"
+    },{
+      "selectedIconPath": "images/friends-select.png",
+      "iconPath": "images/friends.png",
+      "pagePath": "pages/friends/friends",
+      "text": "朋友"
+    }]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

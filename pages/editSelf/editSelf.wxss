@@ -1,0 +1,75 @@
+/* pages/editSelf/editSelf.wxss */
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.container_up {
+  width: 100%;
+  height: 60%;
+  top: 0;
+  position: relative;
+  background-color: aquamarine;
+}
+
+.container_up .character_show {
+  position: relative;
+  background-color: beige;
+}
+
+.container_up .character_show .personal_body {}
+
+.container_up .character_show .personal_hair {}
+
+.container_up .character_show .personal_eye {}
+
+.container_up .character_show .personal_overcoat {}
+
+.container_up .character_show .personal_blouse {}
+
+.container_up .character_show .personal_trouser {}
+
+.container_up .character_show .personal_shoes {}
+
+.container_up .character_show .personal_glasses {}
+
+.container_up .character_show .personal_ring {}
+
+.container_up .character_show .personal_mask {}
+
+.container_down {
+  width: 100%;
+  height: 40%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  bottom: 0;
+  background-color: bisque;
+}
+
+.container_down .tool_type {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  height: 50px;
+  top: 0;
+  background-color: blueviolet;
+}
+
+.container_down .tool_type .item {
+  position: relative;
+  padding: 8px;
+  width: 34px;
+  height: 34px;
+}
+
+.container_down .tool_item {
+  flex: 1;
+  overflow: auto;
+}
+
+.container_down .tool_item .item {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+}

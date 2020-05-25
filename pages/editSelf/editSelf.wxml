@@ -1,0 +1,34 @@
+<view class="container_up">
+<view class="character_show">
+<image class="personal_body"></image>
+<image class="personal_hair" src="{{personalImage.hairStyle}}"></image>
+<image class="personal_eye" src="{{personalImage.eyeStyle}}"></image>
+<image class="personal_overcoat" src="{{personalImage.overcoatStyle}}"></image>
+<image class="personal_blouse" src="{{personalImage.blouseStyle}}"></image>
+<image class="personal_trouser" src="{{personalImage.trouserStyle}}"></image>
+<image class="personal_shoes" src="{{personalImage.shoesStyle}}"></image>
+<image class="personal_glasses" src="{{personalImage.glassesStyle}}"></image>
+<image class="personal_ring" src="{{personalImage.ringStyle}}"></image>
+<image class="personal_mask" src="{{personalImage.maskStyle}}"></image>
+</view>
+</view>
+
+<view class="container_down">
+
+<scroll-view scroll-x="true" class="tool_type">
+<block wx:for="{{chartletList}}">
+<view class="item"></view>
+</block>
+</scroll-view>
+
+<scroll-view scroll-y="true" class="tool_item">
+<block wx:for="{{toolitemList}}" wx:key="item">
+<div bindtap="setStyle">
+<image class="item" src="{{item.url}}"></image>
+</div>
+</block>
+</scroll-view>
+
+</view>
+
+ 
