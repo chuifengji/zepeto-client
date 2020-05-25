@@ -19,7 +19,7 @@
 不存在：调用使用 wx.login()，返回的res.code 加上appid和secret在后台获取用户唯一信息标识OpenID，并用来生成自定义标识User_Id,服务器判断是否存在该用户。并进入TYPE_TWO判断。
 ```
 
-### STEP_Two:
+### STEP_TWO:
 
 ```
 不存在：将生成的User_Id保存返回到小程序客户端保存在globalData，localstorage中。
