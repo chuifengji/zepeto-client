@@ -1,0 +1,43 @@
+/* components/NameAndAvatar/NameAndAvatar.wxss */
+.userinfo_container{
+  height: 76rpx;
+  display: flex; 
+  display: inline-flex; 
+  border: 2px solid #198056;
+  color: #198056;
+  border-radius: 38rpx;
+  margin-top: 28rpx;
+  align-items: center;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  /**使其始终保持水平居中*/
+}
+.userinfo_avatar {
+  width: 48rpx;
+  height: 48rpx;
+  margin-left: 38rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+}
+.userinfo_nickname {
+  display: flex; 
+  display: inline-flex; 
+  margin-left: 22rpx;
+  margin-right: 28rpx;
+  font-size: 32rpx;
+}
+.vertical_bar{
+  width: 2px;
+  margin-right: 22rpx;
+  height: 46rpx;
+  background-color: #198056;
+}
+.btn_gotofriend_page{
+  width: 52rpx;
+  height: 52rpx;
+  margin-right:26rpx;
+}
+.btn_gotofriend_page_image{
+  width: 52rpx;
+  height: 52rpx;
+}

@@ -1,16 +1,9 @@
 <!--index.wxml-->
 
 
-  <view class="userinfo">
-  <view class="userinfo-avatar">
-  <open-data  type="userAvatarUrl"></open-data>
-  </view>
-  <open-data type="userNickName"></open-data>
-  </view>
+<NameAndAvatar userName="李江" bindgotofriend_page="gotofriend_page"></NameAndAvatar>
 
-
-<button bindtap="goToEdit">跳转到编辑页</button>
-
+<div bindtap="goToEdit" class="btn_goto_edit">编辑形象</div>
 
 
 

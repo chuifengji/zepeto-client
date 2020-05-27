@@ -1,0 +1,20 @@
+<!--components/NameAndAvatar/NameAndAvatar.wxml-->
+
+<view class="userinfo_container">
+<view class="userinfo_avatar">
+  <open-data  type="userAvatarUrl"></open-data>
+  </view>
+  <view class="userinfo_nickname">
+  <view>{{userName}}</view>
+  </view>
+
+  <view class="vertical_bar"></view>
+<view class="btn_gotofriend_page" bindtap="gotofriend_page">
+<image src="/images/addfriend.png" class="btn_gotofriend_page_image"></image>
+</view>
+</view>
+
+
+
+
+
