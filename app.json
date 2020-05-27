@@ -1,10 +1,11 @@
 {
   "pages": [
+    "pages/album/album",
     "pages/index/index",
     "pages/editSelf/editSelf",
     "pages/friends/friends",
     "pages/groupPhoto/groupPhoto",
-    "pages/album/album",
+    
     "pages/selfInfo/selfInfo"
   ],
   "window": {

@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "相册",
-  "usingComponents": {}
+  "usingComponents": {
+    "xiangce":"../../components/xiangce/xiangce"
+  }
 }

@@ -1,0 +1,10 @@
+
+<view class="outbox">
+<view class="imgbox">
+<!-- <image class="img" src="{{src}}"> -->
+<!-- </image> -->
+</view>
+<view class="local">{{local}}</view>
+<view class="date">{{year}}/{{month}}//{{day}}</view>
+<view class="del" bindtap="del" wx:if="{{delbtn}}" ></view>
+</view>

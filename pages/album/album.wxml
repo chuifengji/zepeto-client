@@ -1,1 +1,9 @@
+<view class="op"> 
+<view class="edit"  bindtap="edit">编辑</view>
+</view>
+<block wx:for="{{list}}">
+<xiangce  id="{{item.id}}" src="{{item.src}}" local="{{item.local}}" year='{{item.year}}' month='{{item.month}}' day='{{item.day}}' delbtn="{{delbtn}}" bind:delete="del" > 
+
+</xiangce>
+</block>
 
