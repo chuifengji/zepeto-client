@@ -1,11 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/selfInfo/selfInfo",
     "pages/editSelf/editSelf",
+    "pages/index/index",
     "pages/friends/friends",
     "pages/groupPhoto/groupPhoto",
-    "pages/album/album",
-    "pages/selfInfo/selfInfo"
+    "pages/album/album"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

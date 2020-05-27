@@ -1,1 +1,62 @@
 /* pages/selfInfo/selfInfo.wxss */
+page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.user_avatar{
+  width:150rpx;
+  height: 150rpx;
+  margin: 100rpx auto;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.selfinfo_container{
+  display: flex;
+  flex-direction: column;
+}
+.selfinfo_item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  padding:5px 0;
+  margin: 0 30rpx;
+  border-bottom: 1px solid rgb(235, 235, 235);
+}
+.item_itemName{
+white-space: nowrap;
+height: 70rpx;
+}
+.selfinfo_item .item_name_input{
+  width: 380rpx;
+  margin-left: 200rpx;
+  height: 70rpx;
+  text-align: right;
+}
+.item_image{
+width: 100%;
+height: 100%;
+position: absolute;
+}
+.item_image_box{
+  width: 25rpx;
+  height: 25rpx;
+  position:relative;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.picker_item{
+  width: 480rpx;
+  margin-left: 100rpx;
+  height: 70rpx;
+  text-align: right;
+}
+.picker_item_last{
+  width: 380rpx;
+  margin-left: 72rpx;
+  height: 70rpx;
+  text-align: right;
+}

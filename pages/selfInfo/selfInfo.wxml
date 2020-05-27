@@ -1,0 +1,69 @@
+<view class="user_avatar">
+<open-data type="userAvatarUrl"></open-data>
+</view>
+
+<view class="selfinfo_container">
+
+<view class="selfinfo_item">
+<view class="item_itemName">姓名</view>
+<input value="{{user_name}}" class="item_name_input"></input>
+<view class="item_image_box">
+<image class="item_image" src="/images/right_arrow.png"></image>
+</view>
+</view>
+<!-- 学院 -->
+<view class="selfinfo_item">
+<view  class="item_itemName">学院</view>
+<picker bindchange="bindCollegeChange" value="{{collegeIndex}}" range="{{college}}">
+    <view class="picker_item">
+      {{college[collegeIndex]}}
+    </view>
+  </picker>
+<view class="item_image_box">
+<image class="item_image" src="/images/right_arrow.png"></image>
+</view>
+</view>
+
+<!-- 专业 -->
+<view class="selfinfo_item">
+<view  class="item_itemName">专业</view>
+
+<picker bindchange="bindMajorChange" value="{{majorIndex}}" range="{{majorList}}">
+    <view class="picker_item">
+      {{majorList[majorIndex]}}
+    </view>
+  </picker>
+
+<view class="item_image_box">
+<image class="item_image" src="/images/right_arrow.png"></image>
+</view>
+</view>
+
+<!-- 班号 -->
+<view class="selfinfo_item">
+<view  class="item_itemName">班号</view>
+
+<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker_item">
+      {{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]}}班
+    </view>
+  </picker>
+
+<view class="item_image_box">
+<image class="item_image" src="/images/right_arrow.png"></image>
+</view>
+</view>
+
+<!-- 添加我的方式 -->
+<view class="selfinfo_item">
+
+<view  class="item_itemName">添加我的方式</view>
+<view class="picker_item_last"></view>
+
+<view class="item_image_box">
+<image class="item_image" src="/images/right_arrow.png"></image>
+</view>
+</view>
+
+</view>
+

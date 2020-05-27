@@ -24,5 +24,8 @@ Component({
     gotofriend_page: function () {
       this.triggerEvent('gotofriend_page');
     },
+    gotoselfinfo_page: function () {
+      this.triggerEvent('gotoselfinfo_page');
+    },
   }
 })

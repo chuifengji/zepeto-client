@@ -18,6 +18,12 @@ Page({
       url: '../friends/friends',
     })
   },
+  gotoselfinfo_page:function(){
+    wx.navigateTo({
+      url: '../selfInfo/selfInfo',
+    })
+  },
+  
   onLoad: function () {
 
   },

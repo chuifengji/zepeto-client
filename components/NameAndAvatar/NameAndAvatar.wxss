@@ -1,8 +1,8 @@
 /* components/NameAndAvatar/NameAndAvatar.wxss */
 .userinfo_container{
   height: 76rpx;
-  display: flex; 
-  display: inline-flex; 
+  line-height: 76rpx;
+  display:inline-flex;
   border: 2px solid #198056;
   color: #198056;
   border-radius: 38rpx;
@@ -12,19 +12,28 @@
   transform: translateX(-50%);
   /**使其始终保持水平居中*/
 }
+.userinfo{
+  height: 76rpx;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
 .userinfo_avatar {
   width: 48rpx;
   height: 48rpx;
   margin-left: 38rpx;
-  border-radius: 24rpx;
+  border-radius: 50%;
   overflow: hidden;
 }
-.userinfo_nickname {
-  display: flex; 
-  display: inline-flex; 
+
+
+.userinfo_nickname { 
   margin-left: 22rpx;
   margin-right: 28rpx;
   font-size: 32rpx;
+  display:inline-flex;
+  height: 76rpx;
+  white-space: nowrap;
 }
 .vertical_bar{
   width: 2px;
