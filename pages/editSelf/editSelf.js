@@ -191,5 +191,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goshoot(){
+    wx.navigateTo({
+      url: '../shoot/shoot',
+    })
   }
 })

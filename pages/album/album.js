@@ -38,11 +38,9 @@ Page({
   },
   edit:function(){
     var turn=this.data.delbtn?false:true
-    console.log(this.data.delbtn)
     this.setData({
       delbtn:turn
     })
-    console.log(this.data.delbtn)
   },
   del:function(e){
     let newList = [];
@@ -52,11 +50,9 @@ Page({
         newList.push(this.data.list[i])
       }
     }
-    console.log(newList)
     this.setData({
       list: newList
     })
-    console.log(newList)
   }
 
 })

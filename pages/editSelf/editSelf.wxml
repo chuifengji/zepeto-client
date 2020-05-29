@@ -1,6 +1,7 @@
 <view class="container_up">
 <view class="character_show">
 <image class="personal_body"></image>
+
 <image class="personal_hair" src="{{personalImage.hairStyle}}"></image>
 <image class="personal_eye" src="{{personalImage.eyeStyle}}"></image>
 <image class="personal_overcoat" src="{{personalImage.overcoatStyle}}"></image>
@@ -22,6 +23,7 @@
 </scroll-view>
 
 <scroll-view scroll-y="true" class="tool_item">
+<image class="camera" src="../../images/photo.png" bindtap="goshoot"></image>
 <block wx:for="{{toolitemList}}" wx:key="item">
 <div bindtap="setStyle">
 <image class="item" src="{{item.url}}"></image>
