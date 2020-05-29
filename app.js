@@ -30,10 +30,10 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId生成USER_ID，并对userInfo进行初始化。
-        this.netHandlers.login(res.code).then(res=>{
+      //  this.netHandlers.login(res.code).then(res=>{
           //接下来服务器会判断该用户是否存在
   
-        })
+        //})
       }
     })
     },

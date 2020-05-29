@@ -13,6 +13,11 @@ Page({
       url: '../editSelf/editSelf',
     })
   },
+  gotofriend_page:function(){
+    wx.navigateTo({
+      url: '../friends/friends',
+    })
+  },
   onLoad: function () {
 
   },
