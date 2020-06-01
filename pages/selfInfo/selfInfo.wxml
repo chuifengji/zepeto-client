@@ -6,7 +6,7 @@
 
 <view class="selfinfo_item">
 <view class="item_itemName">姓名</view>
-<input value="{{user_name}}" class="item_name_input"></input>
+<input value="{{user_name}}" bindinput="change_user_name" class="item_name_input"></input>
 <view class="item_image_box">
 <image class="item_image" src="/images/right_arrow.png"></image>
 </view>
@@ -67,3 +67,5 @@
 
 </view>
 
+
+<view class="btn_post_selfinfo" bindtap="btn_post_selfinfo">保存</view>

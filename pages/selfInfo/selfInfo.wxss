@@ -60,3 +60,13 @@ position: absolute;
   height: 70rpx;
   text-align: right;
 }
+.btn_post_selfinfo{
+  width: 340rpx;
+  height: 80rpx;
+  background-color: #ccc;
+  margin: auto;
+  margin-top: 50rpx;
+  text-align: center;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+}

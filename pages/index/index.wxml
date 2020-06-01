@@ -1,7 +1,7 @@
 <!--index.wxml-->
 
 
-<NameAndAvatar userName="李上课考试的江" bindgotoselfinfo_page="gotoselfinfo_page" bindgotofriend_page="gotofriend_page"></NameAndAvatar>
+<NameAndAvatar userName="{{userinfo.name}}" bindgotoselfinfo_page="gotoselfinfo_page" bindgotofriend_page="gotofriend_page"></NameAndAvatar>
 
 <div bindtap="goToEdit" class="btn_goto_edit">编辑形象</div>
 

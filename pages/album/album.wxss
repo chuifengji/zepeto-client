@@ -1,1 +1,22 @@
 /* pages/album/album.wxss */
+.op{
+  /* position: relative; */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  /* background-color: green; */
+}
+.clearfix::after{
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  content: ".";
+}
+.clearfix{
+  zoom: 1;
+}
+.edit{
+float: right;
+  right: 0px;
+}

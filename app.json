@@ -1,12 +1,11 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/selfInfo/selfInfo",
     "pages/editSelf/editSelf",
-    "pages/index/index",
     "pages/friends/friends",
-    "pages/groupPhoto/groupPhoto",
-    "pages/album/album"
-
+    "pages/album/album",
+    "pages/shoot/shoot"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,22 +17,26 @@
     "color": "#A5A5A7",
     "selectedColor": "#198056",
     "borderStyle": "black",
-    "list": [{
-      "selectedIconPath": "images/self-select.png",
-      "iconPath": "images/self.png",
-      "pagePath": "pages/index/index",
-      "text": "我的形象"
-    }, {
-      "selectedIconPath": "images/photo-select.png",
-      "iconPath": "images/photo.png",
-      "pagePath": "pages/groupPhoto/groupPhoto",
-      "text": "拍照"
-    }, {
-      "selectedIconPath": "images/album-select.png",
-      "iconPath": "images/album.png",
-      "pagePath": "pages/album/album",
-      "text": "相册"
-    }]
+    "list": [
+      {
+        "selectedIconPath": "images/self-select.png",
+        "iconPath": "images/self.png",
+        "pagePath": "pages/index/index",
+        "text": "我的形象"
+      },
+      {
+        "selectedIconPath": "images/photo-select.png",
+        "iconPath": "images/photo.png",
+        "pagePath": "pages/shoot/shoot",
+        "text": "拍照"
+      },
+      {
+        "selectedIconPath": "images/album-select.png",
+        "iconPath": "images/album.png",
+        "pagePath": "pages/album/album",
+        "text": "相册"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

@@ -29,17 +29,32 @@ App({
   login : function(code){
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId生成USER_ID，并对userInfo进行初始化。
-      //  this.netHandlers.login(res.code).then(res=>{
-          //接下来服务器会判断该用户是否存在
-  
-        //})
+        this.netHandlers.login(res.code).then(res=>{
+          let Data = res.Data
+          this.globalData.userInfo={
+            id:res.Data.ID,
+            user_id:Data.USERID,
+            name:Data.NAME,
+            college:Data.COLLEGE,
+            major:Data.MJAOR,
+            class:Data.CLASS,
+            my_img:Data.my_img
+          }
+        })
       }
     })
     },
 
   globalData: {
-    userInfo: null //合照的本地地址，朋友列表，个人形象等
+    userInfo: {
+      id:'',
+      user_id:'',
+      name:'',
+      college:'',
+      major:'',
+      class:'',
+      my_img:''
+    }
   }
 })
 

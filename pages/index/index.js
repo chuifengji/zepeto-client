@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-   
+   userinfo:app.globalData.userInfo
   },
   //事件处理函数
 

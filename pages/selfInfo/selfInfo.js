@@ -1,11 +1,12 @@
 // pages/selfInfo/selfInfo.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    user_name:"",
+    user_name:"ss",
     isShowText:1,
     college:["计算机科学学院","经济学院","法学院","民族学与社会学学院","马克思主义学院","教育学院","体育学院","文学与新闻传播学院","外语学院","数学与统计学学院","电子信息工程学院","化学与材料科学学院","药学院","生命科学学院","生物医学工程学院","资环学院","美术学院","管理学院","公共管理学院","音乐舞蹈学院"],
     majorList:["机械设计制造及其自动化","自动化","轨道交通信号与控制","计算机科学与技术","软件工程","网络工程","智能科学与技术"],
@@ -35,6 +36,9 @@ Page({
     multiIndex: [16, 0],
     collegeIndex:0,
     majorIndnx:0,
+    otherData:{
+      
+    }
 
   },
 
@@ -44,8 +48,9 @@ Page({
   bindCollegeChange:function(e){
     this.setData({
       collegeIndex:e.detail.value,
-      majorList:this.data.school_info[this.data.college[e.detail.value]]
+      majorList:this.data.school_info[this.data.college[e.detail.value]],
     })
+    this.otherData.userinfo.user_name
   },
   bindMajorChange:function(e){
     this.setData({
@@ -57,8 +62,25 @@ Page({
       multiIndex: e.detail.value
     })
   },
+  change_user_name:function(e){
+  this.setData({
+    user_name:e.detail.value
+  })
+  },
+  btn_post_selfinfo:function(){
+     let user_id = app.globalData.userInfo.user_id;
+
+     let name = this.data.user_name;
+     let college = this.data.college[this.data.collegeIndex];
+     let major = this.data.majorList[this.data.majorIndex];
+     let classNum = this.data.multiArray[0][this.data.multiIndex[0]]+ this.data.multiArray[1][this.data.multiIndex[1]]
+    app.netHandlers.updateSelfInfo(user_id,name,college,major,classNum).then(res=>{
+      console.log(res)
+    })
+  },
   onLoad: function (options) {
-    
+    //console.log(app.globalData.userInfo.user_id)
+   // console.log(this.data.user_name)
   },
 
   /**
