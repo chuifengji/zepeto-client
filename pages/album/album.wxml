@@ -6,7 +6,8 @@
 </view>
 <view wx:else class="header_edit_container">
 <view class="header_text-delete">删除</view>
-<view class="header_text-all" bindtap="btnSelectAll">全选</view>
+<view wx:if="{{!selectAllActive}}" class="header_text-all" bindtap="btnSelectAll">全选</view>
+<view wx:else class="header_text-all" bindtap="btnSelectCancel">取消</view>
 <view class="header_text-complete" bindtap="btnComplete">完成</view>
 </view>
 

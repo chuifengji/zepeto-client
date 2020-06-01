@@ -6,6 +6,7 @@ Page({
   data: {
     editActive:false,//处于编辑态
     sortTypeTime:true,//以时间排序
+    selectAllActive:false,
     list:[{
       id:0,
       src:"../../images/photo.png" ,
@@ -83,9 +84,17 @@ Page({
   },
   //全选
   btnSelectAll:function(e){
-    let list = this.data.list.map(item=>{item.selected =  !item.selected;return item;})
+    let list = this.data.list.map(item=>{item.selected =  true;return item;})
      this.setData({
-      list:list
+      list:list,
+      selectAllActive:true
     })
+  },
+  btnSelectCancel:function(e){
+    let list = this.data.list.map(item=>{item.selected =  false;return item;})
+    this.setData({
+     list:list,
+     selectAllActive:false
+   })
   }
 })
