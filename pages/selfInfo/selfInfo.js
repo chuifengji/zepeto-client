@@ -6,9 +6,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    user_name:"ss",
+      user_name:"",
+      college:'',
+      major:"",
+      classNumFirst:"",
+      classNumLast:"",
     isShowText:1,
-    college:["计算机科学学院","经济学院","法学院","民族学与社会学学院","马克思主义学院","教育学院","体育学院","文学与新闻传播学院","外语学院","数学与统计学学院","电子信息工程学院","化学与材料科学学院","药学院","生命科学学院","生物医学工程学院","资环学院","美术学院","管理学院","公共管理学院","音乐舞蹈学院"],
+    collegeList:["计算机科学学院","经济学院","法学院","民族学与社会学学院","马克思主义学院","教育学院","体育学院","文学与新闻传播学院","外语学院","数学与统计学学院","电子信息工程学院","化学与材料科学学院","药学院","生命科学学院","生物医学工程学院","资环学院","美术学院","管理学院","公共管理学院","音乐舞蹈学院"],
     majorList:["机械设计制造及其自动化","自动化","轨道交通信号与控制","计算机科学与技术","软件工程","网络工程","智能科学与技术"],
     school_info:{
       "经济学院":["经济学","经济统计学","金融学","金融工程","保险学","国际经济与贸易"],
@@ -39,7 +43,6 @@ Page({
     otherData:{
       
     }
-
   },
 
   /**
@@ -47,77 +50,94 @@ Page({
    */
   bindCollegeChange:function(e){
     this.setData({
-      collegeIndex:e.detail.value,
-      majorList:this.data.school_info[this.data.college[e.detail.value]],
+      college:this.data.collegeList[e.detail.value],
+      majorList:this.data.school_info[this.data.collegeList[e.detail.value]],
     })
-    this.otherData.userinfo.user_name
   },
   bindMajorChange:function(e){
     this.setData({
-      majorIndex:e.detail.value
+      major:this.data.majorList[e.detail.value]
     })
   },
   bindMultiPickerChange:function(e){
+    this.data.multiIndex=e.detail.value;
     this.setData({
-      multiIndex: e.detail.value
+      classNumFirst:this.data.multiArray[0][this.data.multiIndex[0]],
+      classNumLast:this.data.multiArray[1][this.data.multiIndex[1]]
     })
-  },
+  },//
   change_user_name:function(e){
   this.setData({
     user_name:e.detail.value
   })
   },
+  //btn_post_selfinfo 修改个人信息，后面应该改成每个用户只能修改一次。
   btn_post_selfinfo:function(){
      let user_id = app.globalData.userInfo.user_id;
-
      let name = this.data.user_name;
-     let college = this.data.college[this.data.collegeIndex];
-     let major = this.data.majorList[this.data.majorIndex];
-     let classNum = this.data.multiArray[0][this.data.multiIndex[0]]+ this.data.multiArray[1][this.data.multiIndex[1]]
-    app.netHandlers.updateSelfInfo(user_id,name,college,major,classNum).then(res=>{
-      console.log(res)
-    })
+     let college = this.data.college;
+     let major = this.data.major;
+     let classNum = this.data.classNumFirst + this.data.classNumLast
+     let dataTest = (this.data.school_info[this.data.college].indexOf(major)==-1)?false:true&&Boolean(this.data.user_name);
+     if(dataTest){
+       console.log(user_id,name,college,major,classNum)
+      app.netHandlers.updateSelfInfo(user_id,name,college,major,classNum).then(res=>{
+        let Data = res.Data;
+        console.log(res.Data)
+        let userInfo={
+          id:res.Data.ID,
+          user_id:Data.USERID,
+          name:Data.NAME,
+          college:Data.COLLEGE,
+          major:Data.MAJOR,
+          class:Data.CLASS,
+          my_img:Data.my_img
+        }
+        app.globalData.userInfo = userInfo;
+        wx.setStorage({
+          key:"USERINFO",
+          data:userInfo
+        })
+      })
+     }else{wx.showToast({
+       title: '你填的不对嘛',
+       icon:"none"
+     })}
   },
   onLoad: function (options) {
-    //console.log(app.globalData.userInfo.user_id)
-   // console.log(this.data.user_name)
+    this.setData({
+      user_name:app.globalData.userInfo.name,
+      college:app.globalData.userInfo.college,
+      major:app.globalData.userInfo.major,
+      classNumFirst:app.globalData.userInfo.class.substr(0,2),
+      classNumLast:app.globalData.userInfo.class.substr(2,2)
+    })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */

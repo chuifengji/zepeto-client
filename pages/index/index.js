@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-   userinfo:app.globalData.userInfo
+   userinfo:''
   },
   //事件处理函数
 
@@ -25,7 +25,17 @@ Page({
   },
   
   onLoad: function () {
-
+    if(!app.globalData.userInfo){
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userinfo: res
+       })
+      }
+    }else{
+      this.setData({
+        userinfo: app.globalData.userInfo
+     })
+    }
   },
 
 })

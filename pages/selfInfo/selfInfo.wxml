@@ -14,9 +14,9 @@
 <!-- 学院 -->
 <view class="selfinfo_item">
 <view  class="item_itemName">学院</view>
-<picker bindchange="bindCollegeChange" value="{{collegeIndex}}" range="{{college}}">
+<picker bindchange="bindCollegeChange" value="{{collegeIndex}}" range="{{collegeList}}">
     <view class="picker_item">
-      {{college[collegeIndex]}}
+      {{college}}
     </view>
   </picker>
 <view class="item_image_box">
@@ -30,7 +30,7 @@
 
 <picker bindchange="bindMajorChange" value="{{majorIndex}}" range="{{majorList}}">
     <view class="picker_item">
-      {{majorList[majorIndex]}}
+      {{major}}
     </view>
   </picker>
 
@@ -45,7 +45,7 @@
 
 <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
     <view class="picker_item">
-      {{multiArray[0][multiIndex[0]]}}{{multiArray[1][multiIndex[1]]}}班
+    {{classNumFirst}}{{classNumLast}}班
     </view>
   </picker>
 
