@@ -1,10 +1,8 @@
 /* pages/album/album.wxss */
-.op{
-  /* position: relative; */
+/* .op{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  /* background-color: green; */
 }
 .clearfix::after{
   display: block;
@@ -19,4 +17,70 @@
 .edit{
 float: right;
   right: 0px;
+} */
+page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.header_edit_container {
+  width: 666rpx;
+  display: inline-flex;
+  position: relative;
+  margin-top: 50rpx;
+  align-items: center;
+  left: 42rpx;
+  right: 42rpx;
+  color: #009F7E;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  line-height: 40rpx;
+}
+
+.header_text-sort {
+  width: 140rpx;
+  height: 40rpx;
+  margin-left: 5rpx;
+}
+.header_text-edit {
+  width: 56rpx;
+  height: 40rpx;
+  margin-left: 5rpx;
+  position: absolute;
+  right: 0;
+}
+.header_text-complete{
+  width: 56rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+}
+.header_text-all{
+  width: 56rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 120rpx;
+
+}
+.header_text-delete{
+  width: 56rpx;
+  height: 40rpx;
+  color: red;
+}
+.photo_container{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  align-content: flex-start;
+  top: 52rpx;
+  left: 48rpx;
+  width: 654rpx;
+  /* padding-right: 184rpx; */
+  box-sizing: border-box;
+  height: calc(100% - 230rpx);
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

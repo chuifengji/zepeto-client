@@ -1,0 +1,16 @@
+<view class="btn_go_edit"  bindtap="goToEdit">朋友</view>
+
+<view class="item_container">
+<view class="item_friend" bindtap="goTo_tab_friend" style="color:{{currentTab==0?'#505050':'#7C7C7C'}}">朋友</view>
+<view class="item_class" bindtap="goTo_tab_class" style="color:{{currentTab==0?'#7C7C7C':'#505050'}}" >班级</view>
+</view>
+
+<view class="item_move_bar" style="transition:all 0.6s;margin-left:{{currentTab==0?'211rpx':'441rpx'}};"></view>
+
+<view class="photos_container">
+
+ <block wx:for="{{peopleList}}" wx:key="index">
+   <person name="{{item.name}}" img="{{item.img}}" id="{{item.id}}"></person>
+ </block>
+
+</view>

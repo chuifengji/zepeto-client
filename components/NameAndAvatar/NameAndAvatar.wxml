@@ -12,9 +12,8 @@
 </view>
   <view class="vertical_bar"></view>
 
-<view class="btn_gotofriend_page" bindtap="gotofriend_page">
-<image src="/images/addfriend.png" class="btn_gotofriend_page_image"></image>
-</view>
+<i class="iconfont iconjiahaoyou btn_gotofriend_page" bindtap="gotofriend_page"></i>
+
 
 </view>
 

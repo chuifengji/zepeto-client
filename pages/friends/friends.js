@@ -5,12 +5,54 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentTab:0,
+    peopleList:[
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      },
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      },
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      },
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      },
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      },
+      {
+        name:'吕栋梁',
+        src:'',
+        id:"0"
+      }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  goTo_tab_class:function(){
+    this.setData({
+      currentTab:1
+    })
+  },
+  goTo_tab_friend:function(){
+    this.setData({
+      currentTab:0
+    })
+  },
   onLoad: function (options) {
 
   },

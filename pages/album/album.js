@@ -4,21 +4,21 @@ Page({
    * 页面的初始数据
    */
   data: {
+    editActive:false,//处于编辑态
+    sortTypeTime:true,//以时间排序
     list:[{
       id:0,
       src:"../../images/photo.png" ,
       local:"校大门" ,
-      year:'2020',
-       month:'5' ,
-       day:'27'
+      date:"2020/5/24",
+      selected:false
     },
     {
       id:1,
       src:"../../images/photo.png" ,
       local:"校大门" ,
-      year:'2020',
-       month:'5' ,
-       day:'27'
+      date:"2020/5/24",
+      selected:false
     }],
 
     delbtn:false
@@ -36,12 +36,6 @@ Page({
   onShow: function () {
 
   },
-  edit:function(){
-    var turn=this.data.delbtn?false:true
-    this.setData({
-      delbtn:turn
-    })
-  },
   del:function(e){
     let newList = [];
     console.log(e)
@@ -53,6 +47,45 @@ Page({
     this.setData({
       list: newList
     })
+  },
+  btnComplete:function(e){
+    this.setData({
+      editActive:false
+    })
+    let list = this.data.list.map(item=>{item.selected =  false;return item;})
+    this.setData({
+     list:list
+   })
+  },
+  btnEdit:function(e){
+    this.setData({
+      editActive:true
+    })
+  },
+  changeSortTypeToName:function(e){
+    this.setData({
+      sortTypeTime:false
+    })
+    //排序方式以名称
+  },
+  changeSortTypeToTime:function(e){
+    this.setData({
+      sortTypeTime:true
+    })
+    //排序方式以时间
+  },
+  changeSelected:function(e){
+    let list = this.data.list;
+    list[e.currentTarget.id].selected=!list[e.currentTarget.id].selected
+    this.setData({
+      list:list
+    })
+  },
+  //全选
+  btnSelectAll:function(e){
+    let list = this.data.list.map(item=>{item.selected =  !item.selected;return item;})
+     this.setData({
+      list:list
+    })
   }
-
 })

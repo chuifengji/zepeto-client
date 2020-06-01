@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/album/album",
     "pages/index/index",
+    "pages/friends/friends",
     "pages/selfInfo/selfInfo",
     "pages/editSelf/editSelf",
-    "pages/friends/friends",
-    "pages/album/album",
     "pages/shoot/shoot"
   ],
   "window": {
@@ -19,19 +19,19 @@
     "borderStyle": "black",
     "list": [
       {
-        "selectedIconPath": "images/self-select.png",
-        "iconPath": "images/self.png",
+        "selectedIconPath": "images/face-active.png",
+        "iconPath": "images/face.png",
         "pagePath": "pages/index/index",
         "text": "我的形象"
       },
       {
-        "selectedIconPath": "images/photo-select.png",
+        "selectedIconPath": "images/photo-active.png",
         "iconPath": "images/photo.png",
         "pagePath": "pages/shoot/shoot",
         "text": "拍照"
       },
       {
-        "selectedIconPath": "images/album-select.png",
+        "selectedIconPath": "images/album-active.png",
         "iconPath": "images/album.png",
         "pagePath": "pages/album/album",
         "text": "相册"

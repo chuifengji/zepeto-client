@@ -12,19 +12,11 @@ Component({
       type: String,
       value: ""
     },
-    year: {
-      type: Number,
-      value: null
+    date: {
+      type: String,
+      value: ""
     },
-    month: {
-      type: Number,
-      value: null
-    },
-    day: {
-      type: Number,
-      value: null
-    },
-    delbtn: {
+    selected: {
       type: Boolean,
       value: false
     },
@@ -47,6 +39,9 @@ Component({
   methods: {
     del() {
       this.triggerEvent("delete", this.properties.id)
+    },
+    changeSelected(){
+      this.triggerEvent("changeSelected")
     }
   }
 })

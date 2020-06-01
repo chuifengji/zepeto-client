@@ -1,0 +1,5 @@
+<!--components/person/person.wxml-->
+ <view class="item_person">
+ <image class="item_img" src="{{img}}"></image>
+ </view>
+ <view class="item_name">{{name}}</view>

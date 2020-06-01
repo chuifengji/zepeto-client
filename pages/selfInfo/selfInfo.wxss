@@ -11,7 +11,6 @@ page {
   border-radius: 50%;
   overflow: hidden;
 }
-
 .selfinfo_container{
   display: flex;
   flex-direction: column;

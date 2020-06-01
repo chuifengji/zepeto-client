@@ -1,4 +1,5 @@
 /* components/NameAndAvatar/NameAndAvatar.wxss */
+@import '../../utils/iconfont.wxss';
 .userinfo_container{
   height: 76rpx;
   line-height: 76rpx;
@@ -25,8 +26,6 @@
   border-radius: 50%;
   overflow: hidden;
 }
-
-
 .userinfo_nickname { 
   margin-left: 22rpx;
   margin-right: 28rpx;
@@ -44,9 +43,9 @@
 .btn_gotofriend_page{
   width: 52rpx;
   height: 52rpx;
+  font-size: 52rpx;
+  line-height: 52rpx;
   margin-right:26rpx;
-}
-.btn_gotofriend_page_image{
-  width: 52rpx;
-  height: 52rpx;
+  color: #198056;
+  z-index: 999;
 }

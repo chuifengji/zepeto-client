@@ -1,9 +1,24 @@
-<view class="op"> 
-<view class="edit"  bindtap="edit">编辑</view>
+<view wx:if="{{!editActive}}" class="header_edit_container">
+<i class="iconfont iconliebiao" style="color: #009F7E;z-index: 999;width:46rpx;height:46rpx;font-size:46rpx;line-height:46rpx;"></i>
+<view wx:if="{{sortTypeTime}}" class="header_text-sort" bindtap="changeSortTypeToName">按时间排序</view>
+<view wx:else class="header_text-sort" bindtap="changeSortTypeToTime">按名称排序</view>
+<view class="header_text-edit" bindtap="btnEdit">编辑</view>
 </view>
-<block wx:for="{{list}}">
-<xiangce  id="{{item.id}}" src="{{item.src}}" local="{{item.local}}" year='{{item.year}}' month='{{item.month}}' day='{{item.day}}' delbtn="{{delbtn}}" bind:delete="del" > 
+<view wx:else class="header_edit_container">
+<view class="header_text-delete">删除</view>
+<view class="header_text-all" bindtap="btnSelectAll">全选</view>
+<view class="header_text-complete" bindtap="btnComplete">完成</view>
+</view>
+
+
+<view class="photo_container">
+<block wx:for="{{list}}" wx:key="index">
+<!-- <xiangce  id="{{item.id}}" src="{{item.src}}" local="{{item.local}}" year='{{item.year}}' month='{{item.month}}' day='{{item.day}}' delbtn="{{delbtn}}" bind:delete="del" > 
+</xiangce> -->
+
+<xiangce  id="{{item.id}}"  local="{{item.local}}" delbtn="{{delbtn}}" date="{{item.date}}" selected="{{item.selected}}" bindchangeSelected="changeSelected"> 
 
 </xiangce>
-</block>
 
+</block>
+</view>

@@ -1,10 +1,11 @@
+<view class="out_container">
 
-<view class="outbox">
-<view class="imgbox">
-<!-- <image class="img" src="{{src}}"> -->
-<!-- </image> -->
+<view class="img_container" style="border:{{selected==true?'4rpx solid #009F7E;':''}}" bindtap="changeSelected">
+<image src="{{src}}"></image>
 </view>
-<view class="local">{{local}}</view>
-<view class="date">{{year}}/{{month}}//{{day}}</view>
-<view class="del" bindtap="del" wx:if="{{delbtn}}" ></view>
+
+<view class="img_name_box">{{local}}</view>
+
+<view class="img_time_box">{{date}}</view>
+
 </view>
