@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-   userinfo:''
+   userinfo:[]
   },
   //事件处理函数
 
@@ -32,10 +32,13 @@ Page({
        })
       }
     }else{
-      this.setData({
-        userinfo: app.globalData.userInfo
-     })
+
     }
   },
+  onShow:function(){
+    this.setData({
+      userinfo: app.globalData.userInfo
+   })
+  }
 
 })

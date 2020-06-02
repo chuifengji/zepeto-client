@@ -39,7 +39,8 @@ App({
             college:Data.COLLEGE,
             major:Data.MAJOR,
             class:Data.CLASS,
-            my_img:Data.my_img
+            my_img:Data.MYIMG,
+            canSearchMe:Data.CanSearchMe
           }
           this.globalData.userInfo = userInfo
           if (that.userInfoReadyCallback) {

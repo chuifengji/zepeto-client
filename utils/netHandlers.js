@@ -27,14 +27,16 @@ login(code) {
  return this._request.getRequest(this._baseUrl + '/personal/login', data).then(res => res.data)
 }
 //后台之后会限制修改次数
-updateSelfInfo(user_id,name,college,major,classNum){
+updateSelfInfo(user_id,name,college,major,classNum,canSearchMe){
   let data = {
     user_id,
     name,
     college,
     major,
-    class:classNum
+    class:classNum,
+    canSearchMe:canSearchMe
   }
+  console.log(data)
   return this._request.getRequest(this._baseUrl + '/personal/insert-personal-info', data).then(res => res.data)
 }
 updateSelfImg(){

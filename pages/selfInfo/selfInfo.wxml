@@ -57,15 +57,13 @@
 <!-- 添加我的方式 -->
 <view class="selfinfo_item">
 
-<view  class="item_itemName">添加我的方式</view>
-<view class="picker_item_last"></view>
-
-<view class="item_image_box">
-<image class="item_image" src="/images/right_arrow.png"></image>
+<view  class="item_itemName">是否可以搜索到我</view>
+<view class="item_switch">
+<switch color="#198056" checked="{{switchChecked}}" bindchange="switchChange"/>
 </view>
 </view>
 
 </view>
 
 
-<view class="btn_post_selfinfo" bindtap="btn_post_selfinfo">保存</view>
+<view class="btn_post_selfinfo" bindtap="btn_post_selfinfo" style="background-color:{{btnActive==true?'#198056':'#A8A8AB'}}">保存</view>
