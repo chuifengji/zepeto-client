@@ -1,0 +1,6 @@
+<view class="outBox">
+  <view  class="innerBox"   >
+    
+    <input class="promptLine" placeholder="搜索姓名/学院/专业/都可" bindinput="{{content}}" value=""></input>
+  </view>
+</view>

@@ -1,62 +1,41 @@
-// pages/friends/friends.js
+// pages/search/search.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab:0,
-    peopleList:[
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      }
-    ]
+    keyword:"",
+    peopleList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  goTo_tab_class:function(){
-    this.setData({
-      currentTab:1
-    })
+  change_keyword:function(e){
+  this.setData({
+    keyword:e.detail.value
+  })
   },
-  goTo_tab_friend:function(){
+  search:function(){
+    let keyword = this.data.keyword;
+    app.netHandlers.searchFriend(keyword).then(res=>{
+      console.log(res.Data)
+    let data=res.Data.map(item=>{
+      return{
+        id:item.ID,
+        name:item.NAME,
+        major:item.MAJOR,
+        src:item.MYIMG
+      }
+    })
+    console.log(data)
     this.setData({
-      currentTab:0
+      peopleList:data
     })
-  },
-  goToSearch:function(){
-    wx.navigateTo({
-      url: '../search/search',
     })
+
   },
   onLoad: function (options) {
 

@@ -1,0 +1,36 @@
+/* pages/search/search.wxss */
+.input_box{
+  width: 670rpx;
+  height: 78rpx;
+  left: 40rpx;
+  right: 40rpx;
+  bottom: 31rpx;
+  top: 31rpx;
+  background-color: #f2f2f2;
+  border-radius: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.input_real{
+margin-left: 50rpx;
+width: 500rpx;
+height: 60rpx;
+}
+
+.photos_container{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-between;
+  align-content: flex-start;
+  top: 80rpx;
+  left: 134rpx;
+  width: 660rpx;
+  padding-right: 184rpx;
+  box-sizing: border-box;
+  height: calc(100% - 230rpx);
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+}

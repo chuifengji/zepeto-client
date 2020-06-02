@@ -1,0 +1,7 @@
+{ 
+  "navigationBarTitleText": "添加朋友",
+  "usingComponents": {
+   "searchBox":"/components/searchBox/searchBox",
+   "person": "/components/person/person"
+  }
+}

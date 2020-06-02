@@ -1,0 +1,45 @@
+@import '../../utils/iconfont.wxss';
+page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.outBox{
+  width: 750rpx;
+  height: 150rpx;
+  position: relative;
+  background-color: white;
+  }
+  .innerBox{
+  width: 670rpx;
+  height: 88rpx;
+  left: 40rpx;
+  right: 40rpx;
+  bottom: 31rpx;
+  top: 31rpx;
+  background-color: #f2f2f2;
+  border-radius: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+  }
+  .searchImg{
+    position: absolute;
+    top:18rpx;
+    bottom: 14rpx;
+    left: 44rpx;
+    font-size: 56rpx;
+    color: #333333;
+  }
+  .promptLine{
+  vertical-align: middle;
+  position: absolute;
+  text-align: center;
+  width: 480rpx;
+  height: 88rpx;
+  margin-left: 100rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  color: rgb(196, 193, 193);
+  letter-spacing: 2rpx;
+  overflow-y: auto;
+  }

@@ -85,9 +85,7 @@ Page({
       {
         url: "https://wenda-data.nt-geek.club/23.png"
       },
-      {
-        url: "https://wenda-data.nt-geek.club/24.png"
-      },
+
     ],
     chartletList: [],
     chartletList: [{

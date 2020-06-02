@@ -1,0 +1,12 @@
+<view class="input_box">
+<i class="searchImg iconfont iconsearch" style="font-size:40rpx;line-height:78rpx;margin-left:40rpx;"></i>
+<input class="input_real" placeholder="搜索姓名/专业/学院都可" value="{{keyword}}" bindinput="change_keyword" bindblur="search"></input>
+</view>
+
+<view class="photos_container">
+
+ <block wx:for="{{peopleList}}" wx:key="index">
+   <person name="{{item.name}}" img="{{item.img}}" id="{{item.id}}"></person>
+ </block>
+
+</view>

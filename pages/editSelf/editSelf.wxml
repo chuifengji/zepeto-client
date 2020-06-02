@@ -1,36 +1,41 @@
 <view class="container_up">
 <view class="character_show">
 <image class="personal_body"></image>
-
 <image class="personal_hair" src="{{personalImage.hairStyle}}"></image>
-<image class="personal_eye" src="{{personalImage.eyeStyle}}"></image>
+<image class="personal_face" src="{{personalImage.faceStyle}}"></image>
 <image class="personal_overcoat" src="{{personalImage.overcoatStyle}}"></image>
 <image class="personal_blouse" src="{{personalImage.blouseStyle}}"></image>
 <image class="personal_trouser" src="{{personalImage.trouserStyle}}"></image>
 <image class="personal_shoes" src="{{personalImage.shoesStyle}}"></image>
 <image class="personal_glasses" src="{{personalImage.glassesStyle}}"></image>
-<image class="personal_ring" src="{{personalImage.ringStyle}}"></image>
-<image class="personal_mask" src="{{personalImage.maskStyle}}"></image>
 </view>
 </view>
+
+
 
 <view class="container_down">
+<view  class="tool_type">
+<i class="iconfont iconface_id item" style="color:{{currentStyle==0?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconface item" style="color:{{currentStyle==1?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconsmile item" style="color:{{currentStyle==2?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
+<i class="iconfont iconyifu item" style="color:{{currentStyle==3?'#009F7E':'#B8B8BA'}};"></i>
+<i class="iconfont iconkuzi item" style="color:{{currentStyle==4?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
+<i class="iconfont iconshoes item" style="color:{{currentStyle==5?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
+<i class="iconfont iconyanjing item" style="color:{{currentStyle==6?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+</view>
 
-<scroll-view scroll-x="true" class="tool_type">
-<block wx:for="{{chartletList}}">
-<view class="item"></view>
-</block>
-</scroll-view>
 
-<scroll-view scroll-y="true" class="tool_item">
-<image class="camera" src="../../images/photo.png" bindtap="goshoot"></image>
+
+<view class="tool_items">
+
+<view class="btn_goto_photo">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<div bindtap="setStyle">
-<image class="item" src="{{item.url}}"></image>
-</div>
+<view bindtap="setStyle" class="single_item"></view>
 </block>
-</scroll-view>
 
 </view>
 
- 
+</view> 

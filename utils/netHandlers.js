@@ -55,6 +55,10 @@ getDecorationList(){
     let data = {USER_ID:USER_ID }
     return this._request.getRequest(this._baseUrl + 'api', data).then(res => res.data)
   }
+  searchFriend(keyword){
+    let data = {content:keyword}
+    return this._request.getRequest(this._baseUrl + '/personal/get-search-list', data).then(res => res.data)
+  }
 
 }
 export default netHandlers

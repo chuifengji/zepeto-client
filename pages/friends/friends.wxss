@@ -5,7 +5,7 @@ page {
   overflow: hidden;
 }
 
-.btn_go_edit {
+.btn_go_search {
   position: fixed;
   top: 30rpx;
   left: 26rpx;
