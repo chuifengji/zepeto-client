@@ -28,7 +28,7 @@
 
 <view class="tool_items">
 
-<view class="btn_goto_photo">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
 

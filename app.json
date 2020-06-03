@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/groupPhoto/groupPhoto",
     "pages/index/index",
     "pages/search/search",
     "pages/editSelf/editSelf",
@@ -7,7 +8,7 @@
     "pages/album/album",
     "pages/friends/friends",
     "pages/shoot/shoot"
-
+ 
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -24,12 +25,12 @@
         "selectedIconPath": "images/face-active.png",
         "iconPath": "images/face.png",
         "pagePath": "pages/index/index",
-        "text": "我的形象"
+        "text": "形象"
       },
       {
         "selectedIconPath": "images/photo-active.png",
         "iconPath": "images/photo.png",
-        "pagePath": "pages/shoot/shoot",
+        "pagePath": "pages/groupPhoto/groupPhoto",
         "text": "拍照"
       },
       {

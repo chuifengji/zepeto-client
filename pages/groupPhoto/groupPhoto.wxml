@@ -1,0 +1,30 @@
+<view class="background_container">
+
+<view class="tool_container"  style="height:{{shrink?120:460}}rpx;transition:height 0.6s;">
+
+<view class="switch_container">
+<view class="switch_btn" bindtap="changeHeight">
+<i class="searchImg iconfont {{shrink?'iconpullup01':'iconxiala'}}" style="font-size:40rpx;line-height:50rpx;"></i>
+</view>
+<view class="item_container">
+    <block wx:for="{{tabItems}}" wx:key="index">
+      <view class="tab-item" style="color:{{currentTab==index?'#FFFFFF':'#505050'}}" data-current="{{index}}" bindtap="switchNav">{{item.navbar_title}}</view>
+    </block>
+    <view class="move_bg" style="transform:{{'translateX('+currentTab*108+'rpx)'}};transition:all 0.5s"></view>
+</view>
+</view>
+
+<view class="main_item_container">
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item_person"></view>
+</block>
+
+<view class="btn_get_photo"  style="transform: {{shrink?'scale(0)':''}};transition:all 0.5s">
+<i class="iconfont iconpingjia-paizhao1" style="font-size: 48rpx;color:#FFFFFF"></i>
+</view>
+
+</view>
+
+</view>
+
+</view>

@@ -62,24 +62,18 @@ page {
 
 .container_down .tool_items {
   display: flex;
-  justify-content: space-between;
-  align-content: flex-start;
   position: relative;
-  width: 688rpx;
- left: 31rpx;
- right: 31rpx;
+  width: 750rpx;
   flex-wrap: wrap;
   overflow-y: auto;
   margin-top: 20rpx;
 }
-.container_down .tool_items:after{
-  content: ""; width: 168rpx; display: block; height:0; 
-    /*只需要添加父元素的after伪元素中 高度0 ，宽度与item的宽一样*/
-}
  .single_item {
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 29rpx;
+  margin-bottom: 20rpx;
   box-sizing: border-box;
   background-color:red;
   border-radius: 15rpx;
@@ -93,6 +87,8 @@ page {
   line-height: 128rpx;
   box-sizing: border-box;
   display: inline-block;
-  margin: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 29rpx;
+  margin-bottom: 20rpx;
 
 }
