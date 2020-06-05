@@ -5,7 +5,7 @@
 import request from './request.js'
 class netHandlers {
   constructor() {
-    this._baseUrl = 'https://mindazepeto.nt-geek.club/'
+    this._baseUrl = 'https://mindazepeto.nt-geek.club'
     this._defaultHeaderGet = { 'data-type': 'application/json' }
     this._defaultHeaderOthers = { 'data-type': 'application/x-www-form-urlencoded' }
     this._request = new request(this._defaultHeaderGet,this._defaultHeaderOthers)
@@ -93,6 +93,41 @@ updatePersonalImage(user_id,url){
   }
   return this._request.getRequest(this._baseUrl + '/personal/update-personal-image', data).then(res => res.data)
 }
+  /*
+ * 上传合照
+ */
+addGroupPhoto(iduser,userid,location,url,thumbnail){
+  let data = {
+    iduser,
+    userid,
+    location,
+    url,
+    thumbnail
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/addGroupPhoto', data).then(res => res.data)
+}
+   /*
+ * 删除合照
+ */
+deleteGroupPhoto(){
+  let data = {
+    iduser,
+    userid,
+    idimg
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/deleteGroupPhoto', data).then(res => res.data)
+  
+}
 
+    /*
+ * 获取合照列表
+ */
+getGroupPhotos(){
+  let data = {
+    iduser,
+    userid,
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/getMyPhotos', data).then(res => res.data)
+}
 }
 export default netHandlers
