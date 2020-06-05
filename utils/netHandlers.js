@@ -5,7 +5,7 @@
 import request from './request.js'
 class netHandlers {
   constructor() {
-    this._baseUrl = 'http://123.56.241.180'
+    this._baseUrl = 'https://mindazepeto.nt-geek.club/'
     this._defaultHeaderGet = { 'data-type': 'application/json' }
     this._defaultHeaderOthers = { 'data-type': 'application/x-www-form-urlencoded' }
     this._request = new request(this._defaultHeaderGet,this._defaultHeaderOthers)
@@ -46,7 +46,18 @@ updateSelfImg(){
 getDecorationList(){
   return this._request.getRequest(this._baseUrl + '/decoration/get-list').then(res => res.data)
 }
-
+/**
+ * 获取外表列表
+ */
+getAppearanceList(){
+  return this._request.getRequest(this._baseUrl+'/appearance/get-list').then(res=>res.data)
+}
+/**
+ * 获取背景列表
+ */
+getBackgroundList(){
+  return this._request.getRequest(this._baseUrl+'/background/get-list').then(res=>res.data)
+}
 /**
  * 
  * 获取朋友列表
@@ -55,10 +66,33 @@ getDecorationList(){
     let data = {USER_ID:USER_ID }
     return this._request.getRequest(this._baseUrl + 'api', data).then(res => res.data)
   }
+  /*
+ * 搜索好友
+ */
   searchFriend(keyword){
     let data = {content:keyword}
     return this._request.getRequest(this._baseUrl + '/personal/get-search-list', data).then(res => res.data)
   }
+  /*
+ * 结交好友
+ */
+makeFriend(myid,friendid){
+  let data = {
+    myid,
+    friendid
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/makeFriends', data).then(res => res.data)
+}
+  /*
+ * 上传个人图片
+ */
+updatePersonalImage(user_id,url){
+  let data = {
+    user_id,
+    url
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/update-personal-image', data).then(res => res.data)
+}
 
 }
 export default netHandlers

@@ -3,16 +3,35 @@ page {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
  .container_up {
   width: 100%;
-  height: 60%;
-  top: 0;
+  height: 700rpx;
   position: relative;
+  display: inline-block;
+}
+.btn_goto_photo{
+  width: 128rpx;
+  height: 128rpx;
+  border-radius: 15rpx;
+  border:6rpx solid rgba(0,144,106,1);
+  text-align: center;
+  line-height: 128rpx;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-left: 30rpx;
+  margin-right: 29rpx;
+  margin-bottom: 20rpx;
+  display: inline-block;
 }
 
 .container_up .character_show {
   position: relative;
+  width: 200rpx;
+  height: 100%;
+  background-color: sandybrown;
 }
 
 .container_up .character_show .personal_body {}
@@ -31,10 +50,23 @@ page {
 
 .container_up .character_show .personal_glasses {}
 
-
+.btn_save_img{
+  width: 128rpx;
+  height:58rpx;
+ background:rgba(25,128,86,1);
+ border-radius:42px;
+ font-size:24rpx;
+font-family:PingFangSC-Semibold,PingFang SC;
+font-weight:bold;
+color:rgba(255,255,255,1);
+text-align: center;
+line-height: 58rpx;
+position: relative;
+right: 0;
+}
 .container_down {
+  flex: 1;
   width: 100%;
-  height: 40%;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -43,11 +75,10 @@ page {
 
 .container_down .tool_type {
   position: relative;
-  width: 100%;
-  overflow: auto;
+  overflow-y: auto;
   height: 100rpx;
+  box-sizing: content-box;
   top: 0;
-  padding: 0 31rpx;
   display: inline-flex;
   align-items: center;
 }
@@ -56,7 +87,8 @@ page {
   z-index: 999;
   font-size:52rpx;
   line-height:100rpx;
-  margin-right: 54rpx;
+  padding-right: 31rpx;
+  padding-left: 31rpx;
   text-align: center;
 }
 
@@ -77,18 +109,4 @@ page {
   box-sizing: border-box;
   background-color:red;
   border-radius: 15rpx;
-}
-.btn_goto_photo{
-  width: 128rpx;
-  height: 128rpx;
-  border-radius: 15rpx;
-  border:6rpx solid rgba(0,144,106,1);
-  text-align: center;
-  line-height: 128rpx;
-  box-sizing: border-box;
-  display: inline-block;
-  margin-left: 30rpx;
-  margin-right: 29rpx;
-  margin-bottom: 20rpx;
-
 }

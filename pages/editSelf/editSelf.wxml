@@ -10,32 +10,130 @@
 <image class="personal_glasses" src="{{personalImage.glassesStyle}}"></image>
 </view>
 </view>
-
-
-
+<view>
+<view class="btn_save_img">保存</view>
+</view>
 <view class="container_down">
 <view  class="tool_type">
-<i class="iconfont iconface_id item" style="color:{{currentStyle==0?'#009F7E':'#B8B8BA'}}"></i>
-<i class="iconfont iconface item" style="color:{{currentStyle==1?'#009F7E':'#B8B8BA'}}"></i>
-<i class="iconfont iconsmile item" style="color:{{currentStyle==2?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
-<i class="iconfont iconyifu item" style="color:{{currentStyle==3?'#009F7E':'#B8B8BA'}};"></i>
-<i class="iconfont iconkuzi item" style="color:{{currentStyle==4?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
-<i class="iconfont iconshoes item" style="color:{{currentStyle==5?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
-<i class="iconfont iconyanjing item" style="color:{{currentStyle==6?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<i class="iconfont iconface_id item" bindtap="changeItemList" data-type="feature" style="color:{{currentStyle=='feature'?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconface item" bindtap="changeItemList" data-type="hair" style="color:{{currentStyle=='hair'?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconsmile item" bindtap="changeItemList" data-type="expression" style="color:{{currentStyle=='expression'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
+<i class="iconfont iconwaitao item" bindtap="changeItemList" data-type="overcoat"  style="color:{{currentStyle=='overcoat'?'#009F7E':'#B8B8BA'}};"></i>
+<i class="iconfont iconyifu item"  bindtap="changeItemList" data-type="shirt" style="color:{{currentStyle=='shirt'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<i class="iconfont iconkuzi item" bindtap="changeItemList" data-type="trousers"style="color:{{currentStyle=='trousers'?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
+<i class="iconfont iconshoes item" bindtap="changeItemList" data-type="shoes" style="color:{{currentStyle=='shoes'?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
+<i class="iconfont iconyanjing item"  bindtap="changeItemList" data-type="glasses" style="color:{{currentStyle=='glasses'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<i class="iconfont iconicon-test item"  bindtap="changeItemList" data-type="others" style="color:{{currentStyle=='others'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
 </view>
 
-
-
-<view class="tool_items">
-
+<!-- 
+current_style:feature
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='feature'}}">
 <view class="btn_goto_photo" bindtap="btn_goto_shoot">
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
-
 <block wx:for="{{toolitemList}}" wx:key="item">
 <view bindtap="setStyle" class="single_item"></view>
 </block>
-
 </view>
+<!-- 
+current_style:hair
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='hair'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:expression
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='expression'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:overcoat
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='overcoat'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:shirt
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='shirt'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:trousers
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='trousers'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:shoes
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='shoes'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:glasses
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='glasses'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+<!-- 
+current_style:others
+--> 
+<view class="tool_items" wx:if="{{currentStyle=='others'}}">
+<view class="btn_goto_photo" bindtap="btn_goto_shoot">
+<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
+</view>
+<block wx:for="{{toolitemList}}" wx:key="item">
+<view bindtap="setStyle" class="single_item"></view>
+</block>
+</view>
+
+
+
 
 </view> 
