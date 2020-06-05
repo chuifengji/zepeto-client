@@ -34,16 +34,14 @@ current_style:feature
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+
 </block>
 </view>
 <!-- 
 current_style:hair
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='hair'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
 <view bindtap="setStyle" class="single_item"></view>
 </block>
@@ -53,11 +51,9 @@ current_style:hair
 current_style:expression
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='expression'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_expression==item.id?true:false}}" bindselected_util_item="selected_expression_item"></ItemUtil>
 </block>
 </view>
 
@@ -65,11 +61,9 @@ current_style:expression
 current_style:overcoat
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='overcoat'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_overcoat==item.id?true:false}}" bindselected_util_item="selected_overcoat_item"></ItemUtil>
 </block>
 </view>
 
@@ -77,11 +71,9 @@ current_style:overcoat
 current_style:shirt
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='shirt'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_shirt==item.id?true:false}}" bindselected_util_item="selected_shirt_item"></ItemUtil>
 </block>
 </view>
 
@@ -89,11 +81,9 @@ current_style:shirt
 current_style:trousers
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='trousers'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_trousers==item.id?true:false}}" bindselected_util_item="selected_trousers_item"></ItemUtil>
 </block>
 </view>
 
@@ -101,11 +91,9 @@ current_style:trousers
 current_style:shoes
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='shoes'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_shoes==item.id?true:false}}" bindselected_util_item="selected_shoes_item"></ItemUtil>
 </block>
 </view>
 
@@ -113,11 +101,9 @@ current_style:shoes
 current_style:glasses
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='glasses'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_glasses==item.id?true:false}}" bindselected_util_item="selected_glasses_item"></ItemUtil>
 </block>
 </view>
 
@@ -125,15 +111,11 @@ current_style:glasses
 current_style:others
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='others'}}">
-<view class="btn_goto_photo" bindtap="btn_goto_shoot">
-<i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
-</view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_others==item.id?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
 </block>
 </view>
-
-
 
 
 </view> 

@@ -6,6 +6,13 @@ Page({
    */
   data: {
     currentStyle:'feature',
+    current_item_expression:null,
+    current_item_overcoat:null,
+    current_item_shirt:null,
+    current_item_trousers:null,
+    current_item_shoes:null,
+    current_item_others:null,
+    current_item_glasses:null,
     personalImage: {
       hairStyle: "",
       eyeStyle: "",
@@ -25,10 +32,28 @@ Page({
 
     //贴图这里，第一次仅仅展现id为1的list,之后每次切换贴图种类
     toolitemList: [{
+        id:0,
         url: "https://wenda-data.nt-geek.club/02.png",
         name: '1'
       },
       {
+        id:1,
+        url: "https://wenda-data.nt-geek.club/03.png"
+      },{
+        id:2,
+        url: "https://wenda-data.nt-geek.club/02.png",
+        name: '1'
+      },
+      {
+        id:3,
+        url: "https://wenda-data.nt-geek.club/03.png"
+      },{
+        id:4,
+        url: "https://wenda-data.nt-geek.club/02.png",
+        name: '1'
+      },
+      {
+        id:5,
         url: "https://wenda-data.nt-geek.club/03.png"
       },
     ],
@@ -50,6 +75,51 @@ Page({
    this.setData({
      currentStyle:e.currentTarget.dataset.type
    })
+  },
+  selected_expression_item:function(e){
+   this.setData({
+    current_item_expression:e.currentTarget.dataset.id
+   })
+  },
+  selected_overcoat_item:function(e){
+    this.setData({
+      current_item_overcoat:e.currentTarget.dataset.id
+     })
+  },
+  selected_shirt_item:function(e){
+    this.setData({
+      current_item_shirt:e.currentTarget.dataset.id
+     })
+  },
+  selected_trousers_item:function(e){
+    this.setData({
+      current_item_trousers:e.currentTarget.dataset.id
+     })
+  },
+  selected_shoes_item:function(e){
+    this.setData({
+      current_item_shoes:e.currentTarget.dataset.id
+     })
+  },
+  selected_glasses_item:function(e){
+    this.setData({
+      current_item_glasses:e.currentTarget.dataset.id
+     })
+  },
+  selected_others_item:function(e){
+    this.setData({
+      current_item_others:e.currentTarget.dataset.id
+     })
+  },
+  selected_hair_item:function(e){
+    this.setData({
+      current_item_hair:e.currentTarget.dataset.id
+     })
+  },
+  selected_feature_item:function(e){
+    this.setData({
+      current_item_feature:e.currentTarget.dataset.id
+     })
   },
   onLoad: function (options) {
 

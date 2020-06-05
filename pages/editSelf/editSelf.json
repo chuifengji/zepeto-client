@@ -1,4 +1,6 @@
 {  
   "navigationBarTitleText": "编辑形象",
-  "usingComponents": {}
+  "usingComponents": {
+    "ItemUtil": "/components/itemUtil/itemUtil"
+  }
 }

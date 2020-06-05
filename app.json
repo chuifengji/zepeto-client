@@ -7,8 +7,8 @@
     "pages/selfInfo/selfInfo",
     "pages/album/album",
     "pages/friends/friends",
-    "pages/shoot/shoot"
- 
+    "pages/shoot/shoot",
+    "pages/mailBox/mailBox"
   ],
   "window": {
     "backgroundTextStyle": "light",

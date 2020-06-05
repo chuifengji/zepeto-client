@@ -1,0 +1,11 @@
+.single_item {
+  width: 128rpx;
+  height: 128rpx;
+  margin-left: 30rpx;
+  margin-right: 29rpx;
+  margin-bottom: 20rpx;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
