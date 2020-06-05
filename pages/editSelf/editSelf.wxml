@@ -34,7 +34,7 @@ current_style:feature
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
 <block wx:for="{{toolitemList}}" wx:key="item">
-
+<ItemUtil data-type="{{item.type}}" data-urlA="{{item.urlA}}" data-urlB="{{item.urlB}}" data-urlC="{{item.urlC}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_feature==item.id?true:false}}" bindselected_util_item="selected_feature_item"></ItemUtil>
 </block>
 </view>
 <!-- 
@@ -43,7 +43,7 @@ current_style:hair
 <view class="tool_items" wx:if="{{currentStyle=='hair'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item"></view>
+<ItemUtil data-type="{{item.type}}" data-urlA="{{item.urlA}}" data-urlB="{{item.urlB}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_hair==item.id?true:false}}" bindselected_util_item="selected_hair_item"></ItemUtil>
 </block>
 </view>
 
@@ -101,7 +101,6 @@ current_style:shoes
 current_style:glasses
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='glasses'}}">
-
 <block wx:for="{{toolitemList}}" wx:key="item">
 <ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_glasses==item.id?true:false}}" bindselected_util_item="selected_glasses_item"></ItemUtil>
 </block>

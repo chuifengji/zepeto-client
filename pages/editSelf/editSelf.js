@@ -13,6 +13,8 @@ Page({
     current_item_shoes:null,
     current_item_others:null,
     current_item_glasses:null,
+    current_item_hair:null,
+    current_item_feature:null,
     personalImage: {
       hairStyle: "",
       eyeStyle: "",
