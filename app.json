@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/friendInfo/friendInfo",
     "pages/editSelf/editSelf",
     "pages/groupPhoto/groupPhoto",
     "pages/search/search",
@@ -9,6 +10,7 @@
     "pages/friends/friends",
     "pages/shoot/shoot",
     "pages/mailBox/mailBox"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

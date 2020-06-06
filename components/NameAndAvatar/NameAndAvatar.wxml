@@ -11,10 +11,7 @@
   </view>
   </view>
   <view class="vertical_bar"></view>
-
 <i class="iconfont iconjiahaoyou btn_gotofriend_page" bindtap="gotofriend_page"></i>
-
-
 </view>
 
 

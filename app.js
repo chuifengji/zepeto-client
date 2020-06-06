@@ -12,7 +12,19 @@ App({
         this.login()
       } else {
         let userInfo = wx.getStorageSync('USERINFO')
+        let friendList = wx.getStorageSync('FRIENDLIST')
+        let classmateList = wx.getStorageSync('CLASSMATELIST')
+        let photoList = wx.getStorageSync('PHOTOLIST')
+        let backgroundList = wx.getStorageSync('BACKGROUNDLIST')
+        let decorationList = wx.getStorageSync('DECORATIONLIST')
+        let appearanceList = wx.getStorageSync('APPEARANCELIST')
         that.globalData.userInfo = userInfo
+        that.globalData.friendList = friendList
+        that.globalData.classmateList = classmateList
+        that.globalData.photoList = photoList
+        that.globalData.backgroundList = backgroundList
+        that.globalData.decorationList = decorationList
+        that.globalData.appearanceList = appearanceList
         if (that.userInfoReadyCallback) {
           that.userInfoReadyCallback(userInfo)
         }
@@ -46,16 +58,80 @@ App({
           if (that.userInfoReadyCallback) {
             that.userInfoReadyCallback(userInfo)
           }
+          this.getFriendList(Data.USERID)
+          this.getMyPhotoList(Data.ID,Data.USERID)
+          this.getMyClassMateList(Data.COLLEGE,Data.MAJOR,Data.CLASS)
+          this.getAppearanceList()
           wx.setStorage({
             key:"USERINFO",
             data:userInfo
+          })
+          wx.setStorage({
+            key:"DECORATIONLIST",
+            data:this.globalData.decorationList
+          })
+          wx.setStorage({
+            key:"BACKGROUNDLIST",
+            data:this.globalData.backgroundList
           })
         })
       }
     })
     },
+    //下面的三个请求对每个用户来说都是一样的，属于公共数据其实也完全可以放在云存储上，没必要浪费带宽。
+    getBackgroundList:function(){
+
+    },
+    getAppearanceList:function(){
+        this.netHandlers.getAppearanceList().then(res=>{
+          this.globalData.appearanceList = res.Data;
+          wx.setStorage({
+            key:"APPEARANCELIST",
+            data:res.Data
+          })
+      })
+    },
+    getDecorationList:function(){
+
+    },
+    //用户初次登录要获得的私人数据是下面这三个。
+    getFriendList:function(USER_ID){
+      this.netHandlers.getFriendsList(USER_ID).then(res=>{
+        this.globalData.friendList = res.Data
+        wx.setStorage({
+          key:"FRIENDLIST",
+          data:res.Data
+        })
+      })
+    },
+    getMyPhotoList:function(iduser,userid){
+      this.netHandlers.getGroupPhotos(iduser,userid).then(res=>{
+        this.globalData.photoList = res.Data
+        wx.setStorage({
+          key:"PHOTOLIST",
+          data:res.Data
+        })
+      })
+    },
+    getMyClassMateList:function(){
+      this.netHandlers.getClassMateList(college,major,classNum).then(res=>{
+        this.globalData.classmateList = res.Data;
+        wx.setStorage({
+          key:"CLASSMATELIST",
+          data:res.Data
+        })
+      })
+    },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    backgroundList:null,
+    appearanceList:null,
+    decorationList:null,
+    friendList:null,
+    classmateList:null,
+    photoList:null
   }
 })
+
+
 

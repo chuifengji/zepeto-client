@@ -1,5 +1,5 @@
 <!--components/person/person.wxml-->
- <view class="item_person">
+ <view class="item_person"  bindtap="gotofriendinfo_page">
  <image class="item_img" src="{{img}}"></image>
  </view>
  <view class="item_name">{{name}}</view>

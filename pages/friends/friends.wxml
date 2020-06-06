@@ -1,4 +1,4 @@
-<view class="btn_go_search"  bindtap="goToSearch">朋友</view>
+<view class="btn_go_search"  bindtap="goToSearch">添加朋友</view>
 
 <view class="item_container">
 <view class="item_friend" bindtap="goTo_tab_friend" style="color:{{currentTab==0?'#505050':'#7C7C7C'}}">朋友</view>

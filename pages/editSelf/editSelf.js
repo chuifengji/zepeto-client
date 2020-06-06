@@ -1,4 +1,5 @@
 // pages/editSelf/editSelf.js
+const app = getApp()
 Page({
 
   /**
@@ -15,53 +16,24 @@ Page({
     current_item_glasses:null,
     current_item_hair:null,
     current_item_feature:null,
-    personalImage: {
-      hairStyle: "",
-      eyeStyle: "",
+      hairAStyle: "",
+      hairBStyle: "",
       overcoatStyle: "",
-      blouseStyle: "",
       trouserStyle: "",
       shoesStyle: "",
       glassesStyle: "",
-      ringStyle: "",
-      maskStyle: ""
-    },
+      othersStyle:"",
+      shirtStyle:"",
+      expressionStyle:"",
+      featureStyle:"",
+ 
      //数据库返回的所有列表
-    appearanceList:[],
+    appearanceList:null,
      //当前渲染出来的列表
     currentItemList:[],
-
-
     //贴图这里，第一次仅仅展现id为1的list,之后每次切换贴图种类
-    toolitemList: [{
-        id:0,
-        url: "https://wenda-data.nt-geek.club/02.png",
-        name: '1'
-      },
-      {
-        id:1,
-        url: "https://wenda-data.nt-geek.club/03.png"
-      },{
-        id:2,
-        url: "https://wenda-data.nt-geek.club/02.png",
-        name: '1'
-      },
-      {
-        id:3,
-        url: "https://wenda-data.nt-geek.club/03.png"
-      },{
-        id:4,
-        url: "https://wenda-data.nt-geek.club/02.png",
-        name: '1'
-      },
-      {
-        id:5,
-        url: "https://wenda-data.nt-geek.club/03.png"
-      },
-    ],
+    toolitemList: [],
    
-      
-
   },
 
   /**
@@ -73,58 +45,132 @@ Page({
     })
   },
   changeItemList:function(e){
-   console.log(e.currentTarget.dataset.type)
    this.setData({
-     currentStyle:e.currentTarget.dataset.type
+     currentStyle:e.currentTarget.dataset.type,
+     toolitemList:app.globalData.appearanceList[e.currentTarget.dataset.type]
    })
   },
   selected_expression_item:function(e){
-   this.setData({
-    current_item_expression:e.currentTarget.dataset.id
-   })
+    if(this.data.current_item_overcoat===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_expression:null,
+        expressionStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_expression:e.currentTarget.dataset.id,
+        expressionStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_overcoat_item:function(e){
-    this.setData({
-      current_item_overcoat:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_overcoat===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_overcoat:null,
+        overcoatStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_overcoat:e.currentTarget.dataset.id,
+        overcoatStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_shirt_item:function(e){
-    this.setData({
-      current_item_shirt:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_shirt===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_shirt:null,
+        shirtStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_shirt:e.currentTarget.dataset.id,
+        shirtStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_trousers_item:function(e){
-    this.setData({
-      current_item_trousers:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_trousers===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_trousers:null,
+        trouserStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_trousers:e.currentTarget.dataset.id,
+        trouserStyle:e.currentTarget.dataset.url
+       })
+    }
+
   },
   selected_shoes_item:function(e){
-    this.setData({
-      current_item_shoes:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_shoes===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_shoes:null,
+        shoesStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_shoes:e.currentTarget.dataset.id,
+        shoesStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_glasses_item:function(e){
-    this.setData({
-      current_item_glasses:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_glasses===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_glasses:null,
+        glassesStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_glasses:e.currentTarget.dataset.id,
+        glassesStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_others_item:function(e){
-    this.setData({
-      current_item_others:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_others===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_others:null,
+        othersStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_others:e.currentTarget.dataset.id,
+        othersStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   selected_hair_item:function(e){
-    this.setData({
-      current_item_hair:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_others===e.currentTarget.dataset.id){
+
+    }else{
+      this.setData({
+        current_item_hair:e.currentTarget.dataset.id
+        
+       })
+    }
+
   },
   selected_feature_item:function(e){
-    this.setData({
-      current_item_feature:e.currentTarget.dataset.id
-     })
+    if(this.data.current_item_feature===e.currentTarget.dataset.id){
+      this.setData({
+        current_item_feature:null,
+        featureStyle:''
+       })
+    }else{
+      this.setData({
+        current_item_feature:e.currentTarget.dataset.id,
+        featureStyle:e.currentTarget.dataset.url
+       })
+    }
   },
   onLoad: function (options) {
-
+    this.setData({
+      appearanceList:app.globalData.appearanceList,
+      toolitemList:app.globalData.appearanceList['FeatureList']
+    })
   },
 
   /**

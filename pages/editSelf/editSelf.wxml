@@ -1,118 +1,119 @@
 <view class="container_up">
-<view class="character_show">
-<image class="personal_body"></image>
-<image class="personal_hair" src="{{personalImage.hairStyle}}"></image>
-<image class="personal_face" src="{{personalImage.faceStyle}}"></image>
-<image class="personal_overcoat" src="{{personalImage.overcoatStyle}}"></image>
-<image class="personal_blouse" src="{{personalImage.blouseStyle}}"></image>
-<image class="personal_trouser" src="{{personalImage.trouserStyle}}"></image>
-<image class="personal_shoes" src="{{personalImage.shoesStyle}}"></image>
-<image class="personal_glasses" src="{{personalImage.glassesStyle}}"></image>
+<view class="character_show" id="nicked" style="position:relative;background-image:url('https://zepeto.nt-geek.club/naked.png')"></view>
+<view class="character_show" id="Trousers" style="background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Shirt" style="background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Expression" style="background-image:url('{{expressionStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Feature" style="background-image:url('{{featureStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+ <view class="character_show" id="Overcoat" style="background-image:url('{{overcoatStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
+<view class="character_show" id="Shoes" style="background-image:url('{{shoesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Glasses" style="background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Others" style="background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="HairA" style="background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="HairB" style="background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
+
+
 </view>
-</view>
-<view>
 <view class="btn_save_img">保存</view>
-</view>
 <view class="container_down">
 <view  class="tool_type">
-<i class="iconfont iconface_id item" bindtap="changeItemList" data-type="feature" style="color:{{currentStyle=='feature'?'#009F7E':'#B8B8BA'}}"></i>
-<i class="iconfont iconface item" bindtap="changeItemList" data-type="hair" style="color:{{currentStyle=='hair'?'#009F7E':'#B8B8BA'}}"></i>
-<i class="iconfont iconsmile item" bindtap="changeItemList" data-type="expression" style="color:{{currentStyle=='expression'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
-<i class="iconfont iconwaitao item" bindtap="changeItemList" data-type="overcoat"  style="color:{{currentStyle=='overcoat'?'#009F7E':'#B8B8BA'}};"></i>
-<i class="iconfont iconyifu item"  bindtap="changeItemList" data-type="shirt" style="color:{{currentStyle=='shirt'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
-<i class="iconfont iconkuzi item" bindtap="changeItemList" data-type="trousers"style="color:{{currentStyle=='trousers'?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
-<i class="iconfont iconshoes item" bindtap="changeItemList" data-type="shoes" style="color:{{currentStyle=='shoes'?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
-<i class="iconfont iconyanjing item"  bindtap="changeItemList" data-type="glasses" style="color:{{currentStyle=='glasses'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
-<i class="iconfont iconicon-test item"  bindtap="changeItemList" data-type="others" style="color:{{currentStyle=='others'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
+<i class="iconfont iconface_id item" bindtap="changeItemList" data-type="FeatureList" style="color:{{currentStyle=='FeatureList'?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconface item" bindtap="changeItemList" data-type="HairList" style="color:{{currentStyle=='HairList'?'#009F7E':'#B8B8BA'}}"></i>
+<i class="iconfont iconsmile item" bindtap="changeItemList" data-type="ExpressionList" style="color:{{currentStyle=='ExpressionList'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
+<i class="iconfont iconwaitao item" bindtap="changeItemList" data-type="OvercoatList"  style="color:{{currentStyle=='OvercoatList'?'#009F7E':'#B8B8BA'}};"></i>
+<i class="iconfont iconyifu item"  bindtap="changeItemList" data-type="ShirtList" style="color:{{currentStyle=='ShirtList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<i class="iconfont iconkuzi item" bindtap="changeItemList" data-type="TrousersList" style="color:{{currentStyle=='TrousersList'?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
+<i class="iconfont iconshoes item" bindtap="changeItemList" data-type="ShoesList" style="color:{{currentStyle=='ShoesList'?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
+<i class="iconfont iconyanjing item"  bindtap="changeItemList" data-type="GlassesList" style="color:{{currentStyle=='GlassesList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<i class="iconfont iconicon-test item"  bindtap="changeItemList" data-type="OthersList" style="color:{{currentStyle=='OthersList'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
 </view>
 
 <!-- 
 current_style:feature
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='feature'}}">
+<view class="tool_items" wx:if="{{currentStyle=='FeatureList'}}">
 <view class="btn_goto_photo" bindtap="btn_goto_shoot">
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-urlA="{{item.urlA}}" data-urlB="{{item.urlB}}" data-urlC="{{item.urlC}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_feature==item.id?true:false}}" bindselected_util_item="selected_feature_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-urlA="{{item.URLA}}" data-urlB="{{item.URLB}}" data-urlC="{{item.URLC}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_feature==item.ID?true:false}}" bindselected_util_item="selected_feature_item"></ItemUtil>
 </block>
 </view>
 <!-- 
 current_style:hair
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='hair'}}">
+<view class="tool_items" wx:if="{{currentStyle=='HairList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-urlA="{{item.urlA}}" data-urlB="{{item.urlB}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_hair==item.id?true:false}}" bindselected_util_item="selected_hair_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-urlA="{{item.URLA}}" data-urlB="{{item.URLB}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_hair==item.ID?true:false}}" bindselected_util_item="selected_hair_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:expression
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='expression'}}">
+<view class="tool_items" wx:if="{{currentStyle=='ExpressionList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_expression==item.id?true:false}}" bindselected_util_item="selected_expression_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_expression==item.ID?true:false}}" bindselected_util_item="selected_expression_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:overcoat
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='overcoat'}}">
+<view class="tool_items" wx:if="{{currentStyle=='OvercoatList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_overcoat==item.id?true:false}}" bindselected_util_item="selected_overcoat_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_overcoat==item.ID?true:false}}" bindselected_util_item="selected_overcoat_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:shirt
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='shirt'}}">
+<view class="tool_items" wx:if="{{currentStyle=='ShirtList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_shirt==item.id?true:false}}" bindselected_util_item="selected_shirt_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_shirt==item.ID?true:false}}" bindselected_util_item="selected_shirt_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:trousers
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='trousers'}}">
+<view class="tool_items" wx:if="{{currentStyle=='TrousersList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_trousers==item.id?true:false}}" bindselected_util_item="selected_trousers_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_trousers==item.ID?true:false}}" bindselected_util_item="selected_trousers_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:shoes
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='shoes'}}">
+<view class="tool_items" wx:if="{{currentStyle=='ShoesList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_shoes==item.id?true:false}}" bindselected_util_item="selected_shoes_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_shoes==item.ID?true:false}}" bindselected_util_item="selected_shoes_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:glasses
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='glasses'}}">
+<view class="tool_items" wx:if="{{currentStyle=='GlassesList'}}">
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_glasses==item.id?true:false}}" bindselected_util_item="selected_glasses_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_glasses==item.ID?true:false}}" bindselected_util_item="selected_glasses_item"></ItemUtil>
 </block>
 </view>
 
 <!-- 
 current_style:others
 --> 
-<view class="tool_items" wx:if="{{currentStyle=='others'}}">
+<view class="tool_items" wx:if="{{currentStyle=='OthersList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.type}}" data-url="{{item.url}}" data-id="{{item.id}}" thumbnail="https://wenda-data.nt-geek.club/03.png" selected="{{current_item_others==item.id?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_others==item.ID?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
 </block>
 </view>
 

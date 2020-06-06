@@ -1,0 +1,27 @@
+<view class="person_container">
+
+<view class="img_box"></view>
+<view>{{friendMajor}}</view>
+<view>{{friendName}}</view>
+
+</view>
+
+<view wx:if="{{hadbeenmyfriend}}" class="button_block">
+
+<view class="btn_item_box">
+<i class="searchImg iconfont iconxiangji" style="font-size:54rpx;"></i>
+<text>去合照</text>
+</view>
+
+<view class="btn_item_box">
+<i class="searchImg iconfont icondelete" style="font-size:56rpx;"></i>
+<text>删除</text>
+</view>
+
+</view>
+<view wx:else class="button_block">
+<view class="btn_item_box" bindtap="addFriend">
+<i class="iconfont iconjiahaoyou " style="font-size:60rpx;color:#00906A;" ></i>
+<text style="color:#00906A;" >加好友</text>
+</view>
+</view>

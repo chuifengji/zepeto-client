@@ -25,6 +25,7 @@ Page({
   },
   
   onLoad: function () {
+
     if(!app.globalData.userInfo){
       app.userInfoReadyCallback = res => {
         this.setData({
@@ -35,10 +36,14 @@ Page({
 
     }
   },
+  getSomeList:function(){},
   onShow:function(){
+    console.log(app.globalData.appearanceList)
     this.setData({
       userinfo: app.globalData.userInfo
    })
-  }
-
+  },
+  onReady: function () {
+   //可以在这里请求装饰列表，背景列表。
+  },
 })

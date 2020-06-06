@@ -36,7 +36,6 @@ updateSelfInfo(user_id,name,college,major,classNum,canSearchMe){
     class:classNum,
     canSearchMe:canSearchMe
   }
-  console.log(data)
   return this._request.getRequest(this._baseUrl + '/personal/insert-personal-info', data).then(res => res.data)
 }
 updateSelfImg(){
@@ -64,8 +63,20 @@ getBackgroundList(){
  */
   getFriendsList(USER_ID) {
     let data = {USER_ID:USER_ID }
-    return this._request.getRequest(this._baseUrl + 'api', data).then(res => res.data)
+    return this._request.getRequest(this._baseUrl + '/personal/get-friends-list', data).then(res => res.data)
   }
+
+  /*
+ * 获取班级同学
+ */
+ getClassMateList(college,major,classNum){
+   let data = {
+     college,
+     major,
+     class:classNum
+   }
+   return this._request.getRequest(this._baseUrl + '/personal/get-classmates-list', data).then(res => res.data)
+ }
   /*
  * 搜索好友
  */
@@ -122,7 +133,7 @@ deleteGroupPhoto(){
     /*
  * 获取合照列表
  */
-getGroupPhotos(){
+getGroupPhotos(iduser,userid){
   let data = {
     iduser,
     userid,

@@ -1,4 +1,4 @@
-// pages/search/search.js
+// pages/friendInfo/friendInfo.js
 const app = getApp()
 Page({
 
@@ -6,48 +6,37 @@ Page({
    * 页面的初始数据
    */
   data: {
-    keyword:"",
-    peopleList:[]
+    hadbeenmyfriend:false,
+    model:null,
+    navigateTitle: "",
+    model:null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  change_keyword:function(e){
-  this.setData({
-    keyword:e.detail.value
-  })
+  addFriend:function(){
+    let myid =app.globalData.userInfo.id;
+    let friendid = this.data.model.id
+    console.log(myid,friendid)
+    app.netHandlers.makeFriend(myid,friendid).then(res=>{
+      console.log(res)
+    })
   },
-  search:function(){
-    let keyword = this.data.keyword;
-    app.netHandlers.searchFriend(keyword).then(res=>{
-      console.log(res.Data)
-    let data=res.Data.map(item=>{
-      return{
-        id:item.ID,
-        name:item.NAME,
-        major:item.MAJOR,
-        src:item.MYIMG
-      }
-    })
-    console.log(data)
-    this.setData({
-      peopleList:data
-    })
-    })
+  //通过该用户的ID判断是否是我的好友
+  isMyFriend(){
 
-  },
-  gotofriendinfo_page:function(e){
-    console.log(e.currentTarget.dataset)
-    var model = JSON.stringify(e.currentTarget.dataset);
-      wx.navigateTo({
-        url: '../friendInfo/friendInfo?model=' + model,
-      })
   },
   onLoad: function (options) {
-
+    let model = JSON.parse(options.model)
+    console.log(model)
+    wx.setNavigationBarTitle({
+      title: model.name
+    })
+    this.setData({
+      model:model
+    })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
