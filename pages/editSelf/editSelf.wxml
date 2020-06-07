@@ -1,5 +1,7 @@
+
 <view class="container_up">
-<view class="character_show" id="nicked" style="position:relative;background-image:url('https://zepeto.nt-geek.club/naked.png')"></view>
+<canvas canvas-id="maskCanvas" class="cvs"></canvas>
+<view class="character_show" id="nicked" style="position:relative;background-image:url('{{nakedStyle}}')"></view>
 <view class="character_show" id="Trousers" style="background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Shirt" style="background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Expression" style="background-image:url('{{expressionStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
@@ -10,10 +12,8 @@
 <view class="character_show" id="Others" style="background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="HairA" style="background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="HairB" style="background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
-
-
 </view>
-<view class="btn_save_img">保存</view>
+<view class="btn_save_img" bindtap="saveStyle">保存</view>
 <view class="container_down">
 <view  class="tool_type">
 <i class="iconfont iconface_id item" bindtap="changeItemList" data-type="FeatureList" style="color:{{currentStyle=='FeatureList'?'#009F7E':'#B8B8BA'}}"></i>
@@ -119,3 +119,4 @@ current_style:others
 
 
 </view> 
+
