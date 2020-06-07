@@ -143,15 +143,27 @@ Page({
     }
   },
   selected_hair_item:function(e){
-    if(this.data.current_item_others===e.currentTarget.dataset.id){
-
-    }else{
+    if(this.data.current_item_hair===e.currentTarget.dataset.id){
       this.setData({
-        current_item_hair:e.currentTarget.dataset.id
-        
+        current_item_hair:e.currentTarget.dataset.id,
+        hairAStyle:'',
+        hairBStyle:""
        })
+    }else{
+      if(e.currentTarget.dataset.type==='hair'){
+        this.setData({
+          current_item_hair:e.currentTarget.dataset.id,
+          hairAStyle:e.currentTarget.dataset.hairAStyle,
+          hairBStyle:"",
+         })
+      }else{
+        this.setData({
+          current_item_hair:e.currentTarget.dataset.id,
+          hairAStyle:e.currentTarget.dataset.hairAStyle,
+          hairBStyle:e.currentTarget.dataset.hairBStyle,
+         })
+      }
     }
-
   },
   selected_feature_item:function(e){
     if(this.data.current_item_feature===e.currentTarget.dataset.id){
