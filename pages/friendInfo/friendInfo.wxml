@@ -13,7 +13,7 @@
 <text>去合照</text>
 </view>
 
-<view class="btn_item_box">
+<view class="btn_item_box" bindtap="deleteFriend">
 <i class="searchImg iconfont icondelete" style="font-size:56rpx;"></i>
 <text>删除</text>
 </view>

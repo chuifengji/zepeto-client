@@ -10,7 +10,7 @@
 <view class="photos_container">
 
  <block wx:for="{{peopleList}}" wx:key="index">
-   <person name="{{item.name}}" img="{{item.img}}" id="{{item.id}}"></person>
+   <person name="{{item.NAME}}" img="{{item.MYIMG}}" id="{{item.ID}}"></person>
  </block>
 
 </view>

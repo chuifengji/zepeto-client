@@ -58,7 +58,7 @@ App({
           if (that.userInfoReadyCallback) {
             that.userInfoReadyCallback(userInfo)
           }
-          this.getFriendList(Data.USERID)
+          this.getFriendList(res.Data.ID)
           this.getMyPhotoList(Data.ID,Data.USERID)
           this.getMyClassMateList(Data.COLLEGE,Data.MAJOR,Data.CLASS)
           this.getAppearanceList()
@@ -95,8 +95,9 @@ App({
 
     },
     //用户初次登录要获得的私人数据是下面这三个。
-    getFriendList:function(USER_ID){
-      this.netHandlers.getFriendsList(USER_ID).then(res=>{
+    getFriendList:function(myid){
+      this.netHandlers.getFriendsList(myid).then(res=>{
+        console.log(res)
         this.globalData.friendList = res.Data
         wx.setStorage({
           key:"FRIENDLIST",

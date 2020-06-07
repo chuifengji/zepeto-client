@@ -61,8 +61,8 @@ getBackgroundList(){
  * 
  * 获取朋友列表
  */
-  getFriendsList(USER_ID) {
-    let data = {USER_ID:USER_ID }
+  getFriendsList(myid) {
+    let data = {myid,}
     return this._request.getRequest(this._baseUrl + '/personal/get-friends-list', data).then(res => res.data)
   }
 
@@ -140,5 +140,20 @@ getGroupPhotos(iduser,userid){
   }
   return this._request.getRequest(this._baseUrl + '/personal/getMyPhotos', data).then(res => res.data)
 }
+getUptoken(fileName){
+  let data = {
+    fileName
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/getUptoken', data).then(res => res.data)
+}
+
+deleteFriend(myid,friendid){
+  let data = {
+    myid,
+    friendid
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/deleteFriend', data).then(res => res.data)
+}
+
 }
 export default netHandlers

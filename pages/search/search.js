@@ -21,7 +21,7 @@ Page({
   search:function(){
     let keyword = this.data.keyword;
     app.netHandlers.searchFriend(keyword).then(res=>{
-      console.log(res.Data)
+      console.log(res)
     let data=res.Data.map(item=>{
       return{
         id:item.ID,

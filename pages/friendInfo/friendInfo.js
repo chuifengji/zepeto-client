@@ -18,18 +18,68 @@ Page({
   addFriend:function(){
     let myid =app.globalData.userInfo.id;
     let friendid = this.data.model.id
-    console.log(myid,friendid)
-    app.netHandlers.makeFriend(myid,friendid).then(res=>{
-      console.log(res)
-    })
+    if(myid===friendid){
+      wx.showToast({
+        title: '你也太孤单了吧',
+        icon:"none"
+      })
+    }else{
+      app.netHandlers.makeFriend(myid,friendid).then(res=>{
+        if(res.Msg==="SUCCESS"){
+          app.globalData.friendList = res.Data;
+          wx.setStorage({
+            key:"FRIENDLIST",
+            data:res.Data
+          })
+          wx.showToast({
+            title: '添加成功',
+          })
+        }
+      })
+    }
   },
   //通过该用户的ID判断是否是我的好友
-  isMyFriend(){
-
+  isMyFriend(id){
+    let friendList = app.globalData.friendList;
+    let count = 0;
+    if(friendList==null){
+     return false
+    }else{
+      friendList.map(item=>{
+        if(item.ID===id){
+          count++;
+        }
+      })
+      if(count>0){
+        return true
+      }else{
+        return false
+      }
+    }
+  },
+  deleteFriend(){
+    let myid =app.globalData.userInfo.id;
+    let friendid = this.data.model.id
+    app.netHandlers.deleteFriend(myid,friendid).then(res=>{
+      if(res.Msg==="SUCCESS"){
+        app.globalData.friendList = res.Data;
+        wx.setStorage({
+          key:"FRIENDLIST",
+          data:res.Data
+        })
+        wx.showToast({
+          title: '删除成功',
+        })
+      }
+    })
   },
   onLoad: function (options) {
     let model = JSON.parse(options.model)
-    console.log(model)
+    if(this.isMyFriend(model.id)){
+      this.setData({
+        hadbeenmyfriend:true
+      })
+    }
     wx.setNavigationBarTitle({
       title: model.name
     })

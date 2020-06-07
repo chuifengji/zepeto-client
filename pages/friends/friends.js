@@ -1,4 +1,5 @@
 // pages/friends/friends.js
+const app = getApp()
 Page({
 
   /**
@@ -6,38 +7,7 @@ Page({
    */
   data: {
     currentTab:0,
-    peopleList:[
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      },
-      {
-        name:'吕栋梁',
-        src:'',
-        id:"0"
-      }
-    ]
+    peopleList:[]
   },
 
   /**
@@ -60,6 +30,10 @@ Page({
   },
   onLoad: function (options) {
 
+  this.setData({
+    peopleList:app.globalData.friendList
+  })
+  
   },
 
   /**
