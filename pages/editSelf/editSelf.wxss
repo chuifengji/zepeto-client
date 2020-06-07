@@ -126,3 +126,10 @@ page {
   background-color: red;
   border-radius: 15rpx;
 }
+.cvs{
+  width:100%;
+  height:350px ;
+  display: block;
+  float: right;
+  visibility: hidden;
+}

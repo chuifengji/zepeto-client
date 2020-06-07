@@ -16,6 +16,8 @@ Page({
     current_item_glasses:null,
     current_item_hair:null,
     current_item_feature:null,
+
+      nakedStyle: "https://zepeto.nt-geek.club/naked.png",
       hairAStyle: "",
       hairBStyle: "",
       overcoatStyle: "",
@@ -26,6 +28,7 @@ Page({
       shirtStyle:"",
       expressionStyle:"",
       featureStyle:"",
+
  
      //数据库返回的所有列表
     appearanceList:null,
@@ -237,5 +240,32 @@ Page({
     wx.navigateTo({
       url: '../shoot/shoot',
     })
+  },
+  
+  saveStyle:function(){
+    wx.getImageInfo({
+      src: this.data.nakedStyle,
+      success (res) {
+        console.log(res)
+        const ctx = wx.createCanvasContext('maskCanvas');
+        ctx.drawImage(res.path,6,-20,308,524)
+        ctx.draw(setTimeout(function () {
+          wx.canvasToTempFilePath({
+            x: 95,
+            y: 60,
+            width: 123,
+            height: 258,
+            canvasId: 'maskCanvas',
+            success: function (res) {
+              console.log(res)
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,          //save face picture
+              })
+            }
+          })
+        },100))
+      }
+    })
+    
   }
 })
