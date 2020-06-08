@@ -10,7 +10,7 @@
 <view class="photos_container">
 
  <block wx:for="{{peopleList}}" wx:key="index">
-   <person name="{{item.NAME}}" img="{{item.MYIMG}}" id="{{item.ID}}"></person>
+   <person bindgotofriendinfo_page="gotofriendinfo_page" data-name="{{item.NAME}}" data-id="{{item.ID}}" data-major="{{item.MAJOR}}" data-src="{{item.SRC}}" name="{{item.NAME}}" img="{{item.IMG}}" id="{{item.ID}}"></person>
  </block>
 
 </view>

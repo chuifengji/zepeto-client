@@ -1,4 +1,3 @@
-
 <view class="container_up">
 <canvas canvas-id="maskCanvas" class="cvs"></canvas>
 <view class="character_show" id="nicked" style="position:relative;background-image:url('{{nakedStyle}}')"></view>
@@ -119,4 +118,3 @@ current_style:others
 
 
 </view> 
-

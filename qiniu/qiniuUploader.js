@@ -30,6 +30,7 @@
 
   // 更新七牛云配置
   function updateConfigWithOptions(options) {
+    console.log(options)
       if (options.region) {
           config.qiniuRegion = options.region;
       } else {
@@ -55,6 +56,7 @@
           return;
       }
       if (options) {
+
           updateConfigWithOptions(options);
       }
       if (config.qiniuUploadToken) {
@@ -65,8 +67,9 @@
           });
       } else if (config.qiniuUploadTokenFunction) {
           config.qiniuUploadToken = config.qiniuUploadTokenFunction();
+          console.log(config.qiniuUploadToken)
           if (null == config.qiniuUploadToken && config.qiniuUploadToken.length > 0) {
-              console.error('qiniu UploadTokenFunction result is null, please check the return value');
+              console.error('qiniu UploadTokenFunction result is null, please check the return value'); // mark: xxx
               return
           }
           doUpload(filePath, success, fail, options, progress, cancelTask);

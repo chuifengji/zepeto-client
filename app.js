@@ -45,7 +45,7 @@ App({
         this.netHandlers.login(res.code).then(res=>{
           let Data = res.Data
           let userInfo={
-            id:res.Data.ID,
+            id:Data.ID,
             user_id:Data.USERID,
             name:Data.NAME,
             college:Data.COLLEGE,

@@ -15,12 +15,14 @@ Page({
    */
   goTo_tab_class:function(){
     this.setData({
-      currentTab:1
+      currentTab:1,
+      peopleList:app.globalData.classmateList
     })
   },
   goTo_tab_friend:function(){
     this.setData({
-      currentTab:0
+      currentTab:0,
+      peopleList:app.globalData.friendList
     })
   },
   goToSearch:function(){
@@ -28,12 +30,15 @@ Page({
       url: '../search/search',
     })
   },
+  gotofriendinfo_page:function(e){
+    console.log(e.currentTarget.dataset)
+    var model = JSON.stringify(e.currentTarget.dataset);
+      wx.navigateTo({
+        url: '../friendInfo/friendInfo?model=' + model,
+      })
+  },
   onLoad: function (options) {
 
-  this.setData({
-    peopleList:app.globalData.friendList
-  })
-  
   },
 
   /**
@@ -47,7 +52,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      peopleList:app.globalData.friendList
+    })
   },
 
   /**

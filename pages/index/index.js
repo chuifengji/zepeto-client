@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+import util from "../../utils/handlers"
 Page({
   data: {
    userinfo:[]
@@ -45,5 +45,6 @@ Page({
   },
   onReady: function () {
    //可以在这里请求装饰列表，背景列表。
+   console.log(util.getFileNameGroupPhotos(12))
   },
 })

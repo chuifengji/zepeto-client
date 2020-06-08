@@ -1,8 +1,7 @@
 {
   "pages": [
-
-    "pages/editSelf/editSelf",
     "pages/index/index",
+    "pages/editSelf/editSelf",
     "pages/friendInfo/friendInfo",
     "pages/groupPhoto/groupPhoto",
     "pages/search/search",
