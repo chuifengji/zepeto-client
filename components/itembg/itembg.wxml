@@ -1,0 +1,4 @@
+<view class="background_container" bindtap="activeitem">
+<view class="background_content_img" style="background-image: url({{src+'?imageView2/1/w/200/h/200/q/75'}});border:{{selected?'2px solid #009F7E;':''}}"></view>
+<view class="background_content_title">{{name}}</view>
+</view>

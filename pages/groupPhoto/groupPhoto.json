@@ -1,4 +1,7 @@
 {
   "navigationStyle": "custom",
-  "usingComponents": {}
-}
+  "usingComponents": {
+      "itembg":"/components/itembg/itembg",
+      "itemPerson":"/components/itemPerson/itemPerson"
+   }
+}  

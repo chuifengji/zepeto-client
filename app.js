@@ -61,6 +61,7 @@ App({
           this.getFriendList(res.Data.ID)
           this.getMyPhotoList(Data.ID,Data.USERID)
           this.getMyClassMateList(Data.COLLEGE,Data.MAJOR,Data.CLASS)
+          this.getBackgroundList()
           this.getAppearanceList()
           wx.setStorage({
             key:"USERINFO",
@@ -70,17 +71,20 @@ App({
             key:"DECORATIONLIST",
             data:this.globalData.decorationList
           })
-          wx.setStorage({
-            key:"BACKGROUNDLIST",
-            data:this.globalData.backgroundList
-          })
+
         })
       }
     })
     },
     //下面的三个请求对每个用户来说都是一样的，属于公共数据其实也完全可以放在云存储上，没必要浪费带宽。
     getBackgroundList:function(){
-
+      this.netHandlers.getBackgroundList().then(res=>{
+        this.globalData.backgroundList = res.Data;
+        wx.setStorage({
+          key:"BACKGROUNDLIST",
+          data:this.globalData.backgroundList
+        })
+    })
     },
     getAppearanceList:function(){
         this.netHandlers.getAppearanceList().then(res=>{
@@ -114,7 +118,7 @@ App({
         })
       })
     },
-    getMyClassMateList:function(){
+    getMyClassMateList:function(college,major,classNum){
       this.netHandlers.getClassMateList(college,major,classNum).then(res=>{
         this.globalData.classmateList = res.Data;
         wx.setStorage({

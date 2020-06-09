@@ -14,8 +14,6 @@
 
 <view class="photo_container">
 <block wx:for="{{list}}" wx:key="index">
-<!-- <xiangce  id="{{item.id}}" src="{{item.src}}" local="{{item.local}}" year='{{item.year}}' month='{{item.month}}' day='{{item.day}}' delbtn="{{delbtn}}" bind:delete="del" > 
-</xiangce> -->
 
 <xiangce  id="{{item.id}}"  local="{{item.local}}" delbtn="{{delbtn}}" date="{{item.date}}" selected="{{item.selected}}" bindchangeSelected="changeSelected"> 
 

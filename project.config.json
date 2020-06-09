@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
@@ -27,7 +27,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.1",
-	"appid": "wx7725cb3ee07c96b2",
+	"appid": "wxfebb03b11af9db8e",
 	"projectname": "MinDaZepeto",
 	"debugOptions": {
 		"hidedInDevtools": []

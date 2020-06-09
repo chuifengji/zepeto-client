@@ -257,6 +257,7 @@ Page({
   },
 
   uploadImgToCloud(filePath) {
+    let that = this
     qiniuUploader.upload(filePath, (res) => {
       console.log(app.globalData.userInfo.user_id,res.fileURL)
       app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id,res.fileURL).then(res=>{
@@ -271,7 +272,7 @@ Page({
           my_img:Data.MYIMG,
           canSearchMe:Data.CanSearchMe
         }
-        this.globalData.userInfo = userInfo
+        that.globalData.userInfo = userInfo
         wx.setStorage({
           key:"USERINFO",
           data:userInfo
@@ -327,3 +328,4 @@ Page({
 //     },100))
 //   }
 // })
+

@@ -1,7 +1,43 @@
-<view class="background_container">
+<view class="background_container" style="background-image:url({{bg_container_image}})">
 
-<view class="tool_container"  style="height:{{shrink?120:460}}rpx;transition:height 0.6s;">
+<!--移植过来的部分-->
+<block wx:for="{{itemList}}" wx:key="{{item.id}}">
+    <!-- 圆心坐标 <text style='position:absolute;top:{{item.y}}px;left:{{item.x}}px;width:2px;height:2px;background-color:yellow;z-index:500'></text> -->
+    <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
+      <view class='imgWrap {{item.active? "touchActive":""}}' style="transform: rotate({{item.angle}}deg); border: {{item.active?4*item.oScale:0}}rpx #fff dashed;">
+        <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' bindtouchstart='WraptouchStart' bindtouchmove='WraptouchMove' bindtouchend='WraptouchEnd'></image>
+        <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image>
+        <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend='WraptouchEnd'></image>
+      </view>
+    </view>
+  </block>
 
+
+
+
+<!--移植过来的部分-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<view class="tool_container"  style="height:{{shrink?120:470}}rpx;transition:height 0.6s;">
 <view class="switch_container">
 <view class="switch_btn" bindtap="changeHeight">
 <i class="searchImg iconfont {{shrink?'iconpullup01':'iconxiala'}}" style="font-size:40rpx;line-height:50rpx;"></i>
@@ -14,17 +50,41 @@
 </view>
 </view>
 
+<view style="position: relative;width:750rpx;height: 200rpx;margin-top:40rpx;overflow:hidden;">
 <view class="main_item_container">
-<block wx:for="{{toolitemList}}" wx:key="item">
-<view bindtap="setStyle" class="single_item_person"></view>
+<!--选中背景-->
+<block wx:if="{{currentTab==1}}" wx:for="{{toolitemList}}" wx:key="item">
+<itembg name="{{item.Name}}" src="{{item.URL}}" data-name="{{item.NAME}}" data-src="{{item.URL}}" data-id="{{item.ID}}" selected="{{current_item_bg==item.ID?true:false}}" bindselected_bg_item="selected_bg_item"></itembg>
+</block>
+<!--选中人物-->
+<block wx:if="{{currentTab==0}}" wx:for="{{toolitemList}}" wx:key="item">
+<itemPerson name="{{item.NAME}}" src="{{item.MYIMG}}" data-name="{{item.NAME}}" data-src="{{item.MYIMG}}" data-id="{{item.ID}}" selected="{{item.selected}}" bindselected_person_item="selected_person_item"></itemPerson>
+</block>
+<!--选中装饰物-->
+<block wx:if="{{currentTab==2}}" wx:for="{{toolitemList}}" wx:key="item">
 </block>
 
-<view class="btn_get_photo"  style="transform: {{shrink?'scale(0)':''}};transition:all 0.5s">
+</view>
+</view>
+
+<view class="btn_get_photo" bindtap="openMask"  style="transform: {{shrink?'scale(0)':''}};transition:all 0.5s">
 <i class="iconfont iconpingjia-paizhao1" style="font-size: 48rpx;color:#FFFFFF"></i>
 </view>
 
-</view>
+<!--移植过来的部分-->
 
 </view>
-
 </view>
+
+<view class='canvasWrap' hidden="{{!showCanvas}}">
+  <image class="resImg" bindlongtap="saveImg" src="{{canvasTemImg}}" mode="widthFix"></image>
+  <view class='btn_view'>
+    <button bindtap='saveImg'>保存到手机</button>
+    <button bindtap='disappearCanvas'>关闭</button>
+  </view>
+</view>
+
+
+<canvas class='maskCanvas' canvas-id="maskCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight}}px;'></canvas>
+
+<!--移植过来的部分-->

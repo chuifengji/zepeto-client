@@ -76,11 +76,18 @@ Page({
     //排序方式以时间
   },
   changeSelected:function(e){
-    let list = this.data.list;
-    list[e.currentTarget.id].selected=!list[e.currentTarget.id].selected
-    this.setData({
-      list:list
-    })
+    if(this.data.editActive){
+      //这里的函数并不正确，后面需要修改。
+      let list = this.data.list;
+      list[e.currentTarget.id].selected=!list[e.currentTarget.id].selected
+      this.setData({
+        list:list
+      })
+    }else{
+      wx.navigateTo({
+        url: '../imageDetail/imageDetail',
+      })
+    }
   },
   //全选
   btnSelectAll:function(e){

@@ -1,0 +1,32 @@
+/* components/itembg/itembg.wxss */
+.person_container {
+  height: 180rpx;
+  width: 140rpx;
+  margin-left: 23rpx;
+  margin-right: 24rpx;
+
+}
+.person_content_img_box {
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 10rpx;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+}
+.person_content_img{
+  width: 70rpx;
+  height: 140rpx;
+  position: relative;
+  left: 35rpx;
+
+}
+.person_content_title {
+  width: 140rpx;
+  height: 35rpx;
+  text-align: center;
+  line-height: 35rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: rgba(80, 80, 80, 1);
+}
