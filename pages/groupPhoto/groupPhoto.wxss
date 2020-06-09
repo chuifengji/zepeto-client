@@ -16,6 +16,7 @@ page {
   bottom: 0;
   position: fixed;
   background-color:#FFFFFF;
+  z-index: 10;
   overflow: hidden;
 }
 

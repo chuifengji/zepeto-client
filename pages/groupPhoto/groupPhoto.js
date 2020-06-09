@@ -9,7 +9,6 @@ const maskCanvas = wx.createCanvasContext('maskCanvas');
 // 移植过来的部分
 const app = getApp()
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -195,6 +194,7 @@ Page({
     })
   },
   WraptouchEnd() {
+    console.log("touchend")
     this.synthesis()
   },
   oTouchStart(e) {
@@ -301,34 +301,31 @@ Page({
     })
   },
   openMask () {
-    if (this.drawTime == 0) {
-      this.synthesis()
-    }
-    this.setData({
-      showCanvas: true
+
+    this.synthesis()
+
+
+  },
+  getImg: function (src) {
+    return new Promise((resolve, reject) => {
+      wx.getImageInfo({
+        src,
+        success(res) {
+          resolve(res.path)
+        }
+      })
     })
   },
-  synthesis() { // 合成图片
-    this.drawTime = this.drawTime + 1
-    console.log('合成图片')
-    maskCanvas.save();
-    maskCanvas.beginPath();
-    //一张白图  可以不画
-    maskCanvas.setFillStyle('#fff');
-    maskCanvas.fillRect(0, 0, this.sysData.windowWidth, this.data.canvasHeight)
-    maskCanvas.closePath();
-    maskCanvas.stroke();
-
-    //画背景 hCw 为 1.62 背景图的高宽比
-    maskCanvas.drawImage('/images/bg.png', 0, 0, this.data.canvasWidth, this.data.canvasHeight);
-    /*
-        num为canvas内背景图占canvas的百分比，若全背景num =1
-        prop值为canvas内背景的宽度与可移动区域的宽度的比，如一致，则prop =1;
-       */
-    //画组件
+  async synthesis() { // 合成图片
+    var local_img = JSON.parse(JSON.stringify(this.data.itemList));
+    var bg_img=await this.getImg(this.data.bg_container_image)
+    for(var itm in this.data.itemList){
+      local_img[itm].image=await this.getImg(this.data.itemList[itm].image)
+    }
+    maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
-      prop = 1;
-    items.forEach((currentValue, index) => {
+    prop = 1;
+    local_img.forEach((currentValue, index) => {
       maskCanvas.save();
       maskCanvas.translate(this.data.canvasWidth * (1 - num) / 2, 0);
       maskCanvas.beginPath();
@@ -338,19 +335,35 @@ Page({
       maskCanvas.drawImage(currentValue.image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
       maskCanvas.restore();
     })
-    maskCanvas.draw(false, (e) => {
+    console.log(11)
+    var that=this
+    maskCanvas.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         canvasId: 'maskCanvas',
-        success: res => {
-          console.log('draw success')
-          console.log(res.tempFilePath)
-          this.setData({
-            canvasTemImg: res.tempFilePath
+        success: function (res) {
+          
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,          //save face picture
           })
+          console.log(res)
         }
-      }, this)
-    })
+      })
+    }, 100))
+    // maskCanvas.draw(false, (e) => {
+    //   wx.canvasToTempFilePath({
+    //     canvasId: 'maskCanvas',
+    //     success: res => {
+    //       console.log('draw success')
+    //       this.setData({
+    //         canvasTemImg: res.tempFilePath
+    //       })
+    //     }
+    //   }, this)
+    // })
   },
+
+
+
   disappearCanvas() {
     this.setData({
       showCanvas: false

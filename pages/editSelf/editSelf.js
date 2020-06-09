@@ -24,7 +24,7 @@ Page({
     nakedStyle: "https://zepeto.nt-geek.club/naked.png",
     hairAStyle: "",
     hairBStyle: "",
-    overcoatStyle: "https://zepeto.nt-geek.club/overcoat_01.png",
+    overcoatStyle: "",
     trouserStyle: "",
     shoesStyle: "",
     glassesStyle: "",
@@ -250,7 +250,9 @@ Page({
         height: 258,
         canvasId: 'maskCanvas',
         success: function (res) {
+
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云
+
         }
       })
     }, 100))
@@ -261,7 +263,9 @@ Page({
     qiniuUploader.upload(filePath, (res) => {
       console.log(app.globalData.userInfo.user_id,res.fileURL)
       app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id,res.fileURL).then(res=>{
+        console.log(res)
         let Data = res.Data
+        
         let userInfo={
           id:Data.ID,
           user_id:Data.USERID,
