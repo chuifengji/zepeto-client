@@ -1,6 +1,6 @@
 <view class="background_container" style="background-image:url({{bg_container_image}})">
 
-<!--移植过来的部分-->
+<!--生成的图片区域-->
 <block wx:for="{{itemList}}" wx:key="{{item.id}}">
     <!-- 圆心坐标 <text style='position:absolute;top:{{item.y}}px;left:{{item.x}}px;width:2px;height:2px;background-color:yellow;z-index:500'></text> -->
     <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
@@ -12,27 +12,7 @@
     </view>
   </block>
 
-
-
-
-<!--移植过来的部分-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!--生成的图片区域-->
 
 
 
@@ -76,13 +56,7 @@
 </view>
 </view>
 
-<view class='canvasWrap' hidden="{{!showCanvas}}">
-  <image class="resImg" bindlongtap="saveImg" src="{{canvasTemImg}}" mode="widthFix"></image>
-  <view class='btn_view'>
-    <button bindtap='saveImg'>保存到手机</button>
-    <button bindtap='disappearCanvas'>关闭</button>
-  </view>
-</view>
+
 
 
 <canvas class='maskCanvas' canvas-id="maskCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight}}px;'></canvas>

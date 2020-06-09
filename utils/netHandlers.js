@@ -107,13 +107,13 @@ updatePersonalImage(user_id,url){
   /*
  * 上传合照
  */
-addGroupPhoto(iduser,userid,location,url,thumbnail){
+addGroupPhoto(iduser,userid,location,time,url){
   let data = {
     iduser,
     userid,
     location,
-    url,
-    thumbnail
+    time,
+    url
   }
   return this._request.getRequest(this._baseUrl + '/personal/addGroupPhoto', data).then(res => res.data)
 }
@@ -145,6 +145,9 @@ getUptoken(fileName){
     fileName
   }
   return this._request.getRequest(this._baseUrl + '/personal/getUptoken', data).then(res => res.data)
+}
+getUptokenPhotos(){
+  return this._request.getRequest(this._baseUrl + '/personal/getUptokenPhotos').then(res => res.data)
 }
 
 deleteFriend(myid,friendid){

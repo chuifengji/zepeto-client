@@ -64,9 +64,9 @@ page {
   justify-content:space-between;
   align-content: flex-start;
   top: 230rpx;
-  left: 134rpx;
-  width: 660rpx;
-  padding-right: 184rpx;
+  left: 85rpx;
+  width: 580rpx;
+  right: 85rpx;
   box-sizing: border-box;
   height: calc(100% - 230rpx);
   -webkit-overflow-scrolling: touch;

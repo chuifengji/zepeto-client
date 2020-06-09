@@ -2,14 +2,17 @@
 
 .item_person{
   width: 200rpx;
-  height: 250rpx;
+  height: 270rpx;
   box-sizing: border-box;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
+  position: relative;
 
 }
 .item_img{
-  width: 200rpx;
-  height: 250rpx;
+  width: 120rpx;
+  left: 44rpx;
+  position: relative;
+  height: 270rpx;
 }
 .item_name{
   width: 200rpx;

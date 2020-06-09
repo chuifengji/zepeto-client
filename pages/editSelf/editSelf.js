@@ -204,15 +204,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    let uptoken = this.getUptoken()
-    console.log(uptoken)
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.getUptoken()
+    this.getUptoken()
   },
 
   goshoot() {
@@ -245,9 +244,6 @@ Page({
     for (var item in imgArray) {
       ctx.drawImage(imgArray[item], 6, -22, 308, 528)
     }
-//     ctx.rect(90, 20, 133, 300)
-// ctx.setFillStyle('red')
-// ctx.fill()
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         x: 90,
@@ -256,7 +252,9 @@ Page({
         height: 300,
         canvasId: 'maskCanvas',
         success: function (res) {
-
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,          //save face picture
+          })
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云
 
         }
@@ -271,7 +269,6 @@ Page({
       app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id,res.fileURL).then(res=>{
         console.log(res)
         let Data = res.Data
-        
         let userInfo={
           id:Data.ID,
           user_id:Data.USERID,
@@ -315,27 +312,5 @@ Page({
     })
   }
 })
-// wx.getImageInfo({
-//   src: this.data.nakedStyle,
-//   success (res) {
-//     console.log(res)
-//     const ctx = wx.createCanvasContext('maskCanvas');
-//     ctx.drawImage(res.path,6,-20,308,524)
-//     ctx.draw(setTimeout(function () {
-//       wx.canvasToTempFilePath({
-//         x: 95,
-//         y: 60,
-//         width: 123,
-//         height: 258,
-//         canvasId: 'maskCanvas',
-//         success: function (res) {
-//           console.log(res)
-//           wx.saveImageToPhotosAlbum({
-//             filePath: res.tempFilePath,          //save face picture
-//           })
-//         }
-//       })
-//     },100))
-//   }
-// })
+
 

@@ -3,11 +3,11 @@ let index = 0,
   items = [],
   flag = true,
   itemId = 1;
-const hCw = 1.62; // 图片宽高比
-const canvasPre = 1; // 展示的canvas占mask的百分比
 const maskCanvas = wx.createCanvasContext('maskCanvas');
 // 移植过来的部分
 const app = getApp()
+const {upload} = require("../../qiniu/qiniuUploader.js")
+const {getFileNameGroupPhotos} = require("../../utils/handlers")
 Page({
   /**
    * 页面的初始数据
@@ -20,8 +20,16 @@ Page({
     current_item_bg:0,
     bg_container_image:'https://wenda-data.nt-geek.club/bg05.png',//当前的背景图片
     itemList: [],
+    
   },
-  otherData:{personList:null,},
+  otherData:{
+    personList:null,
+    fileName:'',
+    uptoken:'',
+    location:'',
+    time:'',
+    sysData:null
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -55,10 +63,11 @@ Page({
     })
   },
   onLoad: function (options) {
-    this.otherData.personList=this.getPersonList(),
-    console.log(this.otherData.personList)
+    let that = this;
+    this.otherData.personList=this.getPersonList();
     this.setData({
-      toolitemList:this.otherData.personList
+      toolitemList:this.otherData.personList,
+      uptoken:this.otherData.uptoken
     })
     // 移植过来的部分
     items = this.data.itemList;
@@ -66,13 +75,14 @@ Page({
     wx.getSystemInfo({
       success: sysData => {
         this.sysData = sysData
+        that.otherData.sysData = sysData
         this.setData({
-          canvasWidth: this.sysData.windowWidth * canvasPre, // 如果觉得不清晰的话，可以把所有组件、宽高放大一倍
-          canvasHeight: this.sysData.windowWidth * canvasPre * hCw,
+          canvasWidth: this.sysData.windowWidth, // 如果觉得不清晰的话，可以把所有组件、宽高放大一倍
+          canvasHeight: this.sysData.windowHeight,
         })
       }
     })
-    // 移植过来的部分
+    this.getUptokenPhotos();
   },
   //getPersonList 去除人物列表中重复的部分。
   getPersonList:function(){
@@ -127,17 +137,19 @@ Page({
 
   },
   setDropItem(imgData) {
+    let that = this;
     let data = {}
     wx.getImageInfo({
       src: imgData.url,
       success: res => {
+  
         // 初始化数据
-        data.width = res.width; //宽度
-        data.height = res.height; //高度
+        data.width = res.width/1.4; //宽度
+        data.height = res.height/1.4; //高度
         data.image = imgData.url; //地址
         data.id = ++itemId; //id
-        data.top = 0; //top定位
-        data.left = 0; //left定位
+        data.top = (that.otherData.sysData.windowHeight-res.height/1.4)/2; //top定位
+        data.left = (that.otherData.sysData.windowWidth-res.width/1.4)/2; //left定位
         //圆心坐标
         data.x = data.left + data.width / 2;
         data.y = data.top + data.height / 2;
@@ -188,7 +200,7 @@ Page({
 
     items[index].lx = e.touches[0].clientX;
     items[index].ly = e.touches[0].clientY;
-    console.log(items)
+   // console.log(items)
     this.setData({
       itemList: items
     })
@@ -301,10 +313,7 @@ Page({
     })
   },
   openMask () {
-
     this.synthesis()
-
-
   },
   getImg: function (src) {
     return new Promise((resolve, reject) => {
@@ -335,40 +344,23 @@ Page({
       maskCanvas.drawImage(currentValue.image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
       maskCanvas.restore();
     })
-    console.log(11)
     var that=this
     maskCanvas.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         canvasId: 'maskCanvas',
         success: function (res) {
-          
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,          //save face picture
-          })
-          console.log(res)
+          that.uploadPhotos(res.tempFilePath)//upload photos tp cloud storage
         }
       })
     }, 100))
-    // maskCanvas.draw(false, (e) => {
-    //   wx.canvasToTempFilePath({
-    //     canvasId: 'maskCanvas',
-    //     success: res => {
-    //       console.log('draw success')
-    //       this.setData({
-    //         canvasTemImg: res.tempFilePath
-    //       })
-    //     }
-    //   }, this)
-    // })
   },
-
-
 
   disappearCanvas() {
     this.setData({
       showCanvas: false
     })
   },
+
   saveImg: function() {
     wx.saveImageToPhotosAlbum({
       filePath: this.data.canvasTemImg,
@@ -399,7 +391,38 @@ Page({
         })
       }
     })
+  },
+  //getUptokenPhotos 获取上传凭证
+  getUptokenPhotos:function(){
+    app.netHandlers.getUptokenPhotos().then(res=>{
+      this.otherData.uptoken = res.Data
+    })
+  },
+  uploadPhotos:function(filePath){
+    let that = this
+    let fileName= getFileNameGroupPhotos(app.globalData.userInfo.id)
+    upload(filePath, (res) => {
+      app.netHandlers.addGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,that.otherData.location,that.otherData.time,res.fileURL).then(res=>{
+        let Data = res.Data
+      })
+      }, (error) => {
+        console.error('error: ' + JSON.stringify(error))
+      }, {
+        region: 'ECN',
+        key:fileName,
+        uptoken: this.otherData.uptoken,
+        domain: 'https://zepeto.nt-geek.club',
+        shouldUseQiniuFileName: false
+      },
+      (progress) => {
+    
+      }, cancelTask => {
+    
+      })
   }
-
-
 })
+
+
+
+
+

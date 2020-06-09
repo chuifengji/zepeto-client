@@ -1,6 +1,8 @@
 page {
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
   overflow: hidden;
 }
 
@@ -8,7 +10,7 @@ page {
   width: 750rpx;
   height: 100%;
   background-repeat:  no-repeat;
-  background-size: 100% auto;
+  background-size: 100% 100%;
 }
 
 .tool_container {
@@ -16,7 +18,7 @@ page {
   bottom: 0;
   position: fixed;
   background-color:#FFFFFF;
-  z-index: 10;
+  z-index: 1000;
   overflow: hidden;
 }
 
