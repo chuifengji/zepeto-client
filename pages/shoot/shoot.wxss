@@ -17,7 +17,27 @@
 }
 .board{
   position: absolute;
-  top: 120px;
-  left: 120px;
+  top: 106px;
+  left: 88px;
   /* background-color: red; */
+}
+.img{
+  width:141px; 
+  height:200px;
+
+}
+.shootbtn{
+  position: absolute;
+  bottom:5px;
+  left:68px;
+  
+}
+.cvs{
+  float: left;
+  visibility: hidden;
+}
+.btn-cvs{
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
 }

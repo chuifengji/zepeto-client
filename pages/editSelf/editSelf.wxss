@@ -131,5 +131,5 @@ page {
   height:350px ;
   display: block;
   float: right;
-  visibility: hidden;
+  /* visibility: hidden; */
 }

@@ -232,22 +232,28 @@ Page({
   },
   async saveStyle() {
     let that = this;
-    var styleArray = [this.data.nakedStyle, this.data.overcoatStyle]
+    var styleArray = [that.data.nakedStyle,that.data.hairAStyle,that.data.hairBStyle,that.data.overcoatStyle,that.data.trouserStyle,that.data.shoesStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.expressionStyle,that.data.featureStyle]
     var imgArray = []
     for (var item in styleArray) {
-      var newimg = await this.getImg(styleArray[item])
-      imgArray.push(newimg)
+      if(styleArray[item]!=""){
+        console.log(item)
+        var newimg = await this.getImg(styleArray[item])
+        imgArray.push(newimg)
+      }
     }
-    //console.log(imgArray)
+    
     for (var item in imgArray) {
-      ctx.drawImage(imgArray[item], 6, -20, 308, 524)
+      ctx.drawImage(imgArray[item], 6, -22, 308, 528)
     }
+//     ctx.rect(90, 30, 133, 290)
+// ctx.setFillStyle('red')
+// ctx.fill()
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
-        x: 95,
-        y: 60,
-        width: 123,
-        height: 258,
+        x: 90,
+        y: 30,
+        width: 133,
+        height: 290,
         canvasId: 'maskCanvas',
         success: function (res) {
 

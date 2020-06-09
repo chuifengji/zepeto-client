@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/shoot/shoot",
     "pages/editSelf/editSelf",
     "pages/friendInfo/friendInfo",
     "pages/groupPhoto/groupPhoto",
@@ -8,7 +9,6 @@
     "pages/selfInfo/selfInfo",
     "pages/album/album",
     "pages/friends/friends",
-    "pages/shoot/shoot",
     "pages/mailBox/mailBox",
     "pages/imageDetail/imageDetail"
   ],
