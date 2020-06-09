@@ -251,9 +251,9 @@ Page({
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         x: 90,
-        y: 30,
+        y: 20,
         width: 133,
-        height: 290,
+        height: 300,
         canvasId: 'maskCanvas',
         success: function (res) {
 
