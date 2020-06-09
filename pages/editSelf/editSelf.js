@@ -245,7 +245,7 @@ Page({
     for (var item in imgArray) {
       ctx.drawImage(imgArray[item], 6, -22, 308, 528)
     }
-//     ctx.rect(90, 30, 133, 290)
+//     ctx.rect(90, 20, 133, 300)
 // ctx.setFillStyle('red')
 // ctx.fill()
     ctx.draw(setTimeout(function () {
