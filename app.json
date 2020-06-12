@@ -10,7 +10,8 @@
     "pages/album/album",
     "pages/friends/friends",
     "pages/mailBox/mailBox",
-    "pages/imageDetail/imageDetail"
+    "pages/imageDetail/imageDetail",
+    "pages/mailDetail/mailDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

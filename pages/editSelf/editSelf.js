@@ -41,6 +41,7 @@ Page({
     currentItemList: [],
     //贴图这里，第一次仅仅展现id为1的list,之后每次切换贴图种类
     toolitemList: [],
+    currentSkinStyle:0,
 
 
 
@@ -58,6 +59,21 @@ Page({
     // wx.navigateTo({
     //   url: '../shoot/shoot',
     // })
+  },
+  changeSkinStyle:function(e){
+    if(e.currentTarget.dataset.skinstyle==='a'){
+    this.setData({
+      currentSkinStyle:0,
+    })
+    }else if(e.currentTarget.dataset.skinstyle==='b'){
+      this.setData({
+        currentSkinStyle:1,
+      })
+    }else{
+      this.setData({
+        currentSkinStyle:2,
+      })
+    }
   },
   changeItemList: function (e) {
     this.setData({
@@ -181,6 +197,7 @@ Page({
     }
   },
   selected_feature_item: function (e) {
+    console.log(e.currentTarget.dataset)
     if (this.data.current_item_feature === e.currentTarget.dataset.id) {
       this.setData({
         current_item_feature: null,
@@ -189,7 +206,7 @@ Page({
     } else {
       this.setData({
         current_item_feature: e.currentTarget.dataset.id,
-        featureStyle: e.currentTarget.dataset.url
+        featureStyle: e.currentTarget.dataset.urla
       })
     }
   },
@@ -264,9 +281,8 @@ Page({
   uploadImgToCloud(filePath) {
     let that = this
     qiniuUploader.upload(filePath, (res) => {
-      console.log(app.globalData.userInfo.user_id,res.fileURL)
+      if(app.globalData.userInfo.my_img==''){//已经有了相关信息就没必要重复添加
       app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id,res.fileURL).then(res=>{
-        console.log(res)
         let Data = res.Data
         let userInfo={
           id:Data.ID,
@@ -283,7 +299,8 @@ Page({
           key:"USERINFO",
           data:userInfo
         })
-      })
+        
+      })}
       }, (error) => {
         console.error('error: ' + JSON.stringify(error))
       }, {

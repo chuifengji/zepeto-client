@@ -17,7 +17,7 @@ Page({
     shrink:1,
     currentTab:0,
     tabItems:[{navbar_title:'人物'},{navbar_title:'背景'},{navbar_title:'装饰'}],
-    toolitemList: [1,2,3,4,5,6,7],
+    toolitemList: [],
     current_item_bg:0,
     bg_container_image:'https://wenda-data.nt-geek.club/bg05.png',//当前的背景图片
     itemList: [],
@@ -122,7 +122,6 @@ Page({
       toolitemList:list
     })
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -134,11 +133,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    //以当前所处tab判断要渲染的列表
     this.otherData.personList=this.getPersonList();
-    this.setData({
-      toolitemList:this.otherData.personList,
-      uptoken:this.otherData.uptoken
-    })
+    if(this.data.currentTab===0){
+      this.setData({
+        toolitemList:this.otherData.personList,
+        uptoken:this.otherData.uptoken
+      })
+    }else if(this.data.currentTab===1){
+      this.setData({
+        toolitemList:app.globalData.backgroundList,
+        uptoken:this.otherData.uptoken
+      })
+    }else{
+      this.setData({
+        toolitemList:app.globalData.decorationList,
+        uptoken:this.otherData.uptoken
+      })
+    }
   },
   setDropItem(imgData) {
     let that = this;

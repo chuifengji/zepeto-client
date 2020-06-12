@@ -16,6 +16,7 @@ App({
         let userInfo = wx.getStorageSync('USERINFO')
         let friendList = wx.getStorageSync('FRIENDLIST')
         let photoList = wx.getStorageSync('PHOTOLIST')
+        this.getMyClassMateList(userInfo.college,userInfo.major,userInfo.class)
         that.globalData.userInfo = userInfo
         that.globalData.friendList = friendList
         that.globalData.photoList = photoList

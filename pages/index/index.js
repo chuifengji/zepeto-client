@@ -43,12 +43,6 @@ Page({
   },
   onReady: function () {
    //可以在这里请求装饰列表，背景列表。
-   app.netHandlers.getClassMateList(app.globalData.userInfo.college,app.globalData.userInfo.major,app.globalData.userInfo.classNum).then(res=>{
-    app.globalData.classmateList = res.Data;
-    wx.setStorage({
-      key:"CLASSMATELIST",
-      data:res.Data
-    })
-  })
+
   },
 })

@@ -8,9 +8,6 @@
         <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' bindtouchstart='WraptouchStart' bindtouchmove='WraptouchMove' bindtouchend=''></image>
 
         <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image>
-        
-        <!-- <i class="iconfont iconshanchuyuanicon x" style='transform: scale({{item.oScale}});font-size:40rpx;color:rgb(245, 108, 108);transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></i> -->
-        <!-- <i class="iconfont iconsuofang o"  style='transform: scale({{item.oScale}});transform-origin:center;font-size:40rpx;color:#00906A;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend=''></i> -->
         <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend=''></image>
       </view>
     </view>

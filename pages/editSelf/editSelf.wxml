@@ -30,6 +30,11 @@
 current_style:feature
 --> 
 <view class="tool_items" wx:if="{{currentStyle=='FeatureList'}}">
+<view style="width:750rpx;height:60rpx;margin-bottom:10rpx;display:inline-flex;">
+<view class="btn_change_skin" bindtap="changeSkinStyle" data-skinstyle="a" style="border:{{currentSkinStyle==0?'1px solid #009F7E;':''}};background-color:#f0cdba;"></view>
+<view class="btn_change_skin" bindtap="changeSkinStyle" data-skinstyle="b" style="border:{{currentSkinStyle==1?'1px solid #009F7E;':''}};background-color:#ffe5da;"></view>
+<view class="btn_change_skin" bindtap="changeSkinStyle" data-skinstyle="c" style="border:{{currentSkinStyle==2?'1px solid #009F7E;':''}};background-color:#cb9883;"></view>
+</view>
 <view class="btn_goto_photo" bindtap="btn_goto_shoot">
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
