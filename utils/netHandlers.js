@@ -38,9 +38,14 @@ updateSelfInfo(user_id,name,college,major,classNum,canSearchMe){
   }
   return this._request.getRequest(this._baseUrl + '/personal/insert-personal-info', data).then(res => res.data)
 }
-updateSelfImg(){
-
+updateCansearchMe(user_id,canSearchMe){
+  let data = {
+    user_id,
+    canSearchMe
+  }
+  return this._request.getRequest(this._baseUrl + '/personal/update-personal-cansearchme', data).then(res => res.data)
 }
+
 //获取装饰列表:暂时未作分类处理
 getDecorationList(){
   return this._request.getRequest(this._baseUrl + '/decoration/get-list').then(res => res.data)
@@ -120,7 +125,7 @@ addGroupPhoto(iduser,userid,location,time,url){
    /*
  * 删除合照
  */
-deleteGroupPhoto(){
+deleteGroupPhoto(iduser,userid,idimg){
   let data = {
     iduser,
     userid,

@@ -6,16 +6,17 @@
     <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
       <view class='imgWrap {{item.active? "touchActive":""}}' style="transform: rotate({{item.angle}}deg); border: {{item.active?4*item.oScale:0}}rpx #fff dashed;">
         <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' bindtouchstart='WraptouchStart' bindtouchmove='WraptouchMove' bindtouchend=''></image>
+
         <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image>
+        
+        <!-- <i class="iconfont iconshanchuyuanicon x" style='transform: scale({{item.oScale}});font-size:40rpx;color:rgb(245, 108, 108);transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></i> -->
+        <!-- <i class="iconfont iconsuofang o"  style='transform: scale({{item.oScale}});transform-origin:center;font-size:40rpx;color:#00906A;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend=''></i> -->
         <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend=''></image>
       </view>
     </view>
   </block>
 
 <!--生成的图片区域-->
-
-
-
 
 <view class="tool_container"  style="height:{{shrink?120:470}}rpx;transition:height 0.6s;">
 <view class="switch_container">
@@ -34,7 +35,7 @@
 <view class="main_item_container">
 <!--选中背景-->
 <block wx:if="{{currentTab==1}}" wx:for="{{toolitemList}}" wx:key="item">
-<itembg name="{{item.Name}}" src="{{item.URL}}" data-name="{{item.NAME}}" data-src="{{item.URL}}" data-id="{{item.ID}}" selected="{{current_item_bg==item.ID?true:false}}" bindselected_bg_item="selected_bg_item"></itembg>
+<itembg name="{{item.Name}}" src="{{item.URL}}" data-name="{{item.Name}}" data-src="{{item.URL}}" data-id="{{item.ID}}" selected="{{current_item_bg==item.ID?true:false}}" bindselected_bg_item="selected_bg_item"></itembg>
 </block>
 <!--选中人物-->
 <block wx:if="{{currentTab==0}}" wx:for="{{toolitemList}}" wx:key="item">

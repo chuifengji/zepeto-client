@@ -55,9 +55,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   btn_goto_shoot: function () {
-    wx.navigateTo({
-      url: '../shoot/shoot',
-    })
+    // wx.navigateTo({
+    //   url: '../shoot/shoot',
+    // })
   },
   changeItemList: function (e) {
     this.setData({
@@ -215,9 +215,9 @@ Page({
   },
 
   goshoot() {
-    wx.navigateTo({
-      url: '../shoot/shoot',
-    })
+    // wx.navigateTo({
+    //   url: '../shoot/shoot',
+    // })
   },
   getImg: function (src) {
     return new Promise((resolve, reject) => {
@@ -231,7 +231,7 @@ Page({
   },
   async saveStyle() {
     let that = this;
-    var styleArray = [that.data.nakedStyle,that.data.hairAStyle,that.data.hairBStyle,that.data.overcoatStyle,that.data.trouserStyle,that.data.shoesStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.expressionStyle,that.data.featureStyle]
+    var styleArray = [that.data.nakedStyle,that.data.hairAStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.featureStyle,that.data.expressionStyle]
     var imgArray = []
     for (var item in styleArray) {
       if(styleArray[item]!=""){
@@ -240,7 +240,7 @@ Page({
         imgArray.push(newimg)
       }
     }
-    
+    console.log(imgArray)
     for (var item in imgArray) {
       ctx.drawImage(imgArray[item], 6, -22, 308, 528)
     }
@@ -252,11 +252,10 @@ Page({
         height: 300,
         canvasId: 'maskCanvas',
         success: function (res) {
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath,          //save face picture
-          })
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云
-
+          wx.showToast({
+            title: '保存成功',
+          })
         }
       })
     }, 100))
@@ -279,7 +278,7 @@ Page({
           my_img:Data.MYIMG,
           canSearchMe:Data.CanSearchMe
         }
-        that.globalData.userInfo = userInfo
+        app.globalData.userInfo = userInfo
         wx.setStorage({
           key:"USERINFO",
           data:userInfo

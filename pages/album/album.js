@@ -1,28 +1,20 @@
 // pages/album/album.js
+const app = getApp()
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    editActive:false,//处于编辑态
-    sortTypeTime:true,//以时间排序
-    selectAllActive:false,
-    list:[{
-      id:0,
-      src:"../../images/photo.png" ,
-      local:"校大门" ,
-      date:"2020/5/24",
-      selected:false
-    },
-    {
-      id:1,
-      src:"../../images/photo.png" ,
-      local:"校大门" ,
-      date:"2020/5/24",
-      selected:false
-    }],
+    editActive: false, //处于编辑态
+    sortTypeTime: true, //以时间排序
+    selectAllActive: false,
+    PhotoList: [
+    ],
 
-    delbtn:false
+    delbtn: false
+  },
+  otherData:{
+    deleteList:[]
   },
 
   /**
@@ -35,73 +27,113 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log(app.globalData.photoList)
+    this.setData({
+      PhotoList: app.globalData.photoList.map(item => {
+        item.selected = false;
+        return item;
+      })
+    })
   },
-  del:function(e){
-    let newList = [];
-    console.log(e)
-    for (let i = 0; i < this.data.list.length; i++) {
-      if (parseInt(e.currentTarget.id) != this.data.list[i].id) {
-        newList.push(this.data.list[i])
+  del: function (e) {
+    let newList = [],
+     that = this,
+    oldList=this.data.PhotoList;
+    for (let i = 0; i < oldList.length; i++) {
+      if(oldList[i].selected===true){
+         this.otherData.deleteList.push(oldList[i])
+      }else{
+        newList.push(oldList[i])
       }
     }
+    //批量删除这里的方法临时使用，后面记得修改。
+    for(let i=0;i<this.otherData.deleteList.length-1;i++){
+      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,this.otherData.deleteList[i].ID)
+    }
+    app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,this.otherData.deleteList[this.otherData.deleteList.length-1].ID).then(res=>{
+      app.globalData.photoList = res.Data
+      wx.setStorage({
+        key:"PHOTOLIST",
+        data:res.Data
+      })
+    })
     this.setData({
-      list: newList
+      PhotoList: newList
+    })
+
+  },
+  btnComplete: function (e) {
+    this.setData({
+      editActive: false
+    })
+    let list = this.data.list.map(item => {
+      item.selected = false;
+      return item;
+    })
+    this.setData({
+      list: list
     })
   },
-  btnComplete:function(e){
+  btnEdit: function (e) {
     this.setData({
-      editActive:false
-    })
-    let list = this.data.list.map(item=>{item.selected =  false;return item;})
-    this.setData({
-     list:list
-   })
-  },
-  btnEdit:function(e){
-    this.setData({
-      editActive:true
+      editActive: true
     })
   },
-  changeSortTypeToName:function(e){
+  changeSortTypeToName: function (e) {
     this.setData({
-      sortTypeTime:false
+      sortTypeTime: false
     })
     //排序方式以名称
   },
-  changeSortTypeToTime:function(e){
+  changeSortTypeToTime: function (e) {
     this.setData({
-      sortTypeTime:true
+      sortTypeTime: true
     })
     //排序方式以时间
   },
-  changeSelected:function(e){
-    if(this.data.editActive){
+  changeSelected: function (e) {
+    if (this.data.editActive) {
       //这里的函数并不正确，后面需要修改。
-      let list = this.data.list;
-      list[e.currentTarget.id].selected=!list[e.currentTarget.id].selected
+      let list = this.data.PhotoList;
+      let getPosition = ()=>{
+        for(let i=0;i<list.length;i++){
+          if(list[i].ID===e.currentTarget.dataset.id){return i}
+        }
+      }  
+      let position =getPosition()
+      if(!list[position].selected){
+ 
+      }
+      list[position].selected=!list[position].selected
       this.setData({
-        list:list
+        PhotoList:list
       })
-    }else{
+    } else {
+      var model = JSON.stringify(e.currentTarget.dataset);
       wx.navigateTo({
-        url: '../imageDetail/imageDetail',
+        url: '../imageDetail/imageDetail?model=' + model,
       })
     }
   },
   //全选
-  btnSelectAll:function(e){
-    let list = this.data.list.map(item=>{item.selected =  true;return item;})
-     this.setData({
-      list:list,
-      selectAllActive:true
+  btnSelectAll: function (e) {
+    let list = this.data.PhotoList.map(item => {
+      item.selected = true;
+      return item;
+    })
+    this.setData({
+      PhotoList: list,
+      selectAllActive: true
     })
   },
-  btnSelectCancel:function(e){
-    let list = this.data.list.map(item=>{item.selected =  false;return item;})
+  btnSelectCancel: function (e) {
+    let list = this.data.PhotoList.map(item => {
+      item.selected = false;
+      return item;
+    })
     this.setData({
-     list:list,
-     selectAllActive:false
-   })
+      PhotoList: list,
+      selectAllActive: false
+    })
   }
 })

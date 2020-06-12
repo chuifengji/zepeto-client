@@ -6,43 +6,48 @@ Page({
    * 页面的初始数据
    */
   data: {
-    keyword:"",
-    peopleList:[]
+    keyword: "",
+    peopleList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  change_keyword:function(e){
-  this.setData({
-    keyword:e.detail.value
-  })
-  },
-  search:function(){
-    let keyword = this.data.keyword;
-    app.netHandlers.searchFriend(keyword).then(res=>{
-      console.log(res)
-    let data=res.Data.map(item=>{
-      return{
-        id:item.ID,
-        name:item.NAME,
-        major:item.MAJOR,
-        src:item.MYIMG
-      }
-    })
-    console.log(data)
+  change_keyword: function (e) {
     this.setData({
-      peopleList:data
+      keyword: e.detail.value
     })
-    })
-
   },
-  gotofriendinfo_page:function(e){
+  search: function () {
+    let keyword = this.data.keyword;
+    if (keyword == '') {
+      wx.showToast({
+        title: '搜索不能为空',
+        icon: 'none'
+      })
+    } else {
+      app.netHandlers.searchFriend(keyword).then(res => {
+        let data = res.Data.map(item => {
+          return {
+            id: item.ID,
+            name: item.NAME,
+            major: item.MAJOR,
+            src: item.MYIMG
+          }
+        })
+        console.log(data)
+        this.setData({
+          peopleList: data
+        })
+      })
+    }
+  },
+  gotofriendinfo_page: function (e) {
     console.log(e.currentTarget.dataset)
     var model = JSON.stringify(e.currentTarget.dataset);
-      wx.navigateTo({
-        url: '../friendInfo/friendInfo?model=' + model,
-      })
+    wx.navigateTo({
+      url: '../friendInfo/friendInfo?model=' + model,
+    })
   },
   onLoad: function (options) {
 

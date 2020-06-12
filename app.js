@@ -11,20 +11,14 @@ App({
         //缓存中不包含USER_ID，未注册/登录过。
         this.login()
       } else {
+        this.getBackgroundList()
+        this.getAppearanceList()
         let userInfo = wx.getStorageSync('USERINFO')
         let friendList = wx.getStorageSync('FRIENDLIST')
-        let classmateList = wx.getStorageSync('CLASSMATELIST')
         let photoList = wx.getStorageSync('PHOTOLIST')
-        let backgroundList = wx.getStorageSync('BACKGROUNDLIST')
-        let decorationList = wx.getStorageSync('DECORATIONLIST')
-        let appearanceList = wx.getStorageSync('APPEARANCELIST')
         that.globalData.userInfo = userInfo
         that.globalData.friendList = friendList
-        that.globalData.classmateList = classmateList
         that.globalData.photoList = photoList
-        that.globalData.backgroundList = backgroundList
-        that.globalData.decorationList = decorationList
-        that.globalData.appearanceList = appearanceList
         if (that.userInfoReadyCallback) {
           that.userInfoReadyCallback(userInfo)
         }

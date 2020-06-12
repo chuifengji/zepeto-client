@@ -1,1 +1,1 @@
-<view>图片详细</view>
+<view class="imgcontainer" style="background-image: url({{src}}"></view>

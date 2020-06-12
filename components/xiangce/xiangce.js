@@ -8,7 +8,7 @@ Component({
       type: String,
       value: ""
     },
-    local: {
+    localtion: {
       type: String,
       value: ""
     },

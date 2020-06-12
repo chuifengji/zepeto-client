@@ -25,7 +25,6 @@ Page({
   },
   
   onLoad: function () {
-
     if(!app.globalData.userInfo){
       app.userInfoReadyCallback = res => {
         this.setData({
@@ -38,13 +37,18 @@ Page({
   },
   getSomeList:function(){},
   onShow:function(){
-    console.log(app.globalData.appearanceList)
     this.setData({
       userinfo: app.globalData.userInfo
    })
   },
   onReady: function () {
    //可以在这里请求装饰列表，背景列表。
-   console.log(util.getFileNameGroupPhotos(12))
+   app.netHandlers.getClassMateList(app.globalData.userInfo.college,app.globalData.userInfo.major,app.globalData.userInfo.classNum).then(res=>{
+    app.globalData.classmateList = res.Data;
+    wx.setStorage({
+      key:"CLASSMATELIST",
+      data:res.Data
+    })
+  })
   },
 })

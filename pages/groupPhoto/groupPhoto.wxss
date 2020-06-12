@@ -61,12 +61,10 @@ page {
 }
 
 .main_item_container{
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   position: relative;
   width: 750rpx;
   height: 240rpx;
-  flex-wrap: wrap;
   box-sizing: border-box;
   overflow-x: auto;
   padding-bottom: 40rpx;
@@ -136,22 +134,22 @@ page {
 
 .x {
   position: absolute;
-  top: -25rpx;
-  left: -25rpx;
+  top: -20rpx;
+  left: -20rpx;
   z-index: 500;
   display: none;
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
   overflow: hidden;
   font-weight: bold;
   color: #d1e3f1;
 }
 .o {
   position: absolute;
-  bottom: -25rpx;
-  right: -25rpx;
-  width: 50rpx;
-  height: 50rpx;
+  bottom: -20rpx;
+  right: -20rpx;
+  width: 40rpx;
+  height: 40rpx;
   text-align: center;
   display: none;
   overflow: hidden;

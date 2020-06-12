@@ -16,20 +16,21 @@
   position: relative;
 }
 .board{
-  position: absolute;
   top: 106px;
   left: 88px;
-  /* background-color: red; */
+  margin: auto;
+  margin-top: 200rpx;
+
 }
 .img{
   width:141px; 
   height:200px;
-
+  margin: auto;
 }
 .shootbtn{
-  position: absolute;
-  bottom:5px;
-  left:68px;
+margin: auto;
+  margin-top: 50rpx;
+ 
   
 }
 .cvs{

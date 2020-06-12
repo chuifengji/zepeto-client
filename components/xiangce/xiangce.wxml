@@ -1,11 +1,11 @@
 <view class="out_container">
 
-<view class="img_container" style="border:{{selected==true?'4rpx solid #009F7E;':''}}" bindtap="changeSelected">
-<image src="{{src}}"></image>
+<view class="img_container" style="background-image: url({{src+'?imageView2/5/w/200/h/200/format/png/interlace/1/q/100'}});border:{{selected==true?'2px solid #009F7E;':''}}" bindtap="changeSelected">
 </view>
 
-<view class="img_name_box">{{local}}</view>
+<view class="img_name_box">{{localtion}}</view>
 
 <view class="img_time_box">{{date}}</view>
 
 </view>
+

@@ -1,16 +1,16 @@
 <view class="container_up">
 <canvas canvas-id="maskCanvas" class="cvs"></canvas>
-<view class="character_show" id="nicked" style="position:relative;background-image:url('{{nakedStyle}}')"></view>
-<view class="character_show" id="Trousers" style="background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="Shirt" style="background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="Expression" style="background-image:url('{{expressionStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="nicked" style="z-index:1;position:relative;background-image:url('{{nakedStyle}}')"></view>
+<view class="character_show" id="Trousers" style="z-index:3;background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Shirt" style="z-index:4;background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Expression" style="z-index:2;background-image:url('{{expressionStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Feature" style="background-image:url('{{featureStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
- <view class="character_show" id="Overcoat" style="background-image:url('{{overcoatStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
-<view class="character_show" id="Shoes" style="background-image:url('{{shoesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="Glasses" style="background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="Others" style="background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="HairA" style="background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="HairB" style="background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
+ <view class="character_show" id="Overcoat" style="z-index:5;background-image:url('{{overcoatStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
+<view class="character_show" id="Shoes" style="z-index:2;background-image:url('{{shoesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Glasses" style="z-index:3;background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="Others" style="z-index:3;background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="HairA" style="z-index:2;background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" id="HairB" style="z-index:0;background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
 </view>
 <view class="btn_save_img" bindtap="saveStyle">保存</view>
 <view class="container_down">
@@ -112,9 +112,7 @@ current_style:others
 <view class="tool_items" wx:if="{{currentStyle=='OthersList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_others==item.ID?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL+'?imageView2/0/interlace/1/q/55'}}" selected="{{current_item_others==item.ID?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
 </block>
 </view>
-
-
 </view> 

@@ -3,11 +3,12 @@ let index = 0,
   items = [],
   flag = true,
   itemId = 1;
+const canvasPre = 2; // 展示的canvas占mask的百分比
 const maskCanvas = wx.createCanvasContext('maskCanvas');
 // 移植过来的部分
 const app = getApp()
 const {upload} = require("../../qiniu/qiniuUploader.js")
-const {getFileNameGroupPhotos} = require("../../utils/handlers")
+const {getFileNameGroupPhotos,getDate} = require("../../utils/handlers")
 Page({
   /**
    * 页面的初始数据
@@ -36,7 +37,8 @@ Page({
   changeHeight:function(){
     this.setData({
       shrink:!this.data.shrink
-  })},
+  })
+},
   switchNav:function(e){
     let current = e.target.dataset.current
     this.setData({
@@ -57,6 +59,7 @@ Page({
     }
   },
   selected_bg_item:function(e){
+    this.otherData.location = e.currentTarget.dataset.name;
     this.setData({
       current_item_bg: e.currentTarget.dataset.id,
       bg_container_image: e.currentTarget.dataset.src
@@ -64,11 +67,7 @@ Page({
   },
   onLoad: function (options) {
     let that = this;
-    this.otherData.personList=this.getPersonList();
-    this.setData({
-      toolitemList:this.otherData.personList,
-      uptoken:this.otherData.uptoken
-    })
+    this.otherData.location = '火之舞';
     // 移植过来的部分
     items = this.data.itemList;
     this.drawTime = 0
@@ -77,8 +76,8 @@ Page({
         this.sysData = sysData
         that.otherData.sysData = sysData
         this.setData({
-          canvasWidth: this.sysData.windowWidth, // 如果觉得不清晰的话，可以把所有组件、宽高放大一倍
-          canvasHeight: this.sysData.windowHeight,
+          canvasWidth: this.sysData.windowWidth*canvasPre, // 如果觉得不清晰的话，可以把所有组件、宽高放大一倍
+          canvasHeight: this.sysData.windowHeight*canvasPre,
         })
       }
     })
@@ -101,6 +100,7 @@ Page({
     hash[current.ID] ? '' : hash[current.ID] = true && arr.push(current);
     return arr
    }, []);
+   console.log(result)
     return result;
   },
   selected_person_item:function(e){
@@ -127,14 +127,18 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.otherData.time = getDate()//获取今天的日期。
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.otherData.personList=this.getPersonList();
+    this.setData({
+      toolitemList:this.otherData.personList,
+      uptoken:this.otherData.uptoken
+    })
   },
   setDropItem(imgData) {
     let that = this;
@@ -142,7 +146,6 @@ Page({
     wx.getImageInfo({
       src: imgData.url,
       success: res => {
-  
         // 初始化数据
         data.width = res.width/1.4; //宽度
         data.height = res.height/1.4; //高度
@@ -313,6 +316,9 @@ Page({
     })
   },
   openMask () {
+    this.setData({
+      shrink:!this.data.shrink
+  })
     this.synthesis()
   },
   getImg: function (src) {
@@ -331,9 +337,10 @@ Page({
     for(var itm in this.data.itemList){
       local_img[itm].image=await this.getImg(this.data.itemList[itm].image)
     }
+    console.log(local_img)
     maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
-    prop = 1;
+    prop = 2;
     local_img.forEach((currentValue, index) => {
       maskCanvas.save();
       maskCanvas.translate(this.data.canvasWidth * (1 - num) / 2, 0);
@@ -349,6 +356,9 @@ Page({
       wx.canvasToTempFilePath({
         canvasId: 'maskCanvas',
         success: function (res) {
+          wx.showLoading({
+            title: '合成中...',
+          })
           that.uploadPhotos(res.tempFilePath)//upload photos tp cloud storage
         }
       })
@@ -403,7 +413,18 @@ Page({
     let fileName= getFileNameGroupPhotos(app.globalData.userInfo.id)
     upload(filePath, (res) => {
       app.netHandlers.addGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,that.otherData.location,that.otherData.time,res.fileURL).then(res=>{
-        let Data = res.Data
+        app.globalData.photoList = res.Data
+        wx.setStorage({
+          key:"PHOTOLIST",
+          data:res.Data
+        })
+        setTimeout(function () {
+          wx.hideLoading(),
+          wx.showToast({
+            title: '已保存到相册中',
+            icon:"none"
+          })
+        }, 2000)
       })
       }, (error) => {
         console.error('error: ' + JSON.stringify(error))
