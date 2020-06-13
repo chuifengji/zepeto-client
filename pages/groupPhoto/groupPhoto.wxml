@@ -1,14 +1,13 @@
-<view class="background_container" style="background-image:url({{bg_container_image}})">
+<view class="background_container" bindtap="passiveAll" style="background-image:url({{bg_container_image}})">
 
 <!--生成的图片区域-->
 <block wx:for="{{itemList}}" wx:key="{{item.id}}">
     <!-- 圆心坐标 <text style='position:absolute;top:{{item.y}}px;left:{{item.x}}px;width:2px;height:2px;background-color:yellow;z-index:500'></text> -->
     <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
       <view class='imgWrap {{item.active? "touchActive":""}}' style="transform: rotate({{item.angle}}deg); border: {{item.active?4*item.oScale:0}}rpx #fff dashed;">
-        <image src='{{item.image}}' data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' bindtouchstart='WraptouchStart' bindtouchmove='WraptouchMove' bindtouchend=''></image>
-
-        <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtap='deleteItem'></image>
-        <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' bindtouchstart='oTouchStart' bindtouchmove='oTouchMove' bindtouchend=''></image>
+        <image src='{{item.image}}' data-type="{{item.type}}" data-originalId="{{item.originalId}}" data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' catchtouchstart='WraptouchStart' catchtouchmove='WraptouchMove' catchtouchend=''></image>
+        <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-originalId="{{item.originalId}}" data-id='{{item.id}}' catchtap='deleteItem'></image>
+        <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' catchtouchstart='oTouchStart' catchtouchmove='oTouchMove' catchtouchend=''></image>
       </view>
     </view>
   </block>
@@ -36,7 +35,7 @@
 </block>
 <!--选中人物-->
 <block wx:if="{{currentTab==0}}" wx:for="{{toolitemList}}" wx:key="item">
-<itemPerson name="{{item.NAME}}" src="{{item.MYIMG}}" data-name="{{item.NAME}}" data-src="{{item.MYIMG}}" data-id="{{item.ID}}" selected="{{item.selected}}" bindselected_person_item="selected_person_item"></itemPerson>
+<itemPerson name="{{item.NAME}}" src="{{item.MYIMG}}" data-name="{{item.NAME}}" data-src="{{item.MYIMG}}" data-id="{{item.ID}}" selected="{{item.selected}}" catchtap="selected_person_item"></itemPerson>
 </block>
 <!--选中装饰物-->
 <block wx:if="{{currentTab==2}}" wx:for="{{toolitemList}}" wx:key="item">

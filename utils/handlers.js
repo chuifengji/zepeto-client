@@ -6,7 +6,7 @@ let getFileNameGroupPhotos = function (userid) {
   month = now.getMonth(),
   date = now.getDate(),
   second = now.getSeconds();
-  return "groupphoto_" + userid + "_" + month.toString() + date.toString() + second.toString() + Math.floor(Math.random() * 10) + ".png";
+  return "groupphoto_" + userid + "_" + Math.floor(Math.random() * 10) + month.toString() + date.toString() + second.toString() + Math.floor(Math.random() * 10) + ".png";
 }
 let getDate = function () {
   let now = new Date(),

@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentStyle: 'feature',
+    currentStyle: 'FeatureList',
     current_item_expression: null,
     current_item_overcoat: null,
     current_item_shirt: null,
@@ -103,7 +103,9 @@ Page({
     } else {
       this.setData({
         current_item_overcoat: e.currentTarget.dataset.id,
-        overcoatStyle: e.currentTarget.dataset.url
+        overcoatStyle: e.currentTarget.dataset.url,
+        shirtStyle: '',
+        current_item_shirt:null
       })
     }
   },
@@ -116,7 +118,9 @@ Page({
     } else {
       this.setData({
         current_item_shirt: e.currentTarget.dataset.id,
-        shirtStyle: e.currentTarget.dataset.url
+        shirtStyle: e.currentTarget.dataset.url,
+        overcoatStyle:'',
+        current_item_overcoat:null
       })
     }
   },
