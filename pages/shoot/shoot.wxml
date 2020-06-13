@@ -1,13 +1,10 @@
-<camera class="cm" mode="normal" device-position="front" flash="auto" binderror="error" style="width:100%; height: 450px;">
-      <cover-view class="board">
-      <cover-image class="img" src="../../images/faceframe.png" style=""/>
-      </cover-view>
+<camera class="cm" mode="normal" device-position="front" flash="auto" binderror="error" style="width:100%; height:{{canvasHeight-100}}px;">
+ <image class="img" style="position:absolute;width:200px; height:254px;background-size:100%;top:100px;left:{{left}}px" src="../../images/out.png"/>
 </camera>
-<view class="btn-cvs">
-<button type="primary" class="shootbtn" bindtap="takePhoto">拍照</button>
-<canvas class="cvs" canvas-id="myCanvas"  style="border: 1px solid;width:100%;height:300px" />
+<view class="out_btn">
+<view class="shootbtn" bindtap="takePhoto">拍照</view>
 </view>
-
+<canvas class="cvs" canvas-id="myCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight-100}}px;border: 1px solid;'/>
 
 
 
