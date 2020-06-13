@@ -1,7 +1,7 @@
 <view wx:if="{{!editActive}}" class="header_edit_container">
 <i class="iconfont iconliebiao" style="color: #009F7E;z-index: 999;width:46rpx;height:46rpx;font-size:46rpx;line-height:46rpx;"></i>
-<view wx:if="{{sortTypeTime}}" class="header_text-sort" bindtap="changeSortTypeToName">按时间排序</view>
-<view wx:else class="header_text-sort" bindtap="changeSortTypeToTime">按名称排序</view>
+<view wx:if="{{sortTypeTime}}" class="header_text-sort" bindtap="changeSortTypeToTime">按时间排序</view>
+<view wx:else class="header_text-sort" bindtap="changeSortTypeToName">按名称排序</view>
 <view class="header_text-edit" bindtap="btnEdit">编辑</view>
 </view>
 <view wx:else class="header_edit_container">

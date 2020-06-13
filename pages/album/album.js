@@ -6,15 +6,14 @@ Page({
    */
   data: {
     editActive: false, //处于编辑态
-    sortTypeTime: true, //以时间排序
+    sortTypeTime: false, //以时间排序
     selectAllActive: false,
-    PhotoList: [
-    ],
+    PhotoList: [],
 
     delbtn: false
   },
-  otherData:{
-    deleteList:[]
+  otherData: {
+    deleteList: []
   },
 
   /**
@@ -37,24 +36,24 @@ Page({
   },
   del: function (e) {
     let newList = [],
-     that = this,
-    oldList=this.data.PhotoList;
+      that = this,
+      oldList = this.data.PhotoList;
     for (let i = 0; i < oldList.length; i++) {
-      if(oldList[i].selected===true){
-         this.otherData.deleteList.push(oldList[i])
-      }else{
+      if (oldList[i].selected === true) {
+        this.otherData.deleteList.push(oldList[i])
+      } else {
         newList.push(oldList[i])
       }
     }
     //批量删除这里的方法临时使用，后面记得修改。
-    for(let i=0;i<this.otherData.deleteList.length-1;i++){
-      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,this.otherData.deleteList[i].ID)
+    for (let i = 0; i < this.otherData.deleteList.length - 1; i++) {
+      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[i].ID)
     }
-    app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id,app.globalData.userInfo.user_id,this.otherData.deleteList[this.otherData.deleteList.length-1].ID).then(res=>{
+    app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[this.otherData.deleteList.length - 1].ID).then(res => {
       app.globalData.photoList = res.Data
       wx.setStorage({
-        key:"PHOTOLIST",
-        data:res.Data
+        key: "PHOTOLIST",
+        data: res.Data
       })
     })
     this.setData({
@@ -81,32 +80,49 @@ Page({
   },
   changeSortTypeToName: function (e) {
     this.setData({
-      sortTypeTime: false
+      sortTypeTime: true
+    })
+    let newList = this.data.PhotoList;
+    newList.sort(function(obj1,obj2){
+       return obj1.LOCATION.localeCompare(obj2.LOCATION)
+    })
+    this.setData({
+      PhotoList:newList
     })
     //排序方式以名称
   },
   changeSortTypeToTime: function (e) {
     this.setData({
-      sortTypeTime: true
+      sortTypeTime: false
+    })
+    let newList = this.data.PhotoList;
+    newList.sort(function(obj1,obj2){
+      return obj1['TIME'] <= obj2['TIME'] ? 1 : -1 
+    })
+    this.setData({
+      PhotoList:newList
     })
     //排序方式以时间
   },
+ 
   changeSelected: function (e) {
     if (this.data.editActive) {
       //这里的函数并不正确，后面需要修改。
       let list = this.data.PhotoList;
-      let getPosition = ()=>{
-        for(let i=0;i<list.length;i++){
-          if(list[i].ID===e.currentTarget.dataset.id){return i}
+      let getPosition = () => {
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].ID === e.currentTarget.dataset.id) {
+            return i
+          }
         }
-      }  
-      let position =getPosition()
-      if(!list[position].selected){
- 
       }
-      list[position].selected=!list[position].selected
+      let position = getPosition()
+      if (!list[position].selected) {
+
+      }
+      list[position].selected = !list[position].selected
       this.setData({
-        PhotoList:list
+        PhotoList: list
       })
     } else {
       var model = JSON.stringify(e.currentTarget.dataset);

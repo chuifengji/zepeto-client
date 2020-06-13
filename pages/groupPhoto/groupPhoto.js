@@ -157,6 +157,7 @@ Page({
     this.setData({
       toolitemList: list
     })
+    app.globalData.personList = list
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -406,12 +407,15 @@ Page({
     })
   },
   async synthesis() { // 合成图片
+    wx.showLoading({
+      title: '合成中...',
+    })
     var local_img = JSON.parse(JSON.stringify(this.data.itemList));
     var bg_img = await this.getImg(this.data.bg_container_image)
     for (var itm in this.data.itemList) {
       local_img[itm].image = await this.getImg(this.data.itemList[itm].image)
     }
-    console.log(local_img)
+    //console.log(local_img)
     maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
       prop = 2;
@@ -430,9 +434,6 @@ Page({
       wx.canvasToTempFilePath({
         canvasId: 'maskCanvas',
         success: function (res) {
-          wx.showLoading({
-            title: '合成中...',
-          })
           that.uploadPhotos(res.tempFilePath) //upload photos tp cloud storage
         }
       })
@@ -498,7 +499,7 @@ Page({
                 title: '已保存到相册中',
                 icon: "none"
               })
-          }, 2000)
+          }, 600)
         })
       }, (error) => {
         console.error('error: ' + JSON.stringify(error))
