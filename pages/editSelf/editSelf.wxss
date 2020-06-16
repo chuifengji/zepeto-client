@@ -137,7 +137,6 @@ page {
   position: absolute;
   left: 800rpx;
   float: right;
-  visibility: hidden;
 }
 
 .btn_change_skin {

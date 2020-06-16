@@ -1,9 +1,13 @@
+let ctx = null,
+  canvas = null;
 // 移植过来的部分
 let index = 0,
   items = [],
   flag = true,
   itemId = 1;
-const canvasPre = 2; // 展示的canvas占mask的百分比
+const canvasPre = 1; // 展示的canvas占mask的百分比
+const num = 1,
+  prop = 1;
 const maskCanvas = wx.createCanvasContext('maskCanvas');
 // 移植过来的部分
 const app = getApp()
@@ -34,6 +38,7 @@ Page({
     itemList: [],
 
   },
+
   otherData: {
     personList: null,
     fileName: '',
@@ -42,6 +47,7 @@ Page({
     time: '',
     sysData: null
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -163,7 +169,25 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    let that = this;
+    const query = wx.createSelectorQuery()
+    query.select('#myCanvas')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        console.log(res[0])
+        canvas = res[0].node
+        ctx = canvas.getContext('2d')
+        const dpr = wx.getSystemInfoSync().pixelRatio
+        canvas.width = res[0].width * dpr
+        canvas.height = res[0].height * dpr
+        ctx.scale(dpr, dpr)
+      })
+
     this.otherData.time = getDate() //获取今天的日期。
+
   },
 
   /**
@@ -401,50 +425,55 @@ Page({
       wx.getImageInfo({
         src,
         success(res) {
+        //  let imgData = canvas.createImage();
+         // imgData.src = res.path
           resolve(res.path)
         }
       })
     })
   },
-  async synthesis() { // 合成图片
+  async synthesis() {
     wx.showLoading({
       title: '合成中...',
     })
     var local_img = JSON.parse(JSON.stringify(this.data.itemList));
-    var bg_img = await this.getImg(this.data.bg_container_image)
+    var bg_img =  canvas.createImage();
     for (var itm in this.data.itemList) {
-      local_img[itm].image = await this.getImg(this.data.itemList[itm].image)
+      local_img[itm]._image = canvas.createImage();
+      local_img[itm]._src = await this.getImg(this.data.itemList[itm].image)
     }
-    //console.log(local_img)
-    maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
-    const num = 1,
-      prop = 2;
-    local_img.forEach((currentValue, index) => {
-      maskCanvas.save();
-      maskCanvas.translate(this.data.canvasWidth * (1 - num) / 2, 0);
-      maskCanvas.beginPath();
-      maskCanvas.translate(currentValue.x * prop, currentValue.y * prop); //圆心坐标
-      maskCanvas.rotate(currentValue.angle * Math.PI / 180);
-      maskCanvas.translate(-(currentValue.width * currentValue.scale * prop / 2), -(currentValue.height * currentValue.scale * prop / 2))
-      maskCanvas.drawImage(currentValue.image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
-      maskCanvas.restore();
-    })
-    var that = this
-    maskCanvas.draw(setTimeout(function () {
-      wx.canvasToTempFilePath({
-        canvasId: 'maskCanvas',
-        success: function (res) {
-          that.uploadPhotos(res.tempFilePath) //upload photos tp cloud storage
+     console.log(local_img)
+    bg_img.onload = () => {
+      ctx.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
+       console.log(local_img)
+      local_img.forEach((currentValue, index) => {
+        console.log(currentValue)
+        ctx.save();
+        ctx.translate(this.data.canvasWidth * (1 - num) / 2, 0);
+        ctx.beginPath();
+        ctx.translate(currentValue.x * prop, currentValue.y * prop); //圆心坐标
+        ctx.rotate(currentValue.angle * Math.PI / 180);
+        ctx.translate(-(currentValue.width * currentValue.scale * prop / 2), -(currentValue.height * currentValue.scale * prop / 2))
+         currentValue._image.onLoad = () => {
+          ctx.drawImage(currentValue._image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
+          ctx.restore();
         }
+        console.log(currentValue._src)
+        currentValue._image.src=currentValue._src
+       
       })
-    }, 100))
+    var that = this
+    wx.canvasToTempFilePath({
+      canvas,
+      success: function (res) {
+        that.uploadPhotos(res.tempFilePath) //upload photos tp cloud storage
+      }
+    })
+    }
+    bg_img.src = await this.getImg(this.data.bg_container_image)
+
   },
 
-  disappearCanvas() {
-    this.setData({
-      showCanvas: false
-    })
-  },
 
   saveImg: function () {
     wx.saveImageToPhotosAlbum({
@@ -499,7 +528,7 @@ Page({
                 title: '已保存到相册中',
                 icon: "none"
               })
-          }, 600)
+          }, 200)
         })
       }, (error) => {
         console.error('error: ' + JSON.stringify(error))

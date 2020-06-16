@@ -55,7 +55,7 @@
 
 
 
-
-<canvas class='maskCanvas' canvas-id="maskCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight}}px;'></canvas>
+<canvas type="2d" id="myCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight}}px;'></canvas>
+<!-- <canvas class='maskCanvas' canvas-id="maskCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight}}px;'></canvas> -->
 
 <!--移植过来的部分-->

@@ -201,7 +201,6 @@ Page({
     }
   },
   selected_feature_item: function (e) {
-    console.log(e.currentTarget.dataset)
     if (this.data.current_item_feature === e.currentTarget.dataset.id) {
       this.setData({
         current_item_feature: null,
@@ -245,6 +244,7 @@ Page({
       wx.getImageInfo({
         src,
         success(res) {
+          console.log(res)
           resolve(res.path)
         }
       })
