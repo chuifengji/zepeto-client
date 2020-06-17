@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [    
     "pages/index/index",
     "pages/shoot/shoot",
     "pages/editSelf/editSelf",
@@ -16,7 +16,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "民大zepeto",
+    "navigationBarTitleText": "小民云相馆",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

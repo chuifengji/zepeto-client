@@ -1,2 +1,3 @@
-<!--pages/mailDetail/mailDetail.wxml-->
-<text>pages/mailDetail/mailDetail.wxml</text>
+<view class="mail_title">{{mailContent.title}}</view>
+<view class="mail_date">{{mailContent.date}}</view>
+<view class="mail_detail" style="height:{{height}}px">{{mailContent.detail}}</view>

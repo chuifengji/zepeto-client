@@ -263,14 +263,14 @@ Page({
     }
     console.log(imgArray)
     for (var item in imgArray) {
-      ctx.drawImage(imgArray[item], 6, -22, 308, 528)
+      ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
     }
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
-        x: 90,
-        y: 20,
-        width: 133,
-        height: 300,
+        x: 180,
+        y: 40,
+        width: 275,
+        height: 600,
         canvasId: 'maskCanvas',
         success: function (res) {
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云

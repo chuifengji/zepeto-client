@@ -5,14 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    mailContent:null,
+    height:500
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let model = JSON.parse(options.model)
+      this.setData({
+        mailContent:model,
+        height:wx.getSystemInfoSync().windowHeight-140
+      })
   },
 
   /**

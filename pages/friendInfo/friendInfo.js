@@ -9,7 +9,8 @@ Page({
     hadbeenmyfriend:false,
     model:null,
     navigateTitle: "",
-    model:null
+    model:null,
+  
   },
 
   /**

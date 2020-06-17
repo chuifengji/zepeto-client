@@ -1,9 +1,10 @@
 <!--index.wxml-->
-
-
+<i class="iconfont iconxinxiang btn_mail_page" bindtap="gotomail_page"></i>
 <NameAndAvatar userName="{{userinfo.name}}" bindgotoselfinfo_page="gotoselfinfo_page" bindgotofriend_page="gotofriend_page"></NameAndAvatar>
+<view class="imageContainer">
+<view class="img_box" style="background-image: url({{userinfo.my_img}})"></view>
+</view>
 
-<view class="imageContainer"></view>
 <view bindtap="goToEdit" class="btn_goto_edit">编辑形象</view>
 
 

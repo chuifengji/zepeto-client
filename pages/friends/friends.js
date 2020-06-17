@@ -52,9 +52,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      peopleList:app.globalData.friendList
-    })
+    if(this.data.currentTab == 0){
+      this.setData({
+        peopleList:app.globalData.friendList
+      })
+    }else{
+      this.setData({
+        peopleList:app.globalData.classmateList
+      })
+    }
   },
 
   /**

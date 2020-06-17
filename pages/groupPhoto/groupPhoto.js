@@ -163,6 +163,21 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    const query = wx.createSelectorQuery()
+    query.select('#maskCanvas')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        console.log(res[0])
+        canvas = res[0].node
+        ctx = canvas.getContext('2d')
+        const dpr = wx.getSystemInfoSync().pixelRatio
+        canvas.width = res[0].width * dpr
+        canvas.height = res[0].height * dpr
+        ctx.scale(dpr, dpr)
+      })
     this.otherData.time = getDate() //获取今天的日期。
   },
 

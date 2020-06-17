@@ -1,8 +1,7 @@
 <view class="person_container">
 
-<view class="img_box"></view>
-<view>{{friendMajor}}</view>
-<view>{{friendName}}</view>
+<view class="img_box" style="background-image: url({{model.src}})"></view>
+<view class="majorinfo_box">From: {{model.major}}</view>
 
 </view>
 

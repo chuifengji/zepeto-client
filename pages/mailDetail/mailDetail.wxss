@@ -1,1 +1,39 @@
-/* pages/mailDetail/mailDetail.wxss */
+.mail_title{
+width: 750rpx;
+height: 60rpx;
+line-height: 60rpx;
+text-align: left;
+font-size: 32rpx;
+font-weight:600;
+margin-left: 40rpx;
+margin-top: 20rpx;
+}
+.mail_date{
+  margin-left: 40rpx;
+  margin-bottom: 15rpx;
+  width: 750rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: left;
+  font-size: 26rpx;
+  display: block;
+  color: rgba(179, 177, 177, 0.76);
+}
+.mail_detail{
+  width: 750rpx;
+  font-family: PingFang SC, Lantinghei SC, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  -webkit-overflow-scrolling: touch;
+  left:40rpx;
+   padding-right: 40rpx;
+   padding-left: 40rpx;
+   font-size: 32rpx;
+   width: 750rpx;
+   overflow-y: auto;
+   overflow-x: hidden;
+   word-wrap: break-word;
+   text-align:justify;
+   word-break: break-all;
+   box-sizing: border-box;
+   line-height:1.8; 
+    color: #333;
+}

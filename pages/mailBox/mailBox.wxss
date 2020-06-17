@@ -1,1 +1,47 @@
-/* pages/mailBox/mailBox.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+  background-color: #f6f5fa;
+}
+.mail_box{
+position: relative;
+width: 670rpx;
+height: 210rpx;
+margin: 20rpx auto;
+background-color: #ffffff;
+border-radius: 20rpx;
+box-shadow: 0 4px 4px 0 rgba(187, 186, 186, 0.14), 0 2px 8px 0 rgba(187, 186, 186, 0.14), 0 6px 2px -4px  rgba(187, 186, 186, 0.14);
+
+}
+
+.mail_title{
+  position: absolute;
+  width: 460rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: left;
+  left: 34rpx;
+  font-size: 15px;
+   color: #909399;
+}
+.mail_date{
+  position: absolute;
+  height: 90rpx;
+  width: 170rpx;
+  line-height: 90rpx;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #909399;
+}
+.mail_desc{
+  position: absolute;
+  width: 600rpx;
+  height: 120rpx;
+  top: 90rpx;
+  text-align: left;
+  left: 34rpx;
+  font-size: 14px;
+  color: #909399;
+}

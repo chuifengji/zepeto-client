@@ -1,1 +1,5 @@
-<view class="imgcontainer" style="background-image: url({{src}}"></view>
+<view class="imgcontainer" >
+<view class="imgbox" style="background-image: url({{imgUrl}}"></view>
+</view>
+<view class='btn_save' bindtap='saveImg'>保存</view>
+<button class='openSetting' open-type="openSetting" bindopensetting='handleSetting' hidden='{{openSettingBtnHidden}}'>授权</button>

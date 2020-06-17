@@ -23,6 +23,11 @@ Page({
       url: '../selfInfo/selfInfo',
     })
   },
+  gotomail_page:function(){
+    wx.navigateTo({
+      url: '../mailBox/mailBox',
+    })
+  },
   
   onLoad: function () {
     if(!app.globalData.userInfo){

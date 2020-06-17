@@ -1,2 +1,7 @@
-<!--pages/mailBox/mailBox.wxml-->
-<text>pages/mailBox/mailBox.wxml</text>
+<block wx:for="{{mailList}}" wx:key='key'>
+<view class="mail_box" bindtap="btn_gotomaildetail" data-title="{{item.title}}"  data-date="{{item.date}}"  data-desc="{{item.desc}}" data-detail="{{item.detail}}">
+<view class="mail_title" >{{item.title}}</view>
+<view class="mail_date">{{item.date}}</view>
+<view class="mail_desc">{{item.desc}}</view>
+</view>
+</block>
