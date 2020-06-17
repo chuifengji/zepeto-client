@@ -12,7 +12,8 @@ const {
 } = require("../../qiniu/qiniuUploader.js")
 const {
   getFileNameGroupPhotos,
-  getDate
+  getDate,
+  setSortPoint
 } = require("../../utils/handlers")
 Page({
   /**
@@ -30,7 +31,7 @@ Page({
     }],
     toolitemList: [],
     current_item_bg: 0,
-    bg_container_image: 'https://wenda-data.nt-geek.club/bg05.png', //当前的背景图片
+    bg_container_image: 'https://wenda-data.nt-geek.club/bg-01.png', //当前的背景图片
     itemList: [],
 
   },
@@ -121,7 +122,6 @@ Page({
       hash[current.ID] ? '' : hash[current.ID] = true && arr.push(current);
       return arr
     }, []);
-    console.log(result)
     return result;
   },
   selected_person_item: function (e) {
@@ -139,7 +139,8 @@ Page({
       this.setDropItem({
         url: e.currentTarget.dataset.src,
         type: 'person',
-        originalId: e.currentTarget.dataset.id
+        originalId: e.currentTarget.dataset.id,
+        name:e.currentTarget.dataset.name
       });
     } else {
       list[position].selected = false;
@@ -163,21 +164,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    const query = wx.createSelectorQuery()
-    query.select('#maskCanvas')
-      .fields({
-        node: true,
-        size: true
-      })
-      .exec((res) => {
-        console.log(res[0])
-        canvas = res[0].node
-        ctx = canvas.getContext('2d')
-        const dpr = wx.getSystemInfoSync().pixelRatio
-        canvas.width = res[0].width * dpr
-        canvas.height = res[0].height * dpr
-        ctx.scale(dpr, dpr)
-      })
     this.otherData.time = getDate() //获取今天的日期。
   },
 
@@ -211,12 +197,12 @@ Page({
       src: imgData.url,
       success: res => {
         // 初始化数据
-        data.width = res.width / 1.4; //宽度
-        data.height = res.height / 1.4; //高度
+        data.width = res.width / 2.8; //宽度
+        data.height = res.height / 2.8; //高度
         data.image = imgData.url; //地址
         data.id = ++itemId; //id
-        data.top = (that.otherData.sysData.windowHeight - res.height / 1.4) / 2; //top定位
-        data.left = (that.otherData.sysData.windowWidth - res.width / 1.4) / 2; //left定位
+        data.top = (that.otherData.sysData.windowHeight - res.height / 2.8) / 2; //top定位
+        data.left = (that.otherData.sysData.windowWidth - res.width / 2.8) / 2; //left定位
         //圆心坐标
         data.x = data.left + data.width / 2;
         data.y = data.top + data.height / 2;
@@ -226,7 +212,7 @@ Page({
         data.active = false; //选中状态
         data.type = imgData.type; //person or decoration
         data.originalId = imgData.originalId; //物品在数据库中的id
-        console.log(data)
+        data.name = imgData.name
         items[items.length] = data;
         this.setData({
           itemList: items
@@ -249,7 +235,6 @@ Page({
     items[index].lx = e.touches[0].clientX;
     items[index].ly = e.touches[0].clientY;
 
-    console.log(items[index])
   },
   WraptouchMove(e) {
     if (flag) {
@@ -258,7 +243,6 @@ Page({
         flag = true;
       }, 100)
     }
-    // console.log('WraptouchMove', e)
     items[index]._lx = e.touches[0].clientX;
     items[index]._ly = e.touches[0].clientY;
 
@@ -269,7 +253,6 @@ Page({
 
     items[index].lx = e.touches[0].clientX;
     items[index].ly = e.touches[0].clientY;
-    // console.log(items)
     this.setData({
       itemList: items
     })
@@ -283,7 +266,6 @@ Page({
     for (let i = 0; i < items.length; i++) {
       items[i].active = false;
       if (e.currentTarget.dataset.id == items[i].id) {
-        console.log('e.currentTarget.dataset.id', e.currentTarget.dataset.id)
         index = i;
         items[index].active = true;
       }
@@ -295,7 +277,6 @@ Page({
     items[index].anglePre = this.countDeg(items[index].x, items[index].y, items[index].tx, items[index].ty)
     //获取图片半径
     items[index].r = this.getDistancs(items[index].x, items[index].y, items[index].left, items[index].top);
-    console.log(items[index])
   },
   oTouchMove: function (e) {
     if (flag) {
@@ -417,11 +398,19 @@ Page({
         src,
         success(res) {
           resolve(res.path)
+        },
+        fail(res){
+          console.log(res)
         }
       })
     })
   },
   async synthesis() { // 合成图片
+   let personList = this.sortPerson(),
+   nameList = personList.map(item=>{
+     return item.name//获取要打印的人名列表
+   })
+   console.log(nameList)
     wx.showLoading({
       title: '合成中...',
     })
@@ -430,7 +419,6 @@ Page({
     for (var itm in this.data.itemList) {
       local_img[itm].image = await this.getImg(this.data.itemList[itm].image)
     }
-    //console.log(local_img)
     maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
       prop = 2;
@@ -454,43 +442,14 @@ Page({
       })
     }, 100))
   },
-
-  disappearCanvas() {
-    this.setData({
-      showCanvas: false
-    })
-  },
-
-  saveImg: function () {
-    wx.saveImageToPhotosAlbum({
-      filePath: this.data.canvasTemImg,
-      success: res => {
-        wx.showToast({
-          title: '保存成功',
-          icon: "success"
-        })
-      },
-      fail: res => {
-        console.log(res)
-        wx.openSetting({
-          success: settingdata => {
-            console.log(settingdata)
-            if (settingdata.authSetting['scope.writePhotosAlbum']) {
-              console.log('获取权限成功，给出再次点击图片保存到相册的提示。')
-            } else {
-              console.log('获取权限失败，给出不给权限就无法正常使用的提示')
-            }
-          },
-          fail: error => {
-            console.log(error)
-          }
-        })
-        wx.showModal({
-          title: '提示',
-          content: '保存失败，请确保相册权限已打开',
-        })
+  
+  sortPerson:function(){
+   let personList =  this.data.itemList.map(item=>{
+      if(item.type==='person'){
+        return item;
       }
     })
+    return setSortPoint(personList)
   },
   //getUptokenPhotos 获取上传凭证
   getUptokenPhotos: function () {

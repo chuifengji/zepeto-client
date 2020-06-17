@@ -15,10 +15,38 @@ let getDate = function () {
   date = now.getDate();
   return year + "/" + month + "/" + date;
 }
+let setSortPoint = function (array) {
+  var len = array.length;
+  for (var i = 0; i < len - 1; i++) {
+      for (var j = 0; j < len - 1 - i; j++) {
+          if (setSortRule(array[j], array[j + 1])) {
+              var tmp = array[j];
+              array[j] = array[j + 1];
+              array[j + 1] = tmp;
+          }
+      }
+  }
+  return array;
+}
+
+//两个坐标比较大小
+let setSortRule = function (p1, p2) {
+  if (p1.top > p2.top) {
+      return true;
+  }
+  else if (p1.top == p2.top) {
+      return (p1.left > p2.left);
+  }
+  else {
+      return false;
+  }
+}
 module.exports = {
   getFileNameSelfImg,
   getFileNameGroupPhotos,
-  getDate
+  getDate,
+  setSortPoint,
+  setSortRule
 }
 
 
