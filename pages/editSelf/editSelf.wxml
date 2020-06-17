@@ -1,5 +1,6 @@
 <view class="container_up">
 <canvas canvas-id="maskCanvas" class="cvs"></canvas>
+<view class="my_face" style="z-index:2;background-image:url('{{selface}}')"></view>
 <view class="character_show" id="nicked" style="z-index:1;position:relative;background-image:url('{{nakedStyle}}')"></view>
 <view class="character_show" id="Trousers" style="z-index:3;background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Shirt" style="z-index:4;background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
@@ -38,6 +39,9 @@ current_style:feature
 <view class="btn_goto_photo" bindtap="btn_goto_shoot">
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
+
+<view data-url="{{selface}}"  style="background-image:url('{{selface}}')" class="item_face"></view>
+
 <block wx:for="{{toolitemList}}" wx:key="item">
 <ItemUtil data-type="{{item.TYPE}}" data-urlA="{{item.URLA}}" data-urlB="{{item.URLB}}" data-urlC="{{item.URLC}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_feature==item.ID?true:false}}" bindselected_util_item="selected_feature_item"></ItemUtil>
 </block>

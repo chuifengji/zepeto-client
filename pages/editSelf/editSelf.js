@@ -21,6 +21,7 @@ Page({
     current_item_glasses: null,
     current_item_hair: null,
     current_item_feature: null,
+    selface:'https://wenda-data.nt-geek.club/mmexport1592133944330.png',
     nakedStyle: "https://zepeto.nt-geek.club/naked.png",
     hairAStyle: "",
     hairBStyle: "",
@@ -215,9 +216,12 @@ Page({
     }
   },
   onLoad: function (options) {
+  let face = wx.getStorageSync('face')
+  console.log(face)
     this.setData({
       appearanceList: app.globalData.appearanceList,
-      toolitemList: app.globalData.appearanceList['FeatureList']
+      toolitemList: app.globalData.appearanceList['FeatureList'],
+      selface:face
     })
   },
 
