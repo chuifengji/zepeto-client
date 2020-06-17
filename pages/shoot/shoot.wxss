@@ -42,6 +42,10 @@ color:rgba(255,255,255,1);
 text-align: center;
 line-height: 72rpx;
 }
+.openSetting{
+  top: 50%;
+  transform: translateY(-50%);
+}
 .cvs{
   position: absolute;
   left: -200%;

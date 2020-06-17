@@ -21,7 +21,7 @@ Page({
     current_item_glasses: null,
     current_item_hair: null,
     current_item_feature: null,
-    selface:'https://wenda-data.nt-geek.club/mmexport1592133944330.png',
+    selface:'',
     nakedStyle: "https://zepeto.nt-geek.club/naked.png",
     hairAStyle: "",
     hairBStyle: "",
@@ -34,8 +34,8 @@ Page({
     expressionStyle: "",
     featureStyle: "",
 
-
-
+    selface_item:'',
+    selface_selected:false,//是否选中自拍照片
     //数据库返回的所有列表
     appearanceList: null,
     //当前渲染出来的列表
@@ -56,6 +56,19 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  selected_self:function(){
+    if(!this.data.selface_selected){
+      this.setData({
+        selface_selected:true,
+        selface:this.data.selface_item
+      })
+    }else{
+      this.setData({
+        selface_selected:false,
+        selface:''
+      })
+    }
+  },
   btn_goto_shoot: function () {
     wx.navigateTo({
       url: '../shoot/shoot',
@@ -216,12 +229,11 @@ Page({
     }
   },
   onLoad: function (options) {
-  let face = wx.getStorageSync('face')
-  console.log(face)
+
     this.setData({
       appearanceList: app.globalData.appearanceList,
       toolitemList: app.globalData.appearanceList['FeatureList'],
-      selface:face
+     
     })
   },
 
@@ -236,6 +248,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    let face = wx.getStorageSync('face')
+    this.setData({
+      selface_item:face
+    })
     this.getUptoken()
   },
 
@@ -256,7 +272,7 @@ Page({
   },
   async saveStyle() {
     let that = this;
-    var styleArray = [that.data.nakedStyle,that.data.hairAStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.featureStyle,that.data.expressionStyle]
+    var styleArray = [that.data.hairAStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.featureStyle,that.data.expressionStyle]
     var imgArray = []
     for (var item in styleArray) {
       if(styleArray[item]!=""){
@@ -265,9 +281,22 @@ Page({
         imgArray.push(newimg)
       }
     }
-    console.log(imgArray)
+    let naked = await this.getImg(that.data.nakedStyle)
+    let face = await this.getImg(this.data.selface)
+    //绘制身体
+    ctx.save();
+    ctx.drawImage(naked, 12, -44, 616, 1056)
+    ctx.restore();
+    //绘制脸部
+    ctx.save();
+    ctx.translate(275,95)
+    ctx.drawImage(face,0,0,80,100);
+    ctx.restore();
     for (var item in imgArray) {
+      ctx.save();
+      ctx.beginPath();
       ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
+      ctx.restore();
     }
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({

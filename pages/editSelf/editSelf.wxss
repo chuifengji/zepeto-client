@@ -32,7 +32,7 @@ page {
   margin-bottom: 20rpx;
   box-sizing: border-box;
   border-radius: 15rpx;
-  background-size: auto 100%;
+  background-size: auto 85%;
   background-repeat: no-repeat;
   background-position: center center;
 }

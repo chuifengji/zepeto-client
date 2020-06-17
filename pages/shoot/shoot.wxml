@@ -2,8 +2,11 @@
  <image class="img" style="position:absolute;width:200px; height:254px;background-size:100%;top:100px;left:{{left}}px" src="../../images/out.png"/>
 </camera>
 <view class="out_btn">
-<view class="shootbtn" bindtap="takePhoto">拍照</view>
+<view wx:if="{{openSettingBtnHidden}}" class="shootbtn" bindtap="takePhoto">拍照</view>
+<button wx:else class='openSetting' open-type="openSetting" bindopensetting='handleSetting' hidden='{{openSettingBtnHidden}}'>授权</button>
+
 </view>
+
 <canvas class="cvs" canvas-id="myCanvas" style='width:{{canvasWidth}}px; height:{{canvasHeight-100}}px;border: 1px solid;'/>
 
 

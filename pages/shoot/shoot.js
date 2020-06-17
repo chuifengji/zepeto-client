@@ -4,16 +4,43 @@ Page({
   data: {
     tmpimg: "",
     left:'',
-    src:''
+    src:'',
+    openSettingBtnHidden: true,
   },
   otherData: {
     sysData: null
   },
+
+
+  // 授权
+handleSetting: function (e) {
+  let that = this;
+  // 对用户的设置进行判断，如果没有授权，即使用户返回到保存页面，显示的也是“去授权”按钮；同意授权之后才显示保存按钮
+
+  if (!e.detail.authSetting['scope.camera']) {
+    // wx.showModal({
+    //   title: '警告',
+    //   content: '若不打开授权，则无法将图片保存在相册中！',
+    //   showCancel: false
+    // })
+    that.setData({
+      openSettingBtnHidden: false
+    })
+  } else {
+    // wx.showModal({
+    //   title: '提示',
+    //   content: '您已授权，赶紧将图片保存在相册中吧！',
+    //   showCancel: false
+    // })
+    that.setData({
+      openSettingBtnHidden: true
+    })
+  }
+},
   onLoad() {
     let that = this;
     wx.getSystemInfo({
       success: sysData => {
-
         that.otherData.sysData = sysData
         this.setData({
           canvasWidth: sysData.windowWidth,
@@ -27,14 +54,42 @@ Page({
     
   },
   takePhoto() {
-    const ctx = wx.createCameraContext()
-    ctx.takePhoto({
-      quality: 'nomal',
-      success: (res) => {
-        console.log(res)
-        this.save(res.tempImagePath)
+    let that = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.camera']) {
+          wx.authorize({
+            scope: 'scope.camera',
+            success() {
+              //这里是用户同意授权后的回调
+              const ctx = wx.createCameraContext()
+              ctx.takePhoto({
+                quality: 'nomal',
+                success: (res) => {
+                  console.log(res)
+                  that.save(res.tempImagePath)
+                }
+              })
+            },
+            fail() {//这里是用户拒绝授权后的回调
+              that.setData({
+                openSettingBtnHidden: false
+              })
+            }
+          })
+        } else {//用户已经授权过了
+          const ctx = wx.createCameraContext()
+          ctx.takePhoto({
+            quality: 'nomal',
+            success: (res) => {
+              console.log(res)
+              that.save(res.tempImagePath)
+            }
+          })
+        }
       }
     })
+
   },
   save(path) {
     var that = this
@@ -59,22 +114,22 @@ Page({
          destHeight: 254,
         canvasId: 'myCanvas',
         success: function (res) {
-          wx.saveImageToPhotosAlbum({
-            filePath: res.tempFilePath, //save face picture
-            success:function (data) {
-              wx.saveFile({
-                tempFilePath: res.tempFilePath,
-                success (res) {
-                  app.globalData.face = res.savedFilePath
-                  wx.setStorage({
-                    key:"face",
-                    data:res.savedFilePath
-                  })
-                  console.log(res.savedFilePath)
-                }
-            })
-              },
-          })
+          wx.saveFile({
+            tempFilePath: res.tempFilePath,
+            success (res) {
+              app.globalData.face = res.savedFilePath
+              wx.setStorage({
+                key:"face",
+                data:res.savedFilePath
+              })
+              wx.showToast({
+                title: '保存成功',
+              })
+              wx.navigateTo({
+                url: '../editSelf/editSelf',
+              })
+            }
+        })
         }
       })
     })

@@ -40,8 +40,7 @@ current_style:feature
 <i class="iconfont iconxiangji" style="color: #00906A;font-size:48rpx;"></i>
 </view>
 
-<view data-url="{{selface}}"  style="background-image:url('{{selface}}')" class="item_face"></view>
-
+<view wx:if="{{selface_item}}" data-url="{{selface_item}}"  style="background-image:url('{{selface_item}}');border:{{selface_selected?'2px solid #009F7E;':''}}" class="item_face" bindtap="selected_self"></view>
 <block wx:for="{{toolitemList}}" wx:key="item">
 <ItemUtil data-type="{{item.TYPE}}" data-urlA="{{item.URLA}}" data-urlB="{{item.URLB}}" data-urlC="{{item.URLC}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_feature==item.ID?true:false}}" bindselected_util_item="selected_feature_item"></ItemUtil>
 </block>

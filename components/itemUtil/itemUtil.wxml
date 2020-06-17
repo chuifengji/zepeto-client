@@ -1,4 +1,4 @@
 <view bindtap="activeitem"
  class="single_item"
- style="background-image: url({{thumbnail}});border:{{selected?'4rpx solid #009F7E;':''}}"></view>
+ style="background-image: url({{thumbnail}});border:{{selected?'2px solid #009F7E;':''}}"></view>
 
