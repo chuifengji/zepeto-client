@@ -83,6 +83,7 @@ App({
     },
     getAppearanceList:function(){
         this.netHandlers.getAppearanceList().then(res=>{
+          console.log(res)
           this.globalData.appearanceList = res.Data;
           wx.setStorage({
             key:"APPEARANCELIST",
@@ -114,13 +115,15 @@ App({
       })
     },
     getMyClassMateList:function(college,major,classNum){
-      this.netHandlers.getClassMateList(college,major,classNum).then(res=>{
-        this.globalData.classmateList = res.Data;
-        wx.setStorage({
-          key:"CLASSMATELIST",
-          data:res.Data
+      if(college!=''&&major!=''&&classNum!=''){
+        this.netHandlers.getClassMateList(college,major,classNum).then(res=>{
+          this.globalData.classmateList = res.Data;
+          wx.setStorage({
+            key:"CLASSMATELIST",
+            data:res.Data
+          })
         })
-      })
+      }
     },
   globalData: {
     userInfo: null,

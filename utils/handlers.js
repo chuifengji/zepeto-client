@@ -1,6 +1,9 @@
 let getFileNameSelfImg = function (userid) {
   return "self-img-" + userid + ".png"
 }
+let getFileNameSelfFace = function(userid){
+  return "self-img-face" + userid + ".png"
+}
 let getFileNameGroupPhotos = function (userid) {
   let now = new Date(),
   month = now.getMonth(),
@@ -43,6 +46,7 @@ let setSortRule = function (p1, p2) {
 }
 module.exports = {
   getFileNameSelfImg,
+  getFileNameSelfFace,
   getFileNameGroupPhotos,
   getDate,
   setSortPoint,

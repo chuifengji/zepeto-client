@@ -12,27 +12,29 @@ Page({
    */
   data: {
     currentStyle: 'FeatureList',
-    current_item_expression: null,
+    current_item_expression: 1,
     current_item_overcoat: null,
-    current_item_shirt: null,
-    current_item_trousers: null,
-    current_item_shoes: null,
+    current_item_shirt: 11,
+    current_item_trousers: 9,
+    current_item_shoes: 8,
     current_item_others: null,
     current_item_glasses: null,
-    current_item_hair: null,
-    current_item_feature: null,
+    current_item_hair: 1,
+    current_item_feature: 1,
+    current_item_special: null,
     selface:'',
-    nakedStyle: "https://zepeto.nt-geek.club/naked.png",
+    nakedStyle: "https://wenda-data.nt-geek.club/body1.png",
     hairAStyle: "",
-    hairBStyle: "",
+    hairBStyle: "https://wenda-data.nt-geek.club/hair_01.png",
     overcoatStyle: "",
-    trouserStyle: "",
-    shoesStyle: "",
+    trouserStyle: "https://wenda-data.nt-geek.club/trousers_09.png",
+    shoesStyle: "https://wenda-data.nt-geek.club/shoes_08.png",
     glassesStyle: "",
     othersStyle: "",
-    shirtStyle: "",
-    expressionStyle: "",
-    featureStyle: "",
+    shirtStyle: "https://wenda-data.nt-geek.club/shirt_11.png",
+    expressionStyle: "https://wenda-data.nt-geek.club/expression_01.png",
+    featureStyle: "https://wenda-data.nt-geek.club/head_01.png",
+    specialStyle:'',
 
     selface_item:'',
     selface_selected:false,//是否选中自拍照片
@@ -60,12 +62,21 @@ Page({
     if(!this.data.selface_selected){
       this.setData({
         selface_selected:true,
-        selface:this.data.selface_item
+        selface:this.data.selface_item,
+        current_item_expression: null,
+        expressionStyle: '',
+        current_item_feature: null,
+        featureStyle: '',
+        current_item_hair: null,
+        hairAStyle: '',
+        hairBStyle: ""
       })
     }else{
       this.setData({
         selface_selected:false,
-        selface:''
+        selface:'',
+        current_item_feature: 1,
+        featureStyle: "https://wenda-data.nt-geek.club/head_01.png",
       })
     }
   },
@@ -96,7 +107,7 @@ Page({
     })
   },
   selected_expression_item: function (e) {
-    if (this.data.current_item_overcoat === e.currentTarget.dataset.id) {
+    if (this.data.current_item_expression === e.currentTarget.dataset.id) {
       this.setData({
         current_item_expression: null,
         expressionStyle: ''
@@ -108,6 +119,52 @@ Page({
       })
     }
   },
+  selected_special_item:function(e){
+    console.log(e.currentTarget.dataset.url)
+    if(e.currentTarget.dataset.type==='xsf'){//选中的是学士服
+      if (this.data.current_item_special === e.currentTarget.dataset.id) {
+        this.setData({
+          current_item_special: null,
+          specialStyle: '',
+          shirtStyle: "https://wenda-data.nt-geek.club/shirt_11.png",
+          current_item_shirt: 11,
+          trouserStyle: "https://wenda-data.nt-geek.club/trousers_09.png",
+          current_item_trousers: 9,
+        })
+      } else {
+        this.setData({
+          current_item_special: e.currentTarget.dataset.id,
+          specialStyle: e.currentTarget.dataset.url,
+          overcoatStyle:'',
+          current_item_overcoat: null,
+          current_item_shirt:null,
+          shirtStyle:'',
+          current_item_trousers:null,
+          trouserStyle:''
+        })
+      }
+    }else{
+      if (this.data.current_item_special === e.currentTarget.dataset.id) {
+        this.setData({
+          current_item_special: null,
+          specialStyle: '',
+          shirtStyle: "https://wenda-data.nt-geek.club/shirt_11.png",
+          current_item_shirt: 11,
+          trouserStyle: "https://wenda-data.nt-geek.club/trousers_09.png",
+          current_item_trousers: 9,
+        })
+      } else {
+        this.setData({
+          current_item_special: e.currentTarget.dataset.id,
+          specialStyle: e.currentTarget.dataset.url,
+          current_item_shirt:null,
+          shirtStyle:'',
+
+        })
+      }
+    }
+
+  },
   selected_overcoat_item: function (e) {
     if (this.data.current_item_overcoat === e.currentTarget.dataset.id) {
       this.setData({
@@ -118,8 +175,8 @@ Page({
       this.setData({
         current_item_overcoat: e.currentTarget.dataset.id,
         overcoatStyle: e.currentTarget.dataset.url,
-        shirtStyle: '',
-        current_item_shirt:null
+        current_item_special: null,
+        specialStyle: ''
       })
     }
   },
@@ -133,8 +190,6 @@ Page({
       this.setData({
         current_item_shirt: e.currentTarget.dataset.id,
         shirtStyle: e.currentTarget.dataset.url,
-        overcoatStyle:'',
-        current_item_overcoat:null
       })
     }
   },
@@ -194,39 +249,25 @@ Page({
   selected_hair_item: function (e) {
     if (this.data.current_item_hair === e.currentTarget.dataset.id) {
       this.setData({
-        current_item_hair: e.currentTarget.dataset.id,
+        current_item_hair: null,
         hairAStyle: '',
         hairBStyle: ""
       })
     } else {
-      if (e.currentTarget.dataset.type === 'hair') {
         this.setData({
           current_item_hair: e.currentTarget.dataset.id,
-          hairAStyle: e.currentTarget.dataset.hairAStyle,
-          hairBStyle: "",
+          hairAStyle: e.currentTarget.dataset.urla,
+          hairBStyle: e.currentTarget.dataset.urlb,
         })
-      } else {
-        this.setData({
-          current_item_hair: e.currentTarget.dataset.id,
-          hairAStyle: e.currentTarget.dataset.hairAStyle,
-          hairBStyle: e.currentTarget.dataset.hairBStyle,
-        })
-      }
     }
   },
   selected_feature_item: function (e) {
-    console.log(e.currentTarget.dataset)
-    if (this.data.current_item_feature === e.currentTarget.dataset.id) {
-      this.setData({
-        current_item_feature: null,
-        featureStyle: ''
-      })
-    } else {
       this.setData({
         current_item_feature: e.currentTarget.dataset.id,
-        featureStyle: e.currentTarget.dataset.urla
+        featureStyle: e.currentTarget.dataset.urla,
+        selface:'',
+        selface_selected:false,
       })
-    }
   },
   onLoad: function (options) {
 
@@ -248,17 +289,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let face = wx.getStorageSync('face')
+    let face = wx.getStorageSync('faceimg')
+    console.log(face)
     this.setData({
       selface_item:face
     })
     this.getUptoken()
-  },
-
-  goshoot() {
-    // wx.navigateTo({
-    //   url: '../shoot/shoot',
-    // })
   },
   getImg: function (src) {
     return new Promise((resolve, reject) => {
@@ -271,18 +307,37 @@ Page({
     })
   },
   async saveStyle() {
+    wx.showLoading({
+      title: '合成中...',
+    })
     let that = this;
-    var styleArray = [that.data.hairAStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.featureStyle,that.data.expressionStyle]
+    if(that.data.selface ===''){
+    var styleArray = [that.data.hairAStyle,that.data.nakedStyle,that.data.featureStyle,that.data.expressionStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.specialStyle]
     var imgArray = []
     for (var item in styleArray) {
       if(styleArray[item]!=""){
         console.log(item)
-        var newimg = await this.getImg(styleArray[item])
-        imgArray.push(newimg)
+        imgArray.push(await this.getImg(styleArray[item]))
       }
     }
+    for (var item in imgArray) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
+      ctx.restore();
+    }
+  }else{
+    //面部为自拍时
     let naked = await this.getImg(that.data.nakedStyle)
-    let face = await this.getImg(this.data.selface)
+    let face = await this.getImg(that.data.selface)
+    let hairback ='';
+    if(that.data.hairAStyle!=''){
+    hairback = await this.getImg(that.data.hairAStyle)
+        //绘制头发（背部-女性）
+        ctx.save();
+        ctx.drawImage(hairback, 12, -44, 616, 1056)
+        ctx.restore();
+    }
     //绘制身体
     ctx.save();
     ctx.drawImage(naked, 12, -44, 616, 1056)
@@ -292,18 +347,32 @@ Page({
     ctx.translate(275,95)
     ctx.drawImage(face,0,0,80,100);
     ctx.restore();
+
+    var styleArray = [that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.specialStyle]
+    var imgArray = []
+    for (var item in styleArray) {
+      if(styleArray[item]!=""){
+        console.log(item)
+        imgArray.push(await this.getImg(styleArray[item]))
+      }
+    }
+
     for (var item in imgArray) {
       ctx.save();
       ctx.beginPath();
       ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
       ctx.restore();
     }
+
+  }
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         x: 180,
-        y: 40,
-        width: 275,
-        height: 600,
+        y: 10,
+        width: 265,
+        height: 650,
+        destHeight:650,
+        destWidth:265,
         canvasId: 'maskCanvas',
         success: function (res) {
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云
@@ -312,7 +381,7 @@ Page({
           })
         }
       })
-    }, 100))
+    }, 300))
   },
 
   uploadImgToCloud(filePath) {
@@ -332,6 +401,10 @@ Page({
           canSearchMe:Data.CanSearchMe
         }
         app.globalData.userInfo = userInfo
+        wx.hideLoading(),
+        wx.showToast({
+          title: '保存成功'
+        })
         wx.setStorage({
           key:"USERINFO",
           data:userInfo

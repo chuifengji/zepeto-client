@@ -12,12 +12,14 @@
   margin-bottom: 10rpx;
   box-sizing: border-box;
   border-radius: 15rpx;
+  position: relative;
 }
 .person_content_img{
-  width: 70rpx;
-  height: 140rpx;
-  position: relative;
-  left: 35rpx;
+  width: 50rpx;
+  height: 120rpx;
+  position: absolute;
+  left: 45rpx;
+  top: 5rpx;
 
 }
 .person_content_title {
