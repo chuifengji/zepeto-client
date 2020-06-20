@@ -61,12 +61,18 @@ Page({
   deleteFriend(){
     let myid =app.globalData.userInfo.id;
     let friendid = this.data.model.id
+    let newFriendList = [];
     app.netHandlers.deleteFriend(myid,friendid).then(res=>{
       if(res.Msg==="SUCCESS"){
-        app.globalData.friendList = res.Data;
+        app.globalData.friendList.map(item=>{
+          if(item.ID!=friendid){
+            newFriendList.push(item)
+          }
+        })
+        app.globalData.friendList = newFriendList;
         wx.setStorage({
           key:"FRIENDLIST",
-          data:res.Data
+          data:newFriendList
         })
         wx.showToast({
           title: '删除成功',
@@ -92,7 +98,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log(app.globalData.friendList)
   },
 
   /**

@@ -46,20 +46,19 @@ Page({
       }
     }
     //批量删除这里的方法临时使用，后面记得修改。
-    for (let i = 0; i < this.otherData.deleteList.length - 1; i++) {
-      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[i].ID)
-    }
-    app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[this.otherData.deleteList.length - 1].ID).then(res => {
-      app.globalData.photoList = res.Data
-      wx.setStorage({
-        key: "PHOTOLIST",
-        data: res.Data
+    for (let i = 0; i < this.otherData.deleteList.length; i++) {
+      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[i].ID).then(res=>{
+        app.globalData.photoList = newList
+        wx.setStorage({
+          key: "PHOTOLIST",
+          data: newList
+        })
+
       })
-    })
+    }
     this.setData({
       PhotoList: newList
     })
-
   },
   btnComplete: function (e) {
     this.setData({

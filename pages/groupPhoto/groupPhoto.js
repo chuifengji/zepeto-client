@@ -33,7 +33,6 @@ Page({
     current_item_bg: 0,
     bg_container_image: 'https://wenda-data.nt-geek.club/bg-01.png', //当前的背景图片
     itemList: [],
-
   },
   otherData: {
     personList: null,
@@ -78,6 +77,7 @@ Page({
     })
   },
   onLoad: function (options) {
+    this.otherData.personList = this.getPersonList();
     let that = this;
     this.otherData.location = '火之舞';
     // 移植过来的部分
@@ -94,6 +94,57 @@ Page({
       }
     })
     this.getUptokenPhotos();
+  },
+  onHide: function () {
+     app.globalData.selectedPerson = []
+     this.otherData.personList.forEach((current, index) => {
+      if (current.selected === true) {
+        app.globalData.selectedPerson.push(current.ID)
+      }
+    })
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    this.otherData.time = getDate() //获取今天的日期。
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    let newPersonList = this.getPersonList(),//需要记录被选中者的id
+    personList = [];
+    if(app.globalData.selectedPerson!=null){
+      newPersonList.map(item=>{
+        for(let i=0;i<app.globalData.selectedPerson.length;i++){
+          if(item.ID===app.globalData.selectedPerson[i]){
+            item.selected = true;
+          }
+        }
+        personList.push(item)
+     })
+    }else{
+      personList = newPersonList
+    }
+    this.otherData.personList = personList
+    if (this.data.currentTab === 0) {
+      this.setData({
+        toolitemList: personList,
+        uptoken: this.otherData.uptoken
+      })
+    } else if (this.data.currentTab === 1) {
+      this.setData({
+        toolitemList: app.globalData.backgroundList,
+        uptoken: this.otherData.uptoken
+      })
+    } else {
+      this.setData({
+        toolitemList: app.globalData.decorationList,
+        uptoken: this.otherData.uptoken
+      })
+    }
   },
   //getPersonList 去除人物列表中重复的部分。
   getPersonList: function () {
@@ -140,7 +191,7 @@ Page({
         url: e.currentTarget.dataset.src,
         type: 'person',
         originalId: e.currentTarget.dataset.id,
-        name:e.currentTarget.dataset.name
+        name: e.currentTarget.dataset.name
       });
     } else {
       list[position].selected = false;
@@ -160,36 +211,7 @@ Page({
     })
     app.globalData.personList = list
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    this.otherData.time = getDate() //获取今天的日期。
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    //以当前所处tab判断要渲染的列表
-    this.otherData.personList = this.getPersonList();
-    if (this.data.currentTab === 0) {
-      this.setData({
-        toolitemList: this.otherData.personList,
-        uptoken: this.otherData.uptoken
-      })
-    } else if (this.data.currentTab === 1) {
-      this.setData({
-        toolitemList: app.globalData.backgroundList,
-        uptoken: this.otherData.uptoken
-      })
-    } else {
-      this.setData({
-        toolitemList: app.globalData.decorationList,
-        uptoken: this.otherData.uptoken
-      })
-    }
-  },
   setDropItem(imgData) {
     let that = this;
     let data = {}
@@ -206,7 +228,7 @@ Page({
         //圆心坐标
         data.x = data.left + data.width / 2;
         data.y = data.top + data.height / 2;
-        data.angle=0;//初始化角度，否则手机端会出错
+        data.angle = 0; //初始化角度，否则手机端会出错
         data.scale = 1; //scale缩放
         data.oScale = 1; //方向缩放
         data.rotate = 1; //旋转角度
@@ -400,18 +422,18 @@ Page({
         success(res) {
           resolve(res.path)
         },
-        fail(res){
+        fail(res) {
           console.log(res)
         }
       })
     })
   },
   async synthesis() { // 合成图片
-   let personList = this.sortPerson(),
-   nameList = personList.map(item=>{
-     return item.name//获取要打印的人名列表
-   })
-   console.log(nameList)
+    let personList = this.sortPerson(),
+      nameList = personList.map(item => {
+        return item.name //获取要打印的人名列表
+      })
+    console.log(nameList)
     wx.showLoading({
       title: '合成中...',
     })
@@ -435,7 +457,7 @@ Page({
       maskCanvas.rotate(currentValue.angle * Math.PI / 180);
 
       maskCanvas.translate(-(currentValue.width * currentValue.scale * prop / 2), -(currentValue.height * currentValue.scale * prop / 2))
-      
+
       maskCanvas.drawImage(currentValue.image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
       maskCanvas.restore();
     })
@@ -449,10 +471,10 @@ Page({
       })
     }, 100))
   },
-  
-  sortPerson:function(){
-   let personList =  this.data.itemList.map(item=>{
-      if(item.type==='person'){
+
+  sortPerson: function () {
+    let personList = this.data.itemList.map(item => {
+      if (item.type === 'person') {
         return item;
       }
     })
