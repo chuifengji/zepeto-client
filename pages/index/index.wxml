@@ -4,7 +4,6 @@
 <view class="imageContainer">
 <view class="img_box" style="background-image: url({{userinfo.my_img}})"></view>
 </view>
-
 <view bindtap="goToEdit" class="btn_goto_edit">编辑形象</view>
 
 

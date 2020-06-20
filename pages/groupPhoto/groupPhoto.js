@@ -206,6 +206,7 @@ Page({
         //圆心坐标
         data.x = data.left + data.width / 2;
         data.y = data.top + data.height / 2;
+        data.angle=0;//初始化角度，否则手机端会出错
         data.scale = 1; //scale缩放
         data.oScale = 1; //方向缩放
         data.rotate = 1; //旋转角度
@@ -422,13 +423,19 @@ Page({
     maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
       prop = 2;
+
     local_img.forEach((currentValue, index) => {
       maskCanvas.save();
+
       maskCanvas.translate(this.data.canvasWidth * (1 - num) / 2, 0);
       maskCanvas.beginPath();
+
       maskCanvas.translate(currentValue.x * prop, currentValue.y * prop); //圆心坐标
+
       maskCanvas.rotate(currentValue.angle * Math.PI / 180);
+
       maskCanvas.translate(-(currentValue.width * currentValue.scale * prop / 2), -(currentValue.height * currentValue.scale * prop / 2))
+      
       maskCanvas.drawImage(currentValue.image, 0, 0, currentValue.width * currentValue.scale * prop, currentValue.height * currentValue.scale * prop);
       maskCanvas.restore();
     })

@@ -176,6 +176,17 @@ Page({
     }
   },
   onLoad: function (options) {
+
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
     if(app.globalData.userInfo.canSearchMe==="true"){
       this.setData({
         switchChecked:true
@@ -192,16 +203,6 @@ Page({
         canSearchMe:app.globalData.userInfo.canSearchMe
       })
     }
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
   },
   /**
    * 生命周期函数--监听页面隐藏

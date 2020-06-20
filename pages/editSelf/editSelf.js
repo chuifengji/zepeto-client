@@ -22,7 +22,7 @@ Page({
     current_item_hair: 1,
     current_item_feature: 1,
     current_item_special: null,
-    selface:'',
+    selface: '',
     nakedStyle: "https://wenda-data.nt-geek.club/body1.png",
     hairAStyle: "",
     hairBStyle: "https://wenda-data.nt-geek.club/hair_01.png",
@@ -34,17 +34,17 @@ Page({
     shirtStyle: "https://wenda-data.nt-geek.club/shirt_11.png",
     expressionStyle: "https://wenda-data.nt-geek.club/expression_01.png",
     featureStyle: "https://wenda-data.nt-geek.club/head_01.png",
-    specialStyle:'',
+    specialStyle: '',
 
-    selface_item:'',
-    selface_selected:false,//是否选中自拍照片
+    selface_item: '',
+    selface_selected: false, //是否选中自拍照片
     //数据库返回的所有列表
     appearanceList: null,
     //当前渲染出来的列表
     currentItemList: [],
     //贴图这里，第一次仅仅展现id为1的list,之后每次切换贴图种类
     toolitemList: [],
-    currentSkinStyle:0,
+    currentSkinStyle: 0,
 
 
 
@@ -58,11 +58,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  selected_self:function(){
-    if(!this.data.selface_selected){
+  selected_self: function () {
+    if (!this.data.selface_selected) {
       this.setData({
-        selface_selected:true,
-        selface:this.data.selface_item,
+        selface_selected: true,
+        selface: this.data.selface_item,
         current_item_expression: null,
         expressionStyle: '',
         current_item_feature: null,
@@ -71,12 +71,14 @@ Page({
         hairAStyle: '',
         hairBStyle: ""
       })
-    }else{
+    } else {
       this.setData({
-        selface_selected:false,
-        selface:'',
+        selface_selected: false,
+        selface: '',
         current_item_feature: 1,
         featureStyle: "https://wenda-data.nt-geek.club/head_01.png",
+        current_item_expression: 1,
+        expressionStyle: "https://wenda-data.nt-geek.club/expression_01.png",
       })
     }
   },
@@ -85,18 +87,18 @@ Page({
       url: '../shoot/shoot',
     })
   },
-  changeSkinStyle:function(e){
-    if(e.currentTarget.dataset.skinstyle==='a'){
-    this.setData({
-      currentSkinStyle:0,
-    })
-    }else if(e.currentTarget.dataset.skinstyle==='b'){
+  changeSkinStyle: function (e) {
+    if (e.currentTarget.dataset.skinstyle === 'a') {
       this.setData({
-        currentSkinStyle:1,
+        currentSkinStyle: 0,
       })
-    }else{
+    } else if (e.currentTarget.dataset.skinstyle === 'b') {
       this.setData({
-        currentSkinStyle:2,
+        currentSkinStyle: 1,
+      })
+    } else {
+      this.setData({
+        currentSkinStyle: 2,
       })
     }
   },
@@ -107,21 +109,14 @@ Page({
     })
   },
   selected_expression_item: function (e) {
-    if (this.data.current_item_expression === e.currentTarget.dataset.id) {
-      this.setData({
-        current_item_expression: null,
-        expressionStyle: ''
-      })
-    } else {
-      this.setData({
-        current_item_expression: e.currentTarget.dataset.id,
-        expressionStyle: e.currentTarget.dataset.url
-      })
-    }
+    this.setData({
+      current_item_expression: e.currentTarget.dataset.id,
+      expressionStyle: e.currentTarget.dataset.url
+    })
   },
-  selected_special_item:function(e){
+  selected_special_item: function (e) {
     console.log(e.currentTarget.dataset.url)
-    if(e.currentTarget.dataset.type==='xsf'){//选中的是学士服
+    if (e.currentTarget.dataset.type === 'xsf') { //选中的是学士服
       if (this.data.current_item_special === e.currentTarget.dataset.id) {
         this.setData({
           current_item_special: null,
@@ -135,15 +130,15 @@ Page({
         this.setData({
           current_item_special: e.currentTarget.dataset.id,
           specialStyle: e.currentTarget.dataset.url,
-          overcoatStyle:'',
+          overcoatStyle: '',
           current_item_overcoat: null,
-          current_item_shirt:null,
-          shirtStyle:'',
-          current_item_trousers:null,
-          trouserStyle:''
+          current_item_shirt: null,
+          shirtStyle: '',
+          current_item_trousers: null,
+          trouserStyle: ''
         })
       }
-    }else{
+    } else {
       if (this.data.current_item_special === e.currentTarget.dataset.id) {
         this.setData({
           current_item_special: null,
@@ -157,8 +152,8 @@ Page({
         this.setData({
           current_item_special: e.currentTarget.dataset.id,
           specialStyle: e.currentTarget.dataset.url,
-          current_item_shirt:null,
-          shirtStyle:'',
+          current_item_shirt: null,
+          shirtStyle: '',
 
         })
       }
@@ -254,27 +249,38 @@ Page({
         hairBStyle: ""
       })
     } else {
-        this.setData({
-          current_item_hair: e.currentTarget.dataset.id,
-          hairAStyle: e.currentTarget.dataset.urla,
-          hairBStyle: e.currentTarget.dataset.urlb,
-        })
+      this.setData({
+        current_item_hair: e.currentTarget.dataset.id,
+        hairAStyle: e.currentTarget.dataset.urla,
+        hairBStyle: e.currentTarget.dataset.urlb,
+      })
     }
   },
   selected_feature_item: function (e) {
+    if (this.data.expressionStyle == '') {
       this.setData({
         current_item_feature: e.currentTarget.dataset.id,
         featureStyle: e.currentTarget.dataset.urla,
-        selface:'',
-        selface_selected:false,
+        selface: '',
+        selface_selected: false,
+        current_item_expression: 1,
+        expressionStyle: "https://wenda-data.nt-geek.club/expression_01.png",
       })
+    } else {
+      this.setData({
+        current_item_feature: e.currentTarget.dataset.id,
+        featureStyle: e.currentTarget.dataset.urla,
+        selface: '',
+        selface_selected: false,
+      })
+    }
   },
   onLoad: function (options) {
 
     this.setData({
       appearanceList: app.globalData.appearanceList,
       toolitemList: app.globalData.appearanceList['FeatureList'],
-     
+
     })
   },
 
@@ -292,7 +298,7 @@ Page({
     let face = wx.getStorageSync('faceimg')
     console.log(face)
     this.setData({
-      selface_item:face
+      selface_item: face
     })
     this.getUptoken()
   },
@@ -311,74 +317,71 @@ Page({
       title: '合成中...',
     })
     let that = this;
-    if(that.data.selface ===''){
-    var styleArray = [that.data.hairAStyle,that.data.nakedStyle,that.data.featureStyle,that.data.expressionStyle,that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.specialStyle]
-    var imgArray = []
-    for (var item in styleArray) {
-      if(styleArray[item]!=""){
-        console.log(item)
-        imgArray.push(await this.getImg(styleArray[item]))
+    if (that.data.selface === '') {
+      var styleArray = [that.data.hairAStyle, that.data.nakedStyle, that.data.featureStyle, that.data.expressionStyle, that.data.hairBStyle, that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle]
+      var imgArray = []
+      for (var item in styleArray) {
+        if (styleArray[item] != "") {
+          console.log(item)
+          imgArray.push(await this.getImg(styleArray[item]))
+        }
       }
-    }
-    for (var item in imgArray) {
-      ctx.save();
-      ctx.beginPath();
-      ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
-      ctx.restore();
-    }
-  }else{
-    //面部为自拍时
-    let naked = await this.getImg(that.data.nakedStyle)
-    let face = await this.getImg(that.data.selface)
-    let hairback ='';
-    if(that.data.hairAStyle!=''){
-    hairback = await this.getImg(that.data.hairAStyle)
+      for (var item in imgArray) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
+        ctx.restore();
+      }
+    } else {
+      //面部为自拍时
+      let naked = await this.getImg(that.data.nakedStyle)
+      let face = await this.getImg(that.data.selface)
+      let hairback = '';
+      if (that.data.hairAStyle != '') {
+        hairback = await this.getImg(that.data.hairAStyle)
         //绘制头发（背部-女性）
         ctx.save();
         ctx.drawImage(hairback, 12, -44, 616, 1056)
         ctx.restore();
-    }
-    //绘制身体
-    ctx.save();
-    ctx.drawImage(naked, 12, -44, 616, 1056)
-    ctx.restore();
-    //绘制脸部
-    ctx.save();
-    ctx.translate(275,95)
-    ctx.drawImage(face,0,0,80,100);
-    ctx.restore();
-
-    var styleArray = [that.data.hairBStyle,that.data.shoesStyle,that.data.trouserStyle,that.data.glassesStyle,that.data.othersStyle,that.data.shirtStyle,that.data.overcoatStyle,that.data.specialStyle]
-    var imgArray = []
-    for (var item in styleArray) {
-      if(styleArray[item]!=""){
-        console.log(item)
-        imgArray.push(await this.getImg(styleArray[item]))
       }
-    }
-
-    for (var item in imgArray) {
+      //绘制身体
       ctx.save();
-      ctx.beginPath();
-      ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
+      ctx.drawImage(naked, 12, -44, 616, 1056)
       ctx.restore();
-    }
+      //绘制脸部
+      ctx.save();
+      ctx.translate(275, 95)
+      ctx.drawImage(face, 0, 0, 80, 100);
+      ctx.restore();
 
-  }
+      var styleArray = [that.data.hairBStyle, that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle]
+      var imgArray = []
+      for (var item in styleArray) {
+        if (styleArray[item] != "") {
+          console.log(item)
+          imgArray.push(await this.getImg(styleArray[item]))
+        }
+      }
+
+      for (var item in imgArray) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.drawImage(imgArray[item], 12, -44, 616, 1056)
+        ctx.restore();
+      }
+
+    }
     ctx.draw(setTimeout(function () {
       wx.canvasToTempFilePath({
         x: 180,
         y: 10,
         width: 265,
         height: 650,
-        destHeight:650,
-        destWidth:265,
+        destHeight: 650,
+        destWidth: 265,
         canvasId: 'maskCanvas',
         success: function (res) {
           that.uploadImgToCloud(res.tempFilePath) //上传到七牛云
-          wx.showToast({
-            title: '保存成功',
-          })
         }
       })
     }, 300))
@@ -387,30 +390,44 @@ Page({
   uploadImgToCloud(filePath) {
     let that = this
     qiniuUploader.upload(filePath, (res) => {
-      if(app.globalData.userInfo.my_img==''){//已经有了相关信息就没必要重复添加
-      app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id,res.fileURL).then(res=>{
-        let Data = res.Data
-        let userInfo={
-          id:Data.ID,
-          user_id:Data.USERID,
-          name:Data.NAME,
-          college:Data.COLLEGE,
-          major:Data.MAJOR,
-          class:Data.CLASS,
-          my_img:Data.MYIMG,
-          canSearchMe:Data.CanSearchMe
-        }
-        app.globalData.userInfo = userInfo
-        wx.hideLoading(),
-        wx.showToast({
-          title: '保存成功'
-        })
+        if (app.globalData.userInfo.my_img == '') { //已经有了相关信息就没必要重复添加
+          app.netHandlers.updatePersonalImage(app.globalData.userInfo.user_id, res.fileURL).then(res => {
+            let Data = res.Data
+            let userInfo = {
+              id: Data.ID,
+              user_id: Data.USERID,
+              name: Data.NAME,
+              college: Data.COLLEGE,
+              major: Data.MAJOR,
+              class: Data.CLASS,
+              my_img: Data.MYIMG,
+              canSearchMe: Data.CanSearchMe
+            }
+            app.globalData.userInfo = userInfo
+            wx.hideLoading(),
+              wx.showToast({
+                title: '保存成功'
+              })
+            wx.setStorage({
+              key: "USERINFO",
+              data: userInfo
+            })
+          })
+        }else{
+          let userInfo = app.globalData.userInfo,
+          number = Math.floor(Math.random() * 1000),
+          id = userInfo.id,
+          fileName = getFileNameSelfImg(id);
+        userInfo.my_img = 'https://zepeto.nt-geek.club/'+fileName + '?v=' + number;
+        app.globalData.userInfo = userInfo;
         wx.setStorage({
-          key:"USERINFO",
-          data:userInfo
+          key: "USERINFO",
+          data: userInfo
         })
-        
-      })}
+        wx.showToast({
+          title: '保存成功',
+        })
+      }
       }, (error) => {
         console.error('error: ' + JSON.stringify(error))
       }, {
@@ -438,5 +455,3 @@ Page({
     })
   }
 })
-
-
