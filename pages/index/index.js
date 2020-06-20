@@ -43,7 +43,6 @@ Page({
   getSomeList:function(){},
   onShow:function(){
     let userinfo = app.globalData.userInfo
-    console.log(userinfo)
     this.setData({
       userinfo,
    })

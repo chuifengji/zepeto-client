@@ -83,7 +83,6 @@ App({
     },
     getAppearanceList:function(){
         this.netHandlers.getAppearanceList().then(res=>{
-          console.log(res)
           this.globalData.appearanceList = res.Data;
           wx.setStorage({
             key:"APPEARANCELIST",

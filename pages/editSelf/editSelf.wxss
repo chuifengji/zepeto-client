@@ -50,7 +50,6 @@ page {
   margin-bottom: 20rpx;
   display: inline-block;
 }
-
 .container_up .character_show {
   position: relative;
   width: 300px;
@@ -60,7 +59,6 @@ page {
   background-repeat: no-repeat;
   top: -50px;
   background-position: center;
-
 }
 
 .character_part {
@@ -70,22 +68,6 @@ page {
   left: 50%;
   transform: translateX(-50%);
 }
-
-.container_up .character_show .personal_body {}
-
-.container_up .character_show .personal_hair {}
-
-.container_up .character_show .personal_face {}
-
-.container_up .character_show .personal_overcoat {}
-
-.container_up .character_show .personal_blouse {}
-
-.container_up .character_show .personal_trouser {}
-
-.container_up .character_show .personal_shoes {}
-
-.container_up .character_show .personal_glasses {}
 
 .btn_save_img {
   width: 64px;
@@ -103,7 +85,6 @@ page {
   right: 20px;
   z-index: 900;
 }
-
 .container_down {
   flex: 1;
   width: 100%;
@@ -111,6 +92,7 @@ page {
   display: flex;
   flex-direction: column;
   bottom: 0;
+  height: calc(100% - 350px)
 }
 
 .container_down .tool_type {
@@ -138,6 +120,7 @@ page {
   width: 750rpx;
   flex-wrap: wrap;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .single_item {
