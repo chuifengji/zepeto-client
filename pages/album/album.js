@@ -26,51 +26,54 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(app.globalData.photoList)
-    this.setData({
-      PhotoList: app.globalData.photoList.map(item => {
-        item.selected = false;
-        return item;
+    if(app.globalData.photoList!=null){
+      this.setData({
+        PhotoList: app.globalData.photoList.map(item => {
+          item.selected = false;
+          return item;
+        })
       })
-    })
+    }
   },
+
   del: function (e) {
     let newList = [],
       that = this,
-      oldList = this.data.PhotoList;
+      oldList = that.data.PhotoList;
     for (let i = 0; i < oldList.length; i++) {
       if (oldList[i].selected === true) {
-        this.otherData.deleteList.push(oldList[i])
+        that.otherData.deleteList.push(oldList[i])
       } else {
         newList.push(oldList[i])
       }
     }
-    //批量删除这里的方法临时使用，后面记得修改。
-    for (let i = 0; i < this.otherData.deleteList.length; i++) {
-      app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, this.otherData.deleteList[i].ID).then(res=>{
-        app.globalData.photoList = newList
-        wx.setStorage({
-          key: "PHOTOLIST",
-          data: newList
-        })
-
-      })
-    }
-    this.setData({
+    app.globalData.photoList = newList
+    wx.setStorageSync('PHOTOLIST', newList)
+    that.setData({
       PhotoList: newList
     })
+    //批量删除这里的方法临时使用，后面记得修改。
+    for (let i = 0; i < that.otherData.deleteList.length; i++) {
+      setTimeout(function() {
+        app.netHandlers.deleteGroupPhoto(app.globalData.userInfo.id, app.globalData.userInfo.user_id, that.otherData.deleteList[i].ID).then(res=>{
+          console.log(1)
+        })
+      }, 80)
+    }
   },
   btnComplete: function (e) {
     this.setData({
       editActive: false
     })
-    let list = this.data.list.map(item => {
-      item.selected = false;
-      return item;
-    })
-    this.setData({
-      list: list
-    })
+    if(this.data.list!=null){
+      let list = this.data.list.map(item => {
+        item.selected = false;
+        return item;
+      })
+      this.setData({
+        list: list
+      })
+    }
   },
   btnEdit: function (e) {
     this.setData({

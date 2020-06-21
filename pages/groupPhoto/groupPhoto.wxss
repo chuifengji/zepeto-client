@@ -22,6 +22,7 @@ page {
   overflow: hidden;
 }
 
+
 .switch_container {
   width: 750rpx;
   height: 110rpx;
@@ -47,6 +48,7 @@ page {
   margin-right: 213rpx;
   position: relative;
 }
+
 .tab-item{
   width: 108rpx;
   height: 54rpx;
@@ -245,4 +247,41 @@ width: 75%;
 margin-top: 10px;
 }
 
+
+
 /*  移植过来的部分**/
+.btn_screen_change{
+  width: 100rpx;
+  height: 54rpx;
+  position: relative;
+  background-color: burlywood;
+}
+
+.screen_item_container {
+  width: 180rpx;
+  height: 54rpx;
+  text-align: center;
+  line-height: 54rpx;
+  border-radius: 27rpx;
+  display: inline-flex;
+  /* background: #D8D8D8; */
+    background: #fff;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  margin-left: 30rpx;
+  position: fixed;
+}
+
+.screen_tab-item{
+  width: 90rpx;
+  height: 54rpx;
+  z-index: 999;
+}
+.screen_move_bg{
+  position:absolute;
+  width:90rpx;
+  height:54rpx;
+  border-radius: 27rpx;
+  background-color:#00906A;
+}

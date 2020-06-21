@@ -137,7 +137,6 @@ Page({
       wx.showToast({
         title: '保存成功'
       })
-
       wx.navigateBack({
         complete: (res) => {},
       })
@@ -151,7 +150,7 @@ Page({
         shouldUseQiniuFileName: false
       },
       (progress) => {
-
+        
       }, cancelTask => {
 
       }

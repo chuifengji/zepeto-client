@@ -29,6 +29,12 @@ Page({
     }, {
       navbar_title: '装饰'
     }],
+    currentTab_screen:0,
+    tabItems_screen: [{
+      title: '竖屏'
+    }, {
+      title: '横屏'
+    }],
     toolitemList: [],
     current_item_bg: 0,
     bg_container_image: 'https://wenda-data.nt-geek.club/bg-01.png', //当前的背景图片
@@ -36,10 +42,12 @@ Page({
   },
   otherData: {
     personList: null,
+    backgroundList:null,
     fileName: '',
     uptoken: '',
     location: '',
     time: '',
+    bg_type:'',
     sysData: null
   },
   /**
@@ -49,6 +57,29 @@ Page({
     this.setData({
       shrink: !this.data.shrink
     })
+  },
+  switchNav_screen:function(e){
+    console.log(this.otherData.bg_type)
+    let current = e.target.dataset.current
+    this.setData({
+      currentTab_screen: current,
+    })
+    if(current===1&&this.otherData.bg_type!='landScape'){
+      this.setData({
+        current_item_bg: this.otherData.backgroundList[0][0].ID,
+        bg_container_image: this.otherData.backgroundList[0][0].URL
+      })
+    }else{
+      this.setData({
+        current_item_bg: this.otherData.backgroundList[1][0].ID,
+        bg_container_image: this.otherData.backgroundList[1][0].URL
+      })
+    }
+    if(this.data.currentTab==1){
+      this.setData({
+        toolitemList:this.data.currentTab_screen==0?this.otherData.backgroundList[1]:this.otherData.backgroundList[0],
+      })
+    }
   },
   switchNav: function (e) {
     let current = e.target.dataset.current
@@ -61,7 +92,7 @@ Page({
       })
     } else if (current == 1) {
       this.setData({
-        toolitemList: app.globalData.backgroundList,
+        toolitemList:this.data.currentTab_screen==0?this.otherData.backgroundList[1]:this.otherData.backgroundList[0],
       })
     } else {
       this.setData({
@@ -71,6 +102,7 @@ Page({
   },
   selected_bg_item: function (e) {
     this.otherData.location = e.currentTarget.dataset.name;
+    this.otherData.bg_type = e.currentTarget.dataset.type;
     this.setData({
       current_item_bg: e.currentTarget.dataset.id,
       bg_container_image: e.currentTarget.dataset.src
@@ -78,6 +110,8 @@ Page({
   },
   onLoad: function (options) {
     this.otherData.personList = this.getPersonList();
+    this.otherData.backgroundList = this.getBackgroundList();
+    this.otherData.bg_type = 'portrait_screen'
     let that = this;
     this.otherData.location = '火之舞';
     // 移植过来的部分
@@ -96,8 +130,8 @@ Page({
     this.getUptokenPhotos();
   },
   onHide: function () {
-     app.globalData.selectedPerson = []
-     this.otherData.personList.forEach((current, index) => {
+    app.globalData.selectedPerson = []
+    this.otherData.personList.forEach((current, index) => {
       if (current.selected === true) {
         app.globalData.selectedPerson.push(current.ID)
       }
@@ -114,18 +148,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    let newPersonList = this.getPersonList(),//需要记录被选中者的id
-    personList = [];
-    if(app.globalData.selectedPerson!=null){
-      newPersonList.map(item=>{
-        for(let i=0;i<app.globalData.selectedPerson.length;i++){
-          if(item.ID===app.globalData.selectedPerson[i]){
+    let newPersonList = this.getPersonList(), //需要记录被选中者的id
+      personList = [];
+    if (app.globalData.selectedPerson != null) {
+      newPersonList.map(item => {
+        for (let i = 0; i < app.globalData.selectedPerson.length; i++) {
+          if (item.ID === app.globalData.selectedPerson[i]) {
             item.selected = true;
           }
         }
         personList.push(item)
-     })
-    }else{
+      })
+    } else {
       personList = newPersonList
     }
     this.otherData.personList = personList
@@ -135,8 +169,9 @@ Page({
         uptoken: this.otherData.uptoken
       })
     } else if (this.data.currentTab === 1) {
+     
       this.setData({
-        toolitemList: app.globalData.backgroundList,
+        toolitemList: this.data.currentTab_screen==0?this.otherData.backgroundList[1]:this.otherData.backgroundList[0],
         uptoken: this.otherData.uptoken
       })
     } else {
@@ -145,6 +180,19 @@ Page({
         uptoken: this.otherData.uptoken
       })
     }
+  },
+  //getLandscapeackground
+  getBackgroundList:function(){
+    let  backgroundList_L = [],
+    backgroundList_P = [];
+    app.globalData.backgroundList.map(item=>{
+      if(item.TYPE==='landscape'){
+        backgroundList_L.push(item)
+      }else{
+        backgroundList_P.push(item)
+      }
+    })
+    return [backgroundList_L,backgroundList_P]
   },
   //getPersonList 去除人物列表中重复的部分。
   getPersonList: function () {
@@ -215,33 +263,63 @@ Page({
   setDropItem(imgData) {
     let that = this;
     let data = {}
-    wx.getImageInfo({
-      src: imgData.url,
-      success: res => {
-        // 初始化数据
-        data.width = res.width / 2.8; //宽度
-        data.height = res.height / 2.8; //高度
-        data.image = imgData.url; //地址
-        data.id = ++itemId; //id
-        data.top = (that.otherData.sysData.windowHeight - res.height / 2.8) / 2; //top定位
-        data.left = (that.otherData.sysData.windowWidth - res.width / 2.8) / 2; //left定位
-        //圆心坐标
-        data.x = data.left + data.width / 2;
-        data.y = data.top + data.height / 2;
-        data.angle = 0; //初始化角度，否则手机端会出错
-        data.scale = 1; //scale缩放
-        data.oScale = 1; //方向缩放
-        data.rotate = 1; //旋转角度
-        data.active = false; //选中状态
-        data.type = imgData.type; //person or decoration
-        data.originalId = imgData.originalId; //物品在数据库中的id
-        data.name = imgData.name
-        items[items.length] = data;
-        this.setData({
-          itemList: items
-        })
-      }
-    })
+    if(that.data.currentTab_screen===0){
+      wx.getImageInfo({
+        src: imgData.url,
+        success: res => {
+          // 初始化数据
+          data.width = res.width / 2.8; //宽度
+          data.height = res.height / 2.8; //高度
+          data.image = imgData.url; //地址
+          data.id = ++itemId; //id
+          data.top = (that.otherData.sysData.windowHeight - res.height / 2.8) / 2; //top定位
+          data.left = (that.otherData.sysData.windowWidth - res.width / 2.8) / 2; //left定位
+          //圆心坐标
+          data.x = data.left + data.width / 2;
+          data.y = data.top + data.height / 2;
+          data.angle = 0; //初始化角度，否则手机端会出错
+          data.scale = 1; //scale缩放
+          data.oScale = 1; //方向缩放
+          data.rotate = 1; //旋转角度
+          data.active = false; //选中状态
+          data.type = imgData.type; //person or decoration
+          data.originalId = imgData.originalId; //物品在数据库中的id
+          data.name = imgData.name
+          items[items.length] = data;
+          this.setData({
+            itemList: items
+          })
+        }
+      })
+    }else{
+      wx.getImageInfo({
+        src: imgData.url,
+        success: res => {
+          // 初始化数据
+          data.width = res.width / 2.8; //宽度
+          data.height = res.height / 2.8; //高度
+          data.image = imgData.url; //地址
+          data.id = ++itemId; //id
+          data.top = (that.otherData.sysData.windowHeight - res.height / 2.8) / 2-80; //top定位
+          data.left = (that.otherData.sysData.windowWidth - res.width / 2.8) / 2+30; //left定位
+          //圆心坐标
+          data.x = data.left + data.width / 2;
+          data.y = data.top + data.height / 2;
+          data.angle = 90; //初始化角度，否则手机端会出错
+          data.scale = 1; //scale缩放
+          data.oScale = 1; //方向缩放
+          data.rotate = 1; //旋转角度
+          data.active = false; //选中状态
+          data.type = imgData.type; //person or decoration
+          data.originalId = imgData.originalId; //物品在数据库中的id
+          data.name = imgData.name
+          items[items.length] = data;
+          this.setData({
+            itemList: items
+          })
+        }
+      })
+    }
   },
   WraptouchStart: function (e) {
     for (let i = 0; i < items.length; i++) {

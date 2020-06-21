@@ -16,6 +16,10 @@ Component({
       type: Boolean,
       value: false
     },
+    currentTab_screen:{
+      type:Number,
+      value:0
+    }
   },
 
   /**

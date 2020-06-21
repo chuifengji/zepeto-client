@@ -14,6 +14,12 @@
 
 <!--生成的图片区域-->
 
+<view class="screen_item_container"  style="bottom:{{shrink?145:495}}rpx;transition:all 0.6s;">
+    <block wx:for="{{tabItems_screen}}" wx:key="index">
+      <view class="screen_tab-item" style="color:{{currentTab_screen==index?'#FFFFFF':'#00906A;'}}" data-current="{{index}}" bindtap="switchNav_screen">{{item.title}}</view>
+    </block>
+    <view class="screen_move_bg" style="transform:{{'translateX('+currentTab_screen*90+'rpx)'}};transition:all 0.5s"></view>
+</view>
 <view class="tool_container"  style="height:{{shrink?120:470}}rpx;transition:height 0.6s;">
 <view class="switch_container">
 <view class="switch_btn" bindtap="changeHeight">
@@ -31,11 +37,11 @@
 <view class="main_item_container">
 <!--选中背景-->
 <block wx:if="{{currentTab==1}}" wx:for="{{toolitemList}}" wx:key="item">
-<itembg name="{{item.Name}}" src="{{item.URL}}" data-name="{{item.Name}}" data-src="{{item.URL}}" data-id="{{item.ID}}" selected="{{current_item_bg==item.ID?true:false}}" bindselected_bg_item="selected_bg_item"></itembg>
+<itembg currentTab_screen="{{currentTab_screen}}"  name="{{item.Name}}" src="{{item.URL}}" data-name="{{item.Name}}" data-src="{{item.URL}}" data-id="{{item.ID}}" data-type="{{item.TYPE}}" selected="{{current_item_bg==item.ID?true:false}}" bindselected_bg_item="selected_bg_item"></itembg>
 </block>
 <!--选中人物-->
 <block wx:if="{{currentTab==0}}" wx:for="{{toolitemList}}" wx:key="item">
-<itemPerson name="{{item.NAME}}" src="{{item.MYIMG}}" data-name="{{item.NAME}}" data-src="{{item.MYIMG}}" data-id="{{item.ID}}" selected="{{item.selected}}" catchtap="selected_person_item"></itemPerson>
+<itemPerson style="transition:all 0.5s;transform:{{currentTab_screen==1?'rotate(90deg)':''}}" name="{{item.NAME}}" src="{{item.MYIMG}}" data-name="{{item.NAME}}" data-src="{{item.MYIMG}}" data-id="{{item.ID}}" selected="{{item.selected}}" catchtap="selected_person_item"></itemPerson>
 </block>
 <!--选中装饰物-->
 <block wx:if="{{currentTab==2}}" wx:for="{{toolitemList}}" wx:key="item">
@@ -44,7 +50,7 @@
 </view>
 </view>
 
-<view class="btn_get_photo" bindtap="openMask"  style="transform: {{shrink?'scale(0)':''}};transition:all 0.5s">
+<view class="btn_get_photo" bindtap="openMask"  style="transition:all 0.5s;transform:{{currentTab_screen==1?'rotate(90deg)':''}} {{shrink?' scale(0)':''}}">
 <i class="iconfont iconpingjia-paizhao1" style="font-size: 48rpx;color:#FFFFFF"></i>
 </view>
 
