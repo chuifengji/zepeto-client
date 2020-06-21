@@ -1,5 +1,8 @@
 // pages/selfInfo/selfInfo.js
 const app = getApp()
+import {
+  throttle,
+} from "../../utils/handlers.js"
 Page({
 
   /**
@@ -104,7 +107,7 @@ Page({
     }
   },
   //btn_post_selfinfo 修改个人信息，后面应该改成每个用户只能修改一次。
-  btn_post_selfinfo:function(){
+  btn_post_selfinfo:throttle(function(){
     let that = this;
     if(!that.checkHasChange()){
       wx.showModal({
@@ -174,7 +177,7 @@ Page({
         })
       }
     }
-  },
+  },1200),
   onLoad: function (options) {
 
   },

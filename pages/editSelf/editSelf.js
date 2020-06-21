@@ -3,6 +3,7 @@ const app = getApp()
 const ctx = wx.createCanvasContext('maskCanvas');
 const qiniuUploader = require("../../qiniu/qiniuUploader.js");
 import {
+  throttle,
   getFileNameSelfImg
 } from "../../utils/handlers.js"
 Page({
@@ -312,7 +313,7 @@ Page({
       })
     })
   },
-  async saveStyle() {
+   saveStyle:throttle(async function() {
     wx.showLoading({
       title: '合成中...',
     })
@@ -385,7 +386,7 @@ Page({
         }
       })
     }, 300))
-  },
+  },2000),
 
   uploadImgToCloud(filePath) {
     let that = this

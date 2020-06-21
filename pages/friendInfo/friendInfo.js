@@ -1,5 +1,8 @@
 // pages/friendInfo/friendInfo.js
 const app = getApp()
+const {
+  throttle,
+} = require("../../utils/handlers")
 Page({
 
   /**
@@ -16,7 +19,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  addFriend:function(){
+  addFriend:throttle(function(){
     let myid =app.globalData.userInfo.id;
     let friendid = this.data.model.id
     if(myid===friendid){
@@ -38,7 +41,7 @@ Page({
         }
       })
     }
-  },
+  },2000),
   //通过该用户的ID判断是否是我的好友
   isMyFriend(id){
     let friendList = app.globalData.friendList;
@@ -58,7 +61,7 @@ Page({
       }
     }
   },
-  deleteFriend(){
+  deleteFriend:throttle(function(){
     let myid =app.globalData.userInfo.id;
     let friendid = this.data.model.id
     let newFriendList = [];
@@ -79,7 +82,7 @@ Page({
         })
       }
     })
-  },
+  },2000),
   onLoad: function (options) {
     let model = JSON.parse(options.model)
     if(this.isMyFriend(model.id)){

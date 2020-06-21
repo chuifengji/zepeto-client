@@ -1,5 +1,8 @@
 // pages/friends/friends.js
 const app = getApp()
+const {
+  throttle,
+} = require("../../utils/handlers")
 Page({
 
   /**
@@ -13,30 +16,30 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  goTo_tab_class:function(){
+  goTo_tab_class:throttle(function(){
     this.setData({
       currentTab:1,
       peopleList:app.globalData.classmateList
     })
-  },
-  goTo_tab_friend:function(){
+  },500),
+  goTo_tab_friend:throttle(function(){
     this.setData({
       currentTab:0,
       peopleList:app.globalData.friendList
     })
-  },
-  goToSearch:function(){
+  },500),
+  goToSearch:throttle(function(){
     wx.navigateTo({
       url: '../search/search',
     })
-  },
-  gotofriendinfo_page:function(e){
+  },500),
+  gotofriendinfo_page:throttle(function(e){
     console.log(e.currentTarget.dataset)
     var model = JSON.stringify(e.currentTarget.dataset);
       wx.navigateTo({
         url: '../friendInfo/friendInfo?model=' + model,
       })
-  },
+  },500),
   onLoad: function (options) {
 
   },

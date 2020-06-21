@@ -2,6 +2,7 @@ const ctx = wx.createCanvasContext('myCanvas')
 const app = getApp()
 const qiniuUploader = require("../../qiniu/qiniuUploader.js");
 import {
+  throttle,
   getFileNameSelfFace
 } from "../../utils/handlers.js"
 Page({
@@ -62,7 +63,7 @@ Page({
   onShow(){
     this.getUptoken()
   },
-  takePhoto() {
+  takePhoto:throttle(function() {
     let that = this;
     wx.getSetting({
       success(res) {
@@ -98,8 +99,7 @@ Page({
         }
       }
     })
-
-  },
+  },1000),
   save(path) {
     var that = this
     console.log(that.otherData.sysData,that.otherData)

@@ -13,6 +13,7 @@ const {
 const {
   getFileNameGroupPhotos,
   getDate,
+  throttle,
   setSortPoint
 } = require("../../utils/handlers")
 Page({
@@ -58,7 +59,7 @@ Page({
       shrink: !this.data.shrink
     })
   },
-  switchNav_screen:function(e){
+  switchNav_screen:throttle(function(e){
     console.log(this.otherData.bg_type)
     let current = e.target.dataset.current
     this.setData({
@@ -67,21 +68,23 @@ Page({
     if(current===1&&this.otherData.bg_type!='landScape'){
       this.setData({
         current_item_bg: this.otherData.backgroundList[0][0].ID,
-        bg_container_image: this.otherData.backgroundList[0][0].URL
+        bg_container_image: this.otherData.backgroundList[0][0].URL 
       })
+      this.otherData.location = this.otherData.backgroundList[0][0].Name;
     }else{
-      this.setData({
+      this.setData({ 
         current_item_bg: this.otherData.backgroundList[1][0].ID,
         bg_container_image: this.otherData.backgroundList[1][0].URL
       })
+      this.otherData.location = this.otherData.backgroundList[0][0].Name;
     }
     if(this.data.currentTab==1){
       this.setData({
         toolitemList:this.data.currentTab_screen==0?this.otherData.backgroundList[1]:this.otherData.backgroundList[0],
       })
     }
-  },
-  switchNav: function (e) {
+  },100),
+  switchNav: throttle(function (e) {
     let current = e.target.dataset.current
     this.setData({
       currentTab: current,
@@ -99,15 +102,15 @@ Page({
         toolitemList: app.globalData.decorationList,
       })
     }
-  },
-  selected_bg_item: function (e) {
+  },100),
+  selected_bg_item: throttle(function (e) {
     this.otherData.location = e.currentTarget.dataset.name;
     this.otherData.bg_type = e.currentTarget.dataset.type;
     this.setData({
       current_item_bg: e.currentTarget.dataset.id,
       bg_container_image: e.currentTarget.dataset.src
     })
-  },
+  },100),
   onLoad: function (options) {
     this.otherData.personList = this.getPersonList();
     this.otherData.backgroundList = this.getBackgroundList();
@@ -223,7 +226,7 @@ Page({
     }, []);
     return result;
   },
-  selected_person_item: function (e) {
+  selected_person_item: throttle(function (e) {
     let list = this.otherData.personList;
     let getPosition = () => {
       for (let i = 0; i < list.length; i++) {
@@ -258,7 +261,7 @@ Page({
       toolitemList: list
     })
     app.globalData.personList = list
-  },
+  },350),
 
   setDropItem(imgData) {
     let that = this;
@@ -506,7 +509,7 @@ Page({
       })
     })
   },
-  async synthesis() { // 合成图片
+  synthesis:throttle(async function() { // 合成图片
     let personList = this.sortPerson(),
       nameList = personList.map(item => {
         return item.name //获取要打印的人名列表
@@ -548,8 +551,7 @@ Page({
         }
       })
     }, 100))
-  },
-
+  },4000),
   sortPerson: function () {
     let personList = this.data.itemList.map(item => {
       if (item.type === 'person') {

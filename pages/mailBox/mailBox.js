@@ -1,6 +1,8 @@
 // pages/mailBox/mailBox.js
+import {
+  throttle,
+} from "../../utils/handlers.js"
 Page({  
-
   /**
    * 页面的初始数据
    */
@@ -24,13 +26,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  btn_gotomaildetail:function(e){
+  btn_gotomaildetail: throttle(function(e){
     console.log(e.currentTarget.dataset)
     var model = JSON.stringify(e.currentTarget.dataset);
       wx.navigateTo({
         url: '../mailDetail/mailDetail?model=' + model,
       })
-  },
+  },600),
   onLoad: function (options) {
 
   },

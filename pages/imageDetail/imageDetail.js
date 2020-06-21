@@ -1,4 +1,7 @@
 // pages/imageDetail/imageDetail.js
+import {
+  throttle,
+} from "../../utils/handlers.js"
 Page({
 
   /**
@@ -9,9 +12,8 @@ Page({
     imgUrl: ''
   },
 // 保存图片
-saveImg:function(e){
+saveImg:throttle(function(e){
   let that = this;
-
   //获取相册授权
   wx.getSetting({
     success(res) {
@@ -33,11 +35,9 @@ saveImg:function(e){
       }
     }
   })
-
-},
+},400),
 saveImgToLocal: function (e) {
   let that = this;
-
   let imgSrc = that.data.imgUrl;
   wx.downloadFile({
     url: imgSrc,

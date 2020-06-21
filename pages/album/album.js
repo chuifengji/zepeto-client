@@ -1,5 +1,8 @@
 // pages/album/album.js
 const app = getApp()
+const {
+  throttle,
+} = require("../../utils/handlers")
 Page({
   /**
    * 页面的初始数据
@@ -36,7 +39,7 @@ Page({
     }
   },
 
-  del: function (e) {
+  del: throttle(function (e) {
     let newList = [],
       that = this,
       oldList = that.data.PhotoList;
@@ -60,8 +63,8 @@ Page({
         })
       }, 80)
     }
-  },
-  btnComplete: function (e) {
+  },500),
+  btnComplete: throttle(function (e) {
     this.setData({
       editActive: false
     })
@@ -74,13 +77,13 @@ Page({
         list: list
       })
     }
-  },
-  btnEdit: function (e) {
+  },100),
+  btnEdit: throttle(function (e) {
     this.setData({
       editActive: true
     })
-  },
-  changeSortTypeToName: function (e) {
+  },50),
+  changeSortTypeToName: throttle(function (e) {
     this.setData({
       sortTypeTime: true
     })
@@ -92,8 +95,8 @@ Page({
       PhotoList:newList
     })
     //排序方式以名称
-  },
-  changeSortTypeToTime: function (e) {
+  },50),
+  changeSortTypeToTime: throttle(function (e) {
     this.setData({
       sortTypeTime: false
     })
@@ -105,11 +108,10 @@ Page({
       PhotoList:newList
     })
     //排序方式以时间
-  },
+  },50),
  
-  changeSelected: function (e) {
+  changeSelected: throttle(function (e) {
     if (this.data.editActive) {
-      //这里的函数并不正确，后面需要修改。
       let list = this.data.PhotoList;
       let getPosition = () => {
         for (let i = 0; i < list.length; i++) {
@@ -120,7 +122,6 @@ Page({
       }
       let position = getPosition()
       if (!list[position].selected) {
-
       }
       list[position].selected = !list[position].selected
       this.setData({
@@ -132,9 +133,9 @@ Page({
         url: '../imageDetail/imageDetail?model=' + model,
       })
     }
-  },
+  },50),
   //全选
-  btnSelectAll: function (e) {
+  btnSelectAll:  throttle(function (e) {
     let list = this.data.PhotoList.map(item => {
       item.selected = true;
       return item;
@@ -143,8 +144,8 @@ Page({
       PhotoList: list,
       selectAllActive: true
     })
-  },
-  btnSelectCancel: function (e) {
+  },100),
+  btnSelectCancel: throttle(function (e) {
     let list = this.data.PhotoList.map(item => {
       item.selected = false;
       return item;
@@ -153,5 +154,5 @@ Page({
       PhotoList: list,
       selectAllActive: false
     })
-  }
+  },100)
 })

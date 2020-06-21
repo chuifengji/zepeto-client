@@ -1,7 +1,9 @@
 // pages/search/search.js
 const app = getApp()
+import {
+  throttle,
+} from "../../utils/handlers.js"
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -18,7 +20,7 @@ Page({
       keyword: e.detail.value
     })
   },
-  search: function () {
+  search: throttle(function () {
     let keyword = this.data.keyword;
     if (keyword == '') {
       wx.showToast({
@@ -41,14 +43,14 @@ Page({
         })
       })
     }
-  },
-  gotofriendinfo_page: function (e) {
+  },700),
+  gotofriendinfo_page: throttle(function (e) {
     console.log(e.currentTarget.dataset)
     var model = JSON.stringify(e.currentTarget.dataset);
     wx.navigateTo({
       url: '../friendInfo/friendInfo?model=' + model,
     })
-  },
+  },600),
   onLoad: function (options) {
 
   },
