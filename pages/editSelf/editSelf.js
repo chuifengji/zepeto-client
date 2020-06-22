@@ -38,6 +38,7 @@ Page({
     specialStyle: '',
 
     selface_item: '',
+    hatForSelface:"",
     selface_selected: false, //是否选中自拍照片
     //数据库返回的所有列表
     appearanceList: null,
@@ -64,6 +65,7 @@ Page({
       this.setData({
         selface_selected: true,
         selface: this.data.selface_item,
+        hatForSelface:'https://wenda-data.nt-geek.club/hat-origin.png',
         current_item_expression: null,
         expressionStyle: '',
         current_item_feature: null,
@@ -76,6 +78,7 @@ Page({
       this.setData({
         selface_selected: false,
         selface: '',
+        hatForSelface:'',
         current_item_feature: 1,
         featureStyle: "https://wenda-data.nt-geek.club/head_01.png",
         current_item_expression: 1,
@@ -92,14 +95,20 @@ Page({
     if (e.currentTarget.dataset.skinstyle === 'a') {
       this.setData({
         currentSkinStyle: 0,
+        nakedStyle:"https://wenda-data.nt-geek.club/body1.png",
+        featureStyle:this.data.appearanceList.FeatureList[this.data.current_item_feature-1].URLA
       })
     } else if (e.currentTarget.dataset.skinstyle === 'b') {
       this.setData({
         currentSkinStyle: 1,
+        nakedStyle:"https://wenda-data.nt-geek.club/body-white.png",
+        featureStyle:this.data.appearanceList.FeatureList[this.data.current_item_feature-1].URLB
       })
     } else {
       this.setData({
         currentSkinStyle: 2,
+        nakedStyle:"https://wenda-data.nt-geek.club/body-dark.png",
+        featureStyle:this.data.appearanceList.FeatureList[this.data.current_item_feature-1].URLC
       })
     }
   },
@@ -111,14 +120,22 @@ Page({
     })
   },
   selected_expression_item: function (e) {
-    this.setData({
-      current_item_expression: e.currentTarget.dataset.id,
-      expressionStyle: e.currentTarget.dataset.url
-    })
+    if (this.data.current_item_expression === e.currentTarget.dataset.id&&this.data.selface!='') {
+      this.setData({
+        current_item_expression: null,
+        expressionStyle: ''
+      })
+    } else{
+      this.setData({
+        current_item_expression: e.currentTarget.dataset.id,
+        expressionStyle: e.currentTarget.dataset.url
+      })
+    }
   },
   selected_special_item: function (e) {
+    console.log(e.currentTarget.dataset)
     console.log(e.currentTarget.dataset.url)
-    if (e.currentTarget.dataset.type === 'xsf') { //选中的是学士服
+    if (e.currentTarget.dataset.type === 'xsf'||e.currentTarget.dataset.type === 'lxsf') { //选中的是学士服
       if (this.data.current_item_special === e.currentTarget.dataset.id) {
         this.setData({
           current_item_special: null,
@@ -128,7 +145,7 @@ Page({
           trouserStyle: "https://wenda-data.nt-geek.club/trousers_09.png",
           current_item_trousers: 9,
         })
-      } else {
+      }else {
         this.setData({
           current_item_special: e.currentTarget.dataset.id,
           specialStyle: e.currentTarget.dataset.url,
@@ -140,7 +157,31 @@ Page({
           trouserStyle: ''
         })
       }
-    } else {
+    }else if(e.currentTarget.dataset.type === 'gqd'||e.currentTarget.dataset.type === 'jxf'){
+      if (this.data.current_item_special === e.currentTarget.dataset.id){
+        this.setData({
+          current_item_special: null,
+          specialStyle: '',
+          shirtStyle: "https://wenda-data.nt-geek.club/shirt_11.png",
+          current_item_shirt: 11,
+          trouserStyle: "https://wenda-data.nt-geek.club/trousers_09.png",
+          current_item_trousers: 9,
+        })
+      }else{
+        this.setData({
+          current_item_special: e.currentTarget.dataset.id,
+          specialStyle: e.currentTarget.dataset.url,
+          current_item_shirt: null,
+          shirtStyle: '',
+          overcoatStyle: '',
+          current_item_overcoat: null,
+          current_item_trousers: null,
+          trouserStyle: '',
+          current_item_shoes: 8,
+          shoesStyle:''
+         })
+      }
+    }else {
       if (this.data.current_item_special === e.currentTarget.dataset.id) {
         this.setData({
           current_item_special: null,
@@ -156,7 +197,6 @@ Page({
           specialStyle: e.currentTarget.dataset.url,
           current_item_shirt: null,
           shirtStyle: '',
-
         })
       }
     }
@@ -265,24 +305,36 @@ Page({
         featureStyle: e.currentTarget.dataset.urla,
         selface: '',
         selface_selected: false,
+        hatForSelface:'',
         current_item_expression: 1,
         expressionStyle: "https://wenda-data.nt-geek.club/expression_01.png",
       })
     } else {
       this.setData({
         current_item_feature: e.currentTarget.dataset.id,
-        featureStyle: e.currentTarget.dataset.urla,
         selface: '',
         selface_selected: false,
       })
+      if(this.data.currentSkinStyle==0){
+        this.setData({
+          featureStyle: e.currentTarget.dataset.urla,
+        })
+      }else if(this.data.currentSkinStyle==1){
+        this.setData({
+          featureStyle: e.currentTarget.dataset.urlb,
+        })
+      }else{
+        this.setData({
+          featureStyle: e.currentTarget.dataset.urlc,
+        })
+      }  
     }
   },
   onLoad: function (options) {
-
+    this.getUptoken()
     this.setData({
       appearanceList: app.globalData.appearanceList,
       toolitemList: app.globalData.appearanceList['FeatureList'],
-
     })
   },
 
@@ -290,7 +342,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+   
   },
 
   /**
@@ -302,7 +354,6 @@ Page({
     this.setData({
       selface_item: face
     })
-    this.getUptoken()
   },
   getImg: function (src) {
     return new Promise((resolve, reject) => {
@@ -320,7 +371,7 @@ Page({
     })
     let that = this;
     if (that.data.selface === '') {
-      var styleArray = [that.data.hairAStyle, that.data.nakedStyle, that.data.featureStyle, that.data.expressionStyle, that.data.hairBStyle, that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle]
+      var styleArray = [that.data.hairAStyle, that.data.nakedStyle, that.data.featureStyle, that.data.expressionStyle, that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle, that.data.hairBStyle]
       var imgArray = []
       for (var item in styleArray) {
         if (styleArray[item] != "") {
@@ -356,7 +407,7 @@ Page({
       ctx.drawImage(face, 0, 0, 80, 100);
       ctx.restore();
 
-      var styleArray = [that.data.hairBStyle, that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle]
+      var styleArray = [that.data.hatForSelface,that.data.shoesStyle, that.data.trouserStyle, that.data.glassesStyle, that.data.othersStyle, that.data.shirtStyle, that.data.overcoatStyle, that.data.specialStyle,that.data.hairBStyle]
       var imgArray = []
       for (var item in styleArray) {
         if (styleArray[item] != "") {

@@ -3,6 +3,7 @@
 <view class="my_face" style="z-index:2;background-image:url('{{selface}}')"></view>
 <view class="character_show" id="nicked" style="z-index:1;position:relative;background-image:url('{{nakedStyle}}')"></view>
 <view class="character_show" id="Trousers" style="z-index:3;background-image:url('{{trouserStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<view class="character_show" style="z-index:3;background-image:url('{{hatForSelface}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Shirt" style="z-index:4;background-image:url('{{shirtStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Expression" style="z-index:2;background-image:url('{{expressionStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="Feature" style="z-index:1;background-image:url('{{featureStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
@@ -12,7 +13,7 @@
 <!-- <view class="character_show" id="Glasses" style="z-index:3;background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> -->
 <view class="character_show" id="Others" style="z-index:3;background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="HairA" style="z-index:0;background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="HairB" style="z-index:2;background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
+<view class="character_show" id="HairB" style="z-index:6;background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
 </view>
 <view class="btn_save_img" bindtap="saveStyle">保存</view>
 <view class="container_down">
@@ -20,7 +21,7 @@
 <i class="iconfont iconface_id item" bindtap="changeItemList" data-type="FeatureList" style="color:{{currentStyle=='FeatureList'?'#009F7E':'#B8B8BA'}}"></i>
 <i class="iconfont iconte item" bindtap="changeItemList" data-type="SpecialList" style="color:{{currentStyle=='SpecialList'?'#009F7E':'#B8B8BA'}}"></i>
 <i class="iconfont iconface item" bindtap="changeItemList" data-type="HairList" style="color:{{currentStyle=='HairList'?'#009F7E':'#B8B8BA'}}"></i>
-<i class="iconfont iconsmile item" bindtap="changeItemList" data-type="ExpressionList" style="color:{{currentStyle=='ExpressionList'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
+<i class="iconfont iconsmile item" bindtap="changeItemList" data-type="ExpressionList" style="color:{{currentStyle=='ExpressionList'?'#009F7E':'#B8B8BA'}};font-size:49rpx;"></i>
 <i class="iconfont iconwaitao item" bindtap="changeItemList" data-type="OvercoatList"  style="color:{{currentStyle=='OvercoatList'?'#009F7E':'#B8B8BA'}};"></i>
 <i class="iconfont iconyifu item"  bindtap="changeItemList" data-type="ShirtList" style="color:{{currentStyle=='ShirtList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
 <i class="iconfont iconkuzi item" bindtap="changeItemList" data-type="TrousersList" style="color:{{currentStyle=='TrousersList'?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>

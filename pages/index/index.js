@@ -3,7 +3,9 @@
 const app = getApp()
 Page({
   data: {
-   userinfo:[]
+   userinfo:[],
+   origin_img:'https://wenda-data.nt-geek.club/self-img-origin.png',
+   hasimg:true
   },
   //事件处理函数
 
@@ -34,14 +36,26 @@ Page({
         this.setData({
           userinfo: res
        })
+       if(res.my_img==''){
+         this.setData({
+          hasimg:false
+         })
+       }
       }
-    }else{
-
     }
   },
   getSomeList:function(){},
   onShow:function(){
     let userinfo = app.globalData.userInfo
+    if(userinfo.my_img==''){
+      this.setData({
+       hasimg:false
+      })
+    }else if(userinfo.my_img!=''){
+      this.setData({
+        hasimg:true
+       })
+    }
     this.setData({
       userinfo,
    })

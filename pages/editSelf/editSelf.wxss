@@ -121,6 +121,9 @@ page {
   flex-wrap: wrap;
   overflow-y: auto;
   overflow-x: hidden;
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 .single_item {

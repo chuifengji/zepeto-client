@@ -1,5 +1,4 @@
 //app.js
-
 import netHandlers from "./utils/netHandlers"
 App({
   onLaunch: function () {
@@ -59,12 +58,11 @@ App({
           this.getMyClassMateList(Data.COLLEGE,Data.MAJOR,Data.CLASS)
           this.getBackgroundList()
           this.getAppearanceList()
+          this.getDecorationList()
           wx.setStorage({
             key:"USERINFO",
             data:userInfo
           })
-
-
         })
       }
     })
@@ -81,7 +79,6 @@ App({
     },
     getAppearanceList:function(){
         this.netHandlers.getAppearanceList().then(res=>{
-          console.log(res)
           this.globalData.appearanceList = res.Data;
           wx.setStorage({
             key:"APPEARANCELIST",
@@ -91,7 +88,6 @@ App({
     },
     getDecorationList:function(){
       this.netHandlers.getDecorationList().then(res=>{
-        console.log(res)
         this.globalData.decorationList = res.Data
         wx.setStorage({
           key:"DECORATIONLIST",
@@ -102,7 +98,6 @@ App({
     //用户初次登录要获得的私人数据是下面这三个。
     getFriendList:function(myid){
       this.netHandlers.getFriendsList(myid).then(res=>{
-        console.log(res)
         this.globalData.friendList = res.Data
         wx.setStorage({
           key:"FRIENDLIST",

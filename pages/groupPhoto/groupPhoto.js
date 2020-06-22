@@ -150,7 +150,6 @@ Page({
       item.selected = false;
       return item;
     })
-    console.log(app.globalData.decorationList)
   },
 
   /**
@@ -651,7 +650,7 @@ Page({
         region: 'ECN',
         key: fileName,
         uptoken: this.otherData.uptoken,
-        domain: 'https://zepeto.nt-geek.club',
+        domain: 'https://wenda-data.nt-geek.club',
         shouldUseQiniuFileName: false
       },
       (progress) => {

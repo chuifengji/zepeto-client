@@ -37,7 +37,6 @@ Page({
             src: item.MYIMG
           }
         })
-        console.log(data)
         this.setData({
           peopleList: data
         })
