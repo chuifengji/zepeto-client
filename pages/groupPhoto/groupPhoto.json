@@ -2,6 +2,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
       "itembg":"/components/itembg/itembg",
-      "itemPerson":"/components/itemPerson/itemPerson"
+      "itemPerson":"/components/itemPerson/itemPerson",
+      "itemDe":"/components/itemDe/itemDe"
    }
 }  

@@ -1,0 +1,31 @@
+/* components/itemDe/itemDe.wxss */
+.background_container {
+  height: 180rpx;
+  width: 140rpx;
+  margin-left: 23rpx;
+  margin-right: 24rpx;
+  z-index: 1;
+
+}
+.background_content_img {
+  width: 140rpx;
+  height: 140rpx;
+  margin-bottom: 10rpx;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 2;
+}
+
+.background_content_title {
+  width: 140rpx;
+  height: 35rpx;
+  text-align: center;
+  line-height: 35rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: rgba(80, 80, 80, 1);
+}

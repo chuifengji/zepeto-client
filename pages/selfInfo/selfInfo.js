@@ -126,28 +126,43 @@ Page({
               hasChanged:true
             })
             if(dataCheck){
-             app.netHandlers.updateSelfInfo(user_id,name,college,major,classNum,canSearchMe).then(res=>{
-               let Data = res.Data;
-               let userInfo={
-                 id:res.Data.ID,
-                 user_id:Data.USERID,
-                 name:Data.NAME,
-                 college:Data.COLLEGE,
-                 major:Data.MAJOR,
-                 class:Data.CLASS,
-                 my_img:Data.MYIMG,
-                 canSearchMe:Data.CanSearchMe
-               }
-               app.globalData.userInfo = userInfo;
-               wx.setStorage({
-                 key:"USERINFO",
-                 data:userInfo
-               })
-               wx.showToast({
-                title: '保存成功',
-              })
-               that.checkInfoChange()
-             })
+              if(name.length>6){
+                wx.showModal({
+                  title: '提示',
+                  showCancel:false,
+                  content: '抱歉，姓名字数不能超过六。',
+                  success (res) {
+                    if (res.confirm) {
+                      console.log('用户点击确定')
+                    } else if (res.cancel) {
+                      console.log('用户点击取消')
+                    }
+                  }
+                })
+              }else{
+                app.netHandlers.updateSelfInfo(user_id,name,college,major,classNum,canSearchMe).then(res=>{
+                  let Data = res.Data;
+                  let userInfo={
+                    id:res.Data.ID,
+                    user_id:Data.USERID,
+                    name:Data.NAME,
+                    college:Data.COLLEGE,
+                    major:Data.MAJOR,
+                    class:Data.CLASS,
+                    my_img:Data.MYIMG,
+                    canSearchMe:Data.CanSearchMe
+                  }
+                  app.globalData.userInfo = userInfo;
+                  wx.setStorage({
+                    key:"USERINFO",
+                    data:userInfo
+                  })
+                  wx.showToast({
+                   title: '保存成功',
+                 })
+                  that.checkInfoChange()
+                })
+              }
             }else{wx.showToast({
               title: '保存个锤子',
               icon:"none"

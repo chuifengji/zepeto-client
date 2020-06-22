@@ -6,7 +6,7 @@
     <view class='touchWrap' style='transform: scale({{item.scale}});top:{{item.top}}px;left:{{item.left}}px; z-index:{{item.active?100:1}}'>
       <view class='imgWrap {{item.active? "touchActive":""}}' style="transform: rotate({{item.angle}}deg); border: {{item.active?4*item.oScale:0}}rpx #fff dashed;">
         <image src='{{item.image}}' data-type="{{item.type}}" data-originalId="{{item.originalId}}" data-id='{{item.id}}' style='width:{{item.width}}px;height:{{item.height}}px;' catchtouchstart='WraptouchStart' catchtouchmove='WraptouchMove' catchtouchend=''></image>
-        <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-originalId="{{item.originalId}}" data-id='{{item.id}}' catchtap='deleteItem'></image>
+        <image class='x' src='../../images/x.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-type="{{item.type}}" data-originalId="{{item.originalId}}" data-id='{{item.id}}' catchtap='deleteItem'></image>
         <image class='o' src='../../images/o.png' style='transform: scale({{item.oScale}});transform-origin:center;' data-id='{{item.id}}' catchtouchstart='oTouchStart' catchtouchmove='oTouchMove' catchtouchend=''></image>
       </view>
     </view>
@@ -45,6 +45,7 @@
 </block>
 <!--选中装饰物-->
 <block wx:if="{{currentTab==2}}" wx:for="{{toolitemList}}" wx:key="item">
+<itemDe currentTab_screen="{{currentTab_screen}}"  name="{{item.Name}}" src="{{item.THUMBNAIL}}" data-name="{{item.Name}}" data-src="{{item.URL}}" data-id="{{item.ID}}" data-type="{{item.TYPE}}" data-selected="{{item.selected}}" selected="{{item.selected}}"  catchtap="selected_de_item"></itemDe>
 </block>
 
 </view>

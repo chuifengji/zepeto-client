@@ -13,6 +13,7 @@ App({
       } else {
         this.getBackgroundList()
         this.getAppearanceList()
+        this.getDecorationList()
         let userInfo = wx.getStorageSync('USERINFO')
         let friendList = wx.getStorageSync('FRIENDLIST')
         let photoList = wx.getStorageSync('PHOTOLIST')
@@ -62,10 +63,7 @@ App({
             key:"USERINFO",
             data:userInfo
           })
-          wx.setStorage({
-            key:"DECORATIONLIST",
-            data:this.globalData.decorationList
-          })
+
 
         })
       }
@@ -83,6 +81,7 @@ App({
     },
     getAppearanceList:function(){
         this.netHandlers.getAppearanceList().then(res=>{
+          console.log(res)
           this.globalData.appearanceList = res.Data;
           wx.setStorage({
             key:"APPEARANCELIST",
@@ -91,7 +90,14 @@ App({
       })
     },
     getDecorationList:function(){
-
+      this.netHandlers.getDecorationList().then(res=>{
+        console.log(res)
+        this.globalData.decorationList = res.Data
+        wx.setStorage({
+          key:"DECORATIONLIST",
+          data:this.globalData.decorationList
+        })
+      })
     },
     //用户初次登录要获得的私人数据是下面这三个。
     getFriendList:function(myid){

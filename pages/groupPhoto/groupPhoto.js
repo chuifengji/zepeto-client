@@ -76,7 +76,7 @@ Page({
         current_item_bg: this.otherData.backgroundList[1][0].ID,
         bg_container_image: this.otherData.backgroundList[1][0].URL
       })
-      this.otherData.location = this.otherData.backgroundList[0][0].Name;
+      this.otherData.location = this.otherData.backgroundList[1][0].Name;
     }
     if(this.data.currentTab==1){
       this.setData({
@@ -85,6 +85,7 @@ Page({
     }
   },100),
   switchNav: throttle(function (e) {
+    console.log(app.globalData.decorationList)
     let current = e.target.dataset.current
     this.setData({
       currentTab: current,
@@ -145,6 +146,11 @@ Page({
    */
   onReady: function () {
     this.otherData.time = getDate() //获取今天的日期。
+    app.globalData.decorationList = app.globalData.decorationList.map(item=>{
+      item.selected = false;
+      return item;
+    })
+    console.log(app.globalData.decorationList)
   },
 
   /**
@@ -172,7 +178,6 @@ Page({
         uptoken: this.otherData.uptoken
       })
     } else if (this.data.currentTab === 1) {
-     
       this.setData({
         toolitemList: this.data.currentTab_screen==0?this.otherData.backgroundList[1]:this.otherData.backgroundList[0],
         uptoken: this.otherData.uptoken
@@ -226,6 +231,42 @@ Page({
     }, []);
     return result;
   },
+  selected_de_item:throttle(function(e){
+    let list = app.globalData.decorationList;
+    let getPosition = () => {
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].ID === e.currentTarget.dataset.id) {
+          return i
+        }
+      }
+    }
+    let position = getPosition()
+  if(e.currentTarget.dataset.selected === false){
+    list[position].selected = true
+    this.setDropItem({
+      url: e.currentTarget.dataset.src,
+      type: 'decoration',
+      originalId: e.currentTarget.dataset.id,
+      name: e.currentTarget.dataset.name
+    });
+  }else{
+    list[position].selected = false
+    let newList = [];
+    for (let i = 0; i < items.length; i++) {
+      if ((items[i].originalId != e.currentTarget.dataset.id) || (items[i].type != 'decoration')) {
+        newList.push(items[i])
+      }
+    }
+    items = newList;
+    this.setData({
+      itemList: items
+    })
+  }
+  this.setData({
+    toolitemList: list
+  })
+  app.globalData.decorationList = list
+  },350),
   selected_person_item: throttle(function (e) {
     let list = this.otherData.personList;
     let getPosition = () => {
@@ -248,7 +289,7 @@ Page({
       list[position].selected = false;
       let newList = [];
       for (let i = 0; i < items.length; i++) {
-        if ((items[i].originalId != e.currentTarget.dataset.id) || (items[i].type != 'person')) {
+        if ((items[i].originalId != e.currentTarget.dataset.id) && (items[i].type != 'person')) {
           newList.push(items[i])
         }
       }
@@ -466,19 +507,39 @@ Page({
       itemList: items
     })
     //去除选中态
-    let list = this.otherData.personList;
-    let getPosition = () => {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].ID == e.currentTarget.dataset.originalid) {
-          return i
+    if(e.currentTarget.dataset.type=='person'){
+      let list = this.otherData.personList;
+      let getPosition = () => {
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].ID == e.currentTarget.dataset.originalid) {
+            return i
+          }
         }
       }
+      let position = getPosition()
+      list[position].selected = false;
+      if(this.data.currentTab===0){
+        this.setData({
+        toolitemList: list
+      })}
+    }else if(e.currentTarget.dataset.type=='decoration'){
+      let list = app.globalData.decorationList;
+      let getPosition = () => {
+        for (let i = 0; i < list.length; i++) {
+          if (list[i].ID == e.currentTarget.dataset.originalid) {
+            return i
+          }
+        }
+      }
+      let position = getPosition()
+      list[position].selected = false;
+      if(this.data.currentTab===2){
+        this.setData({
+        toolitemList: list
+      })}
+      app.globalData.decorationList = list
     }
-    let position = getPosition()
-    list[position].selected = false;
-    this.setData({
-      toolitemList: list
-    })
+
   },
   //passiveAll点击其他区域则所有物体方框消失。
   passiveAll: function () {
@@ -510,11 +571,11 @@ Page({
     })
   },
   synthesis:throttle(async function() { // 合成图片
-    let personList = this.sortPerson(),
-      nameList = personList.map(item => {
-        return item.name //获取要打印的人名列表
-      })
-    console.log(nameList)
+    // let personList = this.sortPerson(),
+    //   nameList = personList.map(item => {
+    //     return item.name //获取要打印的人名列表
+    //   })
+    // console.log(nameList)
     wx.showLoading({
       title: '合成中...',
     })
@@ -526,7 +587,7 @@ Page({
     maskCanvas.drawImage(bg_img, 0, 0, this.data.canvasWidth, this.data.canvasHeight)
     const num = 1,
       prop = 2;
-
+      console.log(local_img)
     local_img.forEach((currentValue, index) => {
       maskCanvas.save();
 

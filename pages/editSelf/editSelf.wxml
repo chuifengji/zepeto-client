@@ -9,7 +9,7 @@
  <view class="character_show" id="Overcoat" style="z-index:5;background-image:url('{{overcoatStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
   <view class="character_show" id="Special" style="z-index:5;background-image:url('{{specialStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
 <view class="character_show" id="Shoes" style="z-index:2;background-image:url('{{shoesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
-<view class="character_show" id="Glasses" style="z-index:3;background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
+<!-- <view class="character_show" id="Glasses" style="z-index:3;background-image:url('{{glassesStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> -->
 <view class="character_show" id="Others" style="z-index:3;background-image:url('{{othersStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="HairA" style="z-index:0;background-image:url('{{hairAStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view>
 <view class="character_show" id="HairB" style="z-index:2;background-image:url('{{hairBStyle}}');position:absolute;left:50%;transform:translateX(-50%);"></view> 
@@ -25,7 +25,7 @@
 <i class="iconfont iconyifu item"  bindtap="changeItemList" data-type="ShirtList" style="color:{{currentStyle=='ShirtList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
 <i class="iconfont iconkuzi item" bindtap="changeItemList" data-type="TrousersList" style="color:{{currentStyle=='TrousersList'?'#009F7E':'#B8B8BA'}};font-size:50rpx;"></i>
 <i class="iconfont iconshoes item" bindtap="changeItemList" data-type="ShoesList" style="color:{{currentStyle=='ShoesList'?'#009F7E':'#B8B8BA'}};font-size:60rpx;"></i>
-<i class="iconfont iconyanjing item"  bindtap="changeItemList" data-type="GlassesList" style="color:{{currentStyle=='GlassesList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i>
+<!-- <i class="iconfont iconyanjing item"  bindtap="changeItemList" data-type="GlassesList" style="color:{{currentStyle=='GlassesList'?'#009F7E':'#B8B8BA'}};font-size:54rpx;"></i> -->
 <i class="iconfont iconicon-test item"  bindtap="changeItemList" data-type="OthersList" style="color:{{currentStyle=='OthersList'?'#009F7E':'#B8B8BA'}};font-size:48rpx;"></i>
 </view>
 
@@ -134,7 +134,7 @@ current_style:others
 <view class="tool_items" wx:if="{{currentStyle=='OthersList'}}">
 
 <block wx:for="{{toolitemList}}" wx:key="item">
-<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL+'?imageView2/0/interlace/1/q/55'}}" selected="{{current_item_others==item.ID?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
+<ItemUtil data-type="{{item.TYPE}}" data-url="{{item.URL}}" data-id="{{item.ID}}" thumbnail="{{item.THUMBNAIL}}" selected="{{current_item_others==item.ID?true:false}}" bindselected_util_item="selected_others_item"></ItemUtil>
 </block>
 </view>
 </view> 

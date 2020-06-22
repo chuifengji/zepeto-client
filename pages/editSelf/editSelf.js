@@ -104,6 +104,7 @@ Page({
     }
   },
   changeItemList: function (e) {
+    console.log(e.currentTarget.dataset)
     this.setData({
       currentStyle: e.currentTarget.dataset.type,
       toolitemList: app.globalData.appearanceList[e.currentTarget.dataset.type]
